@@ -1,0 +1,192 @@
+.ul-banner {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    background-color: #6D4C41;
+    height: 90px;
+    justify-content: space-between;
+    padding: 0 0px;
+    position: relative;
+  }
+  
+  .logo {
+    margin-right: auto;
+    margin-top: auto;
+  }
+  
+  .logo img {
+    width: 90px;
+    height: 90px;
+    border-radius: 15px;
+  }
+  
+  .menu {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .search-container {
+    flex-grow: 1;
+    display: flex;
+    justify-content: center;
+    padding: 0 10px;
+  }
+  
+  .search-box {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    padding: 5px 10px;
+    width: 300px;
+    border-radius: 15px;
+  }
+  
+  .search-box input {
+    border: none;
+    outline: none;
+    padding: 5px;
+    flex-grow: 1;
+    border-radius: 20px;
+  }
+  
+  .search-box button {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .li-banner a {
+    display: flex;
+    align-items: center;
+    color: white;
+    padding: 15px;
+  }
+  
+  .li-banner:hover {
+    background-color: #866357;
+  }
+  
+  .icon-banner {
+    padding-right: 20px;
+  }
+  .menu-footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  footer {
+    text-align: center;
+    padding: 5px;
+    background-color: #6D4C41;
+    color: white;
+    font-size: 16px;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+  
+  .img-item {
+    width: 150px;
+    height: auto;
+  }
+  
+  /* Menú (para móviles) */
+  .menu-toggle {
+    display: none;
+    font-size: 25px;
+    color: white;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+  
+  /* Pantallas chicas y medianas (860px) */
+  @media (max-width: 1115px) {
+    .main-img {
+        gap: 10px;  /* Menor espacio entre las imágenes */
+        justify-content: space-around;  /* Distribuye las imágenes de manera equitativa */
+    }
+    .img-item {
+        width: 100px;  /* Tamaño aún más pequeño para pantallas pequeñas */
+    }
+  
+    .logo img {
+      width: 70px;
+      height: 70px;
+      border-radius: 15px;
+    }
+    .ul-banner {
+      height: 70px;
+      padding-right: 5px;
+    }
+    
+    /* Ocultar el menú normal y mostrar el botón de hamburguesa */
+    .menu {
+      display: none;
+      flex-direction: column;
+      position: absolute;
+      top: 70px;
+      width: 150px;
+      background-color: #6D4C41;
+      text-align: center;
+      z-index: 1;
+      right: 0;
+    }
+  
+    .menu.active {
+      display: flex;
+      
+    }
+  
+    .menu-toggle {
+      display: block;
+      
+    }
+  
+    .li-banner {
+      padding: 5px;
+      padding-bottom: 10px;
+    }
+  
+    .li-banner a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      padding: 0px;
+    }
+  
+    .search-box {
+      display: flex;
+      align-items: center;
+      background-color: #fff;
+      padding: 5px 10px;
+      width: 230px;
+      border-radius: 15px;
+    }
+    .menu-footer {
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      gap: 0px;
+    }
+  }
+  
+  /* Pantallas medianas (entre 500px y 860px) */
+  @media (min-width: 500px) and (max-width: 1115px) {
+    /* Se muestra las 4 imágenes */
+    .main-img img:nth-child(n+5) {
+        display: none;
+    }
+  }
+  
+  /* Pantallas pequeñas (menos de 500px) */
+  @media (max-width: 499px) {
+    /* Solo muestra las primeras 3 imágenes */
+    .main-img img:nth-child(n+4) {
+        display: none;
+    }
+  }
+  

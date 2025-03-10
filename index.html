@@ -3,26 +3,108 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title> Dulce al Horno</title>
+        <title>Dulce al Horno</title>
         <link rel="icon" type="image/x-icon" href="/resources/icon/Icon_DulceAlHorno_2.jpg">  
         <link rel="stylesheet" href="/styles.css">
+        <link rel="stylesheet" href="/styles/styles-index.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+        <style>
+            .main-container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                padding: 20px;
+                background-color: #f7dfb8;
+            }
+
+            .main-img {
+                display: flex;
+                gap: 30px;
+                transition: transform 0.3s ease;
+                padding-top: 15px;
+                padding-bottom: 20px;
+            }
+
+            .main-container:hover .main-img {
+                transform: scale(1.1);
+            }
+
+            .img-item {
+                transform: rotate(var(--rotate-angle));
+                border: 5px solid #ffffff;
+                transition: transform 0.3s ease;
+            }
+
+        </style>
     </head>
     <body>    
-        <div>
-            <ul style="height: 70px;">
-                <li>
-                    <img src="/resources/icon/Icon_DulceAlHorno_1.jpg" alt="Icon_DulceAlHorno" style="width: 70px;height: 70px;">
-                </li>
-                <div>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#news">News</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                    <li><a href="#about">About</a></li>
+
+        <div class="container-primary">
+                <!-- Menú de navegación -->
+                <ul class="ul-banner">
+                    <!-- Logo -->
+                    <li class="logo">
+                        <img src="/resources/icon/Icon_DulceAlHorno_1.jpg" alt="Icon_DulceAlHorno" usemap="#inicio">
+                        <map name="inicio">
+                            <area shape="rect" coords="0,0,90,90" href="/index.html" alt="Icon_DulceAlHorno">
+                        </map>
+                    </li>
+
+                    <!-- Buscador -->
+                    <div class="search-container">
+                        <form class="search-box">
+                            <input type="text" placeholder="Buscar..." name="search">
+                            <button type="submit">
+                                <i class="bi bi-search"></i>
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Botón de menú para pantallas pequeñas -->
+                    <button class="menu-toggle" onclick="toggleMenu()">☰</button>
+
+                    <!-- Menú principal -->
+                    <div class="menu">
+                        <li class="li-banner"><a href="/index.html"><i class="bi bi-house-door-fill icon-banner"></i>Inicio</a></li>
+                        <li class="li-banner"><a href="#catalogo"><i class="bi bi-journal-text icon-banner"></i>Catálogo</a></li>
+                        <li class="li-banner"><a href="#contacto"><i class="bi bi-envelope-check-fill icon-banner"></i>Contacto</a></li>
+                        <li class="li-banner"><a href="#cuenta"><i class="bi bi-person-fill icon-banner"></i>Cuenta</a></li>
+                        <li class="li-banner"><a href="#carrito"><i class="bi bi-cart-fill icon-banner"></i>Carrito</a></li>
+                    </div>
+
+                </ul>
+    
+            <!-- Imágenes principales -->
+            <div class="main-container">
+                <div class="main-img">
+                    <img src="/resources/img/galletas_corazon_2.jpg" class="img-item" style="--rotate-angle: -5deg;" alt="galletas corazon">
+                    <img src="/resources/img/pastel_chico_1.jpg" class="img-item" style="--rotate-angle: 5deg;" alt="pastel chico">
+                    <img src="/resources/img/rosca.jpg" class="img-item" style="--rotate-angle: -5deg;" alt="rosca">
+                    <img src="/resources/img/galletas_corazon_5.jpg" class="img-item" style="--rotate-angle: 5deg;" alt="galletas corazon">
                 </div>
-            </ul> 
-        </div>       
-        <footer>
-            <p>&copy; 2025 Dulce al Horno. Todos los derechos reservados.</p>
-        </footer>
+            </div>
+    
+            <div>
+                <!-- Aquí van algunos productos -->
+            </div>
+    
+            <!-- Pie de página -->
+            <footer>
+                <ul>
+                    <!-- Menú -->
+                    <div class="menu-footer"  style="justify-content: center; ">
+                        <li class="li-banner"><a href="/index.html"></i>Inicio</a></li>
+                        <li class="li-banner"><a href="#catalogo"></i>Catálogo</a></li>
+                        <li class="li-banner"><a href="#contacto"></i>Contacto</a></li>
+                        <li class="li-banner"><a href="#cuenta"></i>Cuenta</a></li>
+                        <li class="li-banner"><a href="#carrito"></i>Carrito</a></li>
+                    </div>
+                </ul>
+                <hr>
+                <p style="padding-top: 10px;padding-bottom: 5px;">&copy; 2025 Dulce al Horno. Todos los derechos reservados.</p>
+            </footer>
+        </div>
+        
+        <script src="script.js"></script>
     </body>
 </html>

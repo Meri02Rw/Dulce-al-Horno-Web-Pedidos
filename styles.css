@@ -1,25 +1,21 @@
+/* Estilos generales */
+* {
+  
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
     background-color: #FFF3E0;
 }
 ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #6D4C41;
-  }
-  li {
-    float: left;
-  }
-  
-  li a {
-    display: block;
-    color: white;
-    text-align: center;
-    padding: 30px;
-    text-decoration: none;
-  }
-  
-  li a:hover {
-    background-color: #866357;
-  }
+  list-style-type: none;
+  font-size: 16px;
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+li a {
+  text-align: center;
+  text-decoration: none;
+}

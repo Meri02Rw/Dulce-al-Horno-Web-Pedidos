@@ -57,7 +57,7 @@
     cursor: pointer;
   }
   
-  .li-banner a {
+  .li-banner a, .li-footer a {
     display: flex;
     align-items: center;
     color: white;
@@ -85,6 +85,10 @@
     color: white;
     font-size: 16px;
     font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  }
+
+  .li-footer:hover {
+    background-color: none;
   }
   
   .img-item {
@@ -122,7 +126,7 @@
       padding-right: 5px;
     }
     
-    /* Ocultar el menú normal y mostrar el botón de hamburguesa */
+    /* Ocultar el menú normal y mostrar el botón para celulares */
     .menu {
       display: none;
       flex-direction: column;
@@ -131,7 +135,7 @@
       width: 150px;
       background-color: #6D4C41;
       text-align: center;
-      z-index: 1;
+      z-index: 3;
       right: 0;
     }
   
@@ -145,12 +149,12 @@
       
     }
   
-    .li-banner {
+    .li-banner, .li-footer {
       padding: 5px;
       padding-bottom: 10px;
     }
   
-    .li-banner a {
+    .li-banner a, .li-footer a {
       display: flex;
       align-items: center;
       justify-content: center;

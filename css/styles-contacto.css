@@ -1,0 +1,38 @@
+.mb-3 {
+    padding-top: 45px;
+}
+
+.form-label, .form-control {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.form-label {
+    font-size: 16px;
+}
+
+.form-control {
+    font-size: 15px;
+}
+
+.mb-1 {
+    margin-left: 80px;
+    padding-top: 16px;
+}
+.mb-2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 80px;
+    background-color: #e8d0ab;
+    padding: 16px;
+}
+
+  /* Pantallas chicas y medianas (860px) */
+  @media (max-width: 1115px) {
+    .mb-2 {
+        margin: 30px;
+    }
+    .mb-1 {
+        margin-left: 30px;
+    }
+}

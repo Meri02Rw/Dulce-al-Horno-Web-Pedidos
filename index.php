@@ -4,9 +4,9 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Dulce al Horno</title>
-        <link rel="icon" type="image/x-icon" href="/resources/icon/Icon_DulceAlHorno_2.jpg">  
-        <link rel="stylesheet" href="/css/styles.css">
-        <link rel="stylesheet" href="/css/styles-includes.css">
+        <link rel="icon" type="image/x-icon" href="resources/icon/Icon_DulceAlHorno_2.jpg">  
+        <link rel="stylesheet" href="css/styles.css">
+        <link rel="stylesheet" href="css/styles-includes.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
         <style>
             
@@ -27,7 +27,7 @@
                 gap: 20px;
                 position: relative;
                 z-index: 1;
-                background-color: #e8d0ab;
+                background-color: #d4b58c;
             }
 
             .img-item {
@@ -37,27 +37,28 @@
             }
 
             .img-item:hover {
-                transform: rotate(calc(var(--rotate-angle) * 1.5));
+                transform: rotate(calc(var(--rotate-angle) * 1.5)) scale(1.05);
             }
 
             .separador {
-                background-color: #6D4C41;
+                background-color: #5a3d31;
                 height: 50px;
                 margin: 0;
             }
             .button-img {
-                background-color: #2c1f1b; 
-                padding: 10px; 
+                background-color: #6D4C41;
                 color: rgb(255, 255, 255);
+                padding: 12px;
+                font-size: 18px;
                 border: none;
                 cursor: pointer;
                 position: relative;
                 z-index: 2;
+                border-radius: 5px;
             }
 
             .button-img:hover {
-                background-color: #70584e; 
-                color: rgb(0, 0, 0);
+                background-color: #866357;
             }
             .div-button-img{
                 display: flex;
@@ -68,40 +69,41 @@
             .a-img {
                 text-decoration: none;
                 font-family: Arial, Helvetica, sans-serif;
-                
             }
         </style>
     </head>
     <body>
         <div class="container-primary">
-            <!-- Contenedor del banner que se llenará con JS -->
-            <div id="banner-container"></div>
+            <!-- Incluir el banner con PHP -->
+            <div id="banner-container">
+                <?php include 'includes/banner.php'; ?>
+            </div>
 
             <!-- Imágenes principales -->
-            <a href="/catalogo.html" class="a-img">
+            <a href="catalogo.html" class="a-img">
                 <div class="main-container-img">
                     <div class="main-img">
-                        <img src="/resources/img/galletas_corazon_2.jpg" class="img-item" style="--rotate-angle: 30deg;" alt="galletas corazon">
-                        <img src="/resources/img/pastel_chico_1.jpg" class="img-item" style="--rotate-angle: -25deg;" alt="pastel chico">
-                        <img src="/resources/img/rosca.jpg" class="img-item" style="--rotate-angle: -10deg;" alt="rosca">
-                        <img src="/resources/img/galletas_corazon_5.jpg" class="img-item" style="--rotate-angle: 15deg;" alt="galletas corazon">
+                        <img src="resources/img/galletas_corazon_2.jpg" class="img-item" style="--rotate-angle: 30deg;" alt="galletas corazon">
+                        <img src="resources/img/pastel_chico_1.jpg" class="img-item" style="--rotate-angle: -25deg;" alt="pastel chico">
+                        <img src="resources/img/rosca.jpg" class="img-item" style="--rotate-angle: -10deg;" alt="rosca">
+                        <img src="resources/img/galletas_corazon_5.jpg" class="img-item" style="--rotate-angle: 15deg;" alt="galletas corazon">
                     </div>
                 </div>
-                <div class="div-button-img" style="background-color: #e8d0ab;">
+                <div class="div-button-img" style="background-color: #d4b58c;">
                     <button class="button-img"><p style="font-size: 16px;">Comprar</p></button>
                 </div>
             </a>
             <div class="separador"></div>
             <div class="main-container">
-                <!-- Aquí van algunos productos -->
-                <h1>Algunos de nuestros productos</h1>
+                <h1 class="title">Algunos de nuestros productos</h1>
                 <div>
-
+                <!-- Aquí van algunos productos -->
                 </div>
             </div>
-            <!-- Contenedor del footer que se llenará con JS -->
-            <div id="footer-container"></div>
-            <script src="/js/script-includes.js"></script>
+            <!-- Incluir el footer con PHP -->
+            <div id="footer-container">
+                <?php include 'includes/footer.php'; ?>
+            </div>
         </div>
     </body>
 </html>

@@ -4,13 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dulce al Horno</title>
-    <link rel="icon" type="image/x-icon" href="/resources/icon/Icon_DulceAlHorno_2.jpg">  
-    <link rel="stylesheet" href="/css/styles.css">
-    <link rel="stylesheet" href="/css/inicio-sesion.css">
+    <link rel="icon" type="image/x-icon" href="resources/icon/Icon_DulceAlHorno_2.jpg">  
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/inicio-sesion.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body>
 
+
+    <div>
+        <!-- Incluir el banner con PHP -->
+        <div id="banner-container">
+            <?php include 'includes/banner.php'; ?>
+        </div>
+        <div class="main-container">
+            
+        </div>
+        <!-- Incluir el footer con PHP -->
+        <div id="footer-container">
+            <?php include 'includes/footer.php'; ?>
+        </div>
+    </div>
+    
     <!-- Botón para abrir el modal -->
     <button id="btnAbrirModal">Acceder</button>
 
@@ -43,6 +58,5 @@
             </form>
         </div>
     </div>
-    <script src="/js/script.js"></script>
 </body>
 </html>

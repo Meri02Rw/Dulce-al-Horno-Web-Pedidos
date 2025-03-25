@@ -1,38 +1,76 @@
-.mb-3 {
-    padding-top: 45px;
+/* Estilos generales */
+.contact-description {
+    font-size: 18px;
+    color: #4E342E; 
+    margin-bottom: 20px;
 }
 
-.form-label, .form-control {
-    font-family: Arial, Helvetica, sans-serif;
+.contact-info {
+    font-size: 16px;
+    margin-bottom: 30px;
+}
+
+.contact-info li {
+    margin-bottom: 10px;
+    font-size: 18px;
+    color: #6D4C41;
+}
+
+.contact-info i {
+    color: #D7A86E;
+    margin-right: 8px;
+}
+
+/* Contenedor del formulario */
+.contact-form-container {
+    background-color: #F3E5AB;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+/* Formulario */
+.form-group {
+    margin-bottom: 15px;
 }
 
 .form-label {
     font-size: 16px;
+    font-weight: bold;
+    color: #4E342E;
 }
 
 .form-control {
     font-size: 15px;
+    border: 1px solid #D7A86E;
+    border-radius: 8px;
+    padding: 10px;
+    width: 100%;
 }
 
-.mb-1 {
-    margin-left: 80px;
-    padding-top: 16px;
-}
-.mb-2 {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 80px;
-    background-color: #e8d0ab;
-    padding: 16px;
+/* Botón */
+.btn {
+    display: block;
+    width: 100%;
+    background-color: #6D4C41;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
 }
 
-  /* Pantallas chicas y medianas (860px) */
-  @media (max-width: 1115px) {
-    .mb-2 {
-        margin: 30px;
-    }
-    .mb-1 {
-        margin-left: 30px;
+.btn:hover {
+    background-color: #866357;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .contact-form-container {
+        width: 90%;
+        padding: 20px;
     }
 }

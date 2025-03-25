@@ -9,7 +9,6 @@
         <link rel="stylesheet" href="css/styles-includes.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
         <style>
-            
             .main-img {
                 display: flex;
                 gap: 30px;
@@ -70,6 +69,9 @@
                 text-decoration: none;
                 font-family: Arial, Helvetica, sans-serif;
             }
+            .producto {
+                padding: 50px;
+            }
         </style>
     </head>
     <body>
@@ -80,7 +82,7 @@
             </div>
 
             <!-- Imágenes principales -->
-            <a href="catalogo.html" class="a-img">
+            <a href="catalogo.php" class="a-img">
                 <div class="main-container-img">
                     <div class="main-img">
                         <img src="resources/img/galletas_corazon_2.jpg" class="img-item" style="--rotate-angle: 30deg;" alt="galletas corazon">
@@ -98,8 +100,33 @@
                 <h1 class="title">Algunos de nuestros productos</h1>
                 <div>
                 <!-- Aquí van algunos productos -->
+                    <?php
+                    include 'db/db.php';  // Incluye la conexión a la base de datos
+
+                    // Realizar la consulta SQL para obtener productos (limitado a 6)
+                    $query = "SELECT nombre, img_url, precio FROM productos LIMIT 6";
+                    $result = $conn->query($query);
+
+                    // Verificar si hay productos
+                    if ($result->num_rows > 0) {
+                        // Mostrar productos
+                        while ($row = $result->fetch_assoc()) {
+                            echo "<div class='producto'>";
+                            echo "<img src='" . $row['img_url'] . "' alt='" . $row['nombre'] . "' class='producto-img'>";
+                            echo "<p>" . $row['nombre'] . "</p>";
+                            echo "<p>$" . $row['precio'] . "</p>";
+                            echo "</div>";
+                        }
+                    } else {
+                        echo "No hay productos disponibles.";
+                    }
+
+                    // Cerrar la conexión
+                    $conn->close();
+                    ?>
                 </div>
             </div>
+
             <!-- Incluir el footer con PHP -->
             <div id="footer-container">
                 <?php include 'includes/footer.php'; ?>

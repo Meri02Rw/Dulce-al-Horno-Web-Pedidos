@@ -19,12 +19,19 @@
             <?php include 'includes/banner.php'; ?>
         </div>
         <div class="main-container">
-            
+            <!-- Botón para abrir el modal -->
+            <button id="btnAbrirModal">Acceder</button>
+
+            <!-- Incluir el login con PHP -->
+            <div id="login-container">
+                <?php include 'login.php'; ?>
+            </div>
         </div>
         <!-- Incluir el footer con PHP -->
         <div id="footer-container">
             <?php include 'includes/footer.php'; ?>
         </div>
     </div>
+    <script src="js/script-login.js"></script>
 </body>
 </html>

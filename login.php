@@ -6,31 +6,12 @@
     <title>Dulce al Horno</title>
     <link rel="icon" type="image/x-icon" href="resources/icon/Icon_DulceAlHorno_2.jpg">  
     <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/inicio-sesion.css">
+    <link rel="stylesheet" href="css/styles-login.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body>
-
-
-    <div>
-        <!-- Incluir el banner con PHP -->
-        <div id="banner-container">
-            <?php include 'includes/banner.php'; ?>
-        </div>
-        <div class="main-container">
-            
-        </div>
-        <!-- Incluir el footer con PHP -->
-        <div id="footer-container">
-            <?php include 'includes/footer.php'; ?>
-        </div>
-    </div>
-    
-    <!-- Botón para abrir el modal -->
-    <button id="btnAbrirModal">Acceder</button>
-
     <!-- Modal de Inicio de Sesión / Registro -->
-    <div id="modal" class="modal">
+    <div id="modal" class="modal" style="display: none;">
         <div class="modal-contenido">
             <span class="cerrar" id="cerrarModal">&times;</span>
 
@@ -49,14 +30,16 @@
             </form>
 
             <!-- Formulario de Registro (Oculto por defecto) -->
-            <form id="formRegistro" class="formulario oculto">
+            <form id="formRegistro" class="formulario oculto" action="users/registro.php" method="POST">
                 <h2>Registrarse</h2>
-                <input type="text" placeholder="Nombre completo" required>
-                <input type="email" placeholder="Correo electrónico" required>
-                <input type="password" placeholder="Contraseña" required>
-                <button type="submit">Registrarse</button>
-            </form>
+                <input type="text" name="nombre" id="nombre" placeholder="Nombre" required>
+                <input type="text" name="apellidos" id="apellidos" placeholder="Apellidos">
+                <input type="email" name="correo" id="correo" placeholder="Correo electrónico" required>
+                <input type="password" name="contraseña" id="contraseña" placeholder="Contraseña" required>
+                <button type="submit" id="btnRegistroForm">Registrarse</button>
+            </form> 
         </div>
     </div>
+    <script src="js/script-login.js"></script>
 </body>
 </html>

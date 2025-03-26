@@ -25,7 +25,6 @@
         <hr>
         <p style="padding-top: 10px;padding-bottom: 5px;">&copy; 2025 Dulce al Horno. Todos los derechos reservados.</p>
     </footer>
-    <script src="js/script-includes.js"></script>
 </div>
 </body>
 </html>

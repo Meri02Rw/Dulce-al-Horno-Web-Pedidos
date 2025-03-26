@@ -18,13 +18,25 @@
         <div id="banner-container">
             <?php include 'includes/banner.php'; ?>
         </div>
+        
         <div class="main-container">
-            
+            <div>
+                <i class="bi bi-cart-fill" style="color: rgba(53, 59, 59, 0.113); font-size: 300px;"></i>
+            </div>
+            <!-- Botón para abrir el modal -->
+            <button id="btnAbrirModal">Acceder</button>
+
+            <!-- Incluir el login con PHP -->
+            <div id="login-container">
+                <?php include 'login.php'; ?>
+            </div>
         </div>
         <!-- Incluir el footer con PHP -->
         <div id="footer-container">
             <?php include 'includes/footer.php'; ?>
         </div>
+    </div>
+    <script src="js/script-login.js"></script>
     </div>
 </body>
 </html>

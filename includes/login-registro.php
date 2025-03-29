@@ -6,7 +6,7 @@
     <title>Dulce al Horno</title>
     <link rel="icon" type="image/x-icon" href="resources/icon/Icon_DulceAlHorno_2.jpg">  
     <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/styles-login.css">
+    <link rel="stylesheet" href="css/styles-login-registro.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body>
@@ -22,10 +22,10 @@
             </div>
 
             <!-- Formulario de Inicio de Sesión -->
-            <form id="formLogin" class="formulario">
+            <form id="formLogin" class="formulario" action="users/login.php" method="POST">
                 <h2>Iniciar Sesión</h2>
-                <input type="email" placeholder="Correo electrónico" required>
-                <input type="password" placeholder="Contraseña" required>
+                <input type="email" name="correo" placeholder="Correo electrónico" required>
+                <input type="password" name="password" placeholder="Contraseña" required>
                 <button type="submit">Entrar</button>
             </form>
 
@@ -40,6 +40,6 @@
             </form> 
         </div>
     </div>
-    <script src="js/script-login.js"></script>
+    <script src="js/script-login-registro.js"></script>
 </body>
 </html>

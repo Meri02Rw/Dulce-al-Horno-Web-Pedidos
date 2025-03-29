@@ -107,7 +107,7 @@
   }
   
   /* Responsive */
-  /* Pantallas chicas y medianas (860px) */
+  /* Pantallas chicas y medianas (1115px) */
   @media (max-width: 1115px) {
     .main-img {
         gap: 10px;  /* Menor espacio entre las imágenes */
@@ -179,7 +179,7 @@
     }
   }
   
-  /* Pantallas medianas (entre 500px y 860px) */
+  /* Pantallas medianas (entre 500px y 1115px) */
   @media (min-width: 500px) and (max-width: 1115px) {
     /* Se muestra las 4 imágenes */
     .main-img img:nth-child(n+5) {

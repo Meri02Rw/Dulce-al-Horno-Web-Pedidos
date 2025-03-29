@@ -6,7 +6,7 @@
     <title>Dulce al Horno</title>
     <link rel="icon" type="image/x-icon" href="resources/icon/Icon_DulceAlHorno_2.jpg">  
     <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/styles-includes.css">
+    <link rel="stylesheet" href="css/styles-banner-footer.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body>
@@ -25,6 +25,5 @@
         <hr>
         <p style="padding-top: 10px;padding-bottom: 5px;">&copy; 2025 Dulce al Horno. Todos los derechos reservados.</p>
     </footer>
-</div>
 </body>
 </html>

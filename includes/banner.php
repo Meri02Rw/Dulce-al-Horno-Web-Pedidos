@@ -6,7 +6,7 @@
     <title>Dulce al Horno</title>
     <link rel="icon" type="image/x-icon" href="resources/icon/Icon_DulceAlHorno_2.jpg">  
     <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/styles-includes.css">
+    <link rel="stylesheet" href="css/styles-banner-footer.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body>
@@ -44,6 +44,6 @@
             </div>
         </ul>
     </div>
-    <script src="js/script-includes.js"></script>
+    <script src="js/script-banner.js"></script>
 </body>
 </html>

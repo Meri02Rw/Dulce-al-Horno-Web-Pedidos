@@ -6,7 +6,7 @@
     <title>Cuenta</title>
     <link rel="icon" type="image/x-icon" href="resources/icon/Icon_DulceAlHorno_2.jpg">  
     <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/styles-includes.css">
+    <link rel="stylesheet" href="css/styles-banner-footer.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <style>
         
@@ -19,19 +19,22 @@
             <?php include 'includes/banner.php'; ?>
         </div>
         <div class="main-container">
+
             <!-- Botón para abrir el modal -->
             <button id="btnAbrirModal">Acceder</button>
 
             <!-- Incluir el login con PHP -->
             <div id="login-container">
-                <?php include 'login.php'; ?>
+                <?php include 'includes/login-registro.php'; ?>
             </div>
+
+            <a href="./includes/logout.php">Cerrar Sesión</a>
         </div>
         <!-- Incluir el footer con PHP -->
         <div id="footer-container">
             <?php include 'includes/footer.php'; ?>
         </div>
     </div>
-    <script src="js/script-login.js"></script>
+    <script src="js/script-login-registro.js"></script>
 </body>
 </html>

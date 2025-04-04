@@ -1,3 +1,6 @@
+<?php 
+include 'includes/alert.php'; // Incluir alertas
+?>
 <!DOCTYPE html>
 <html lang="es-MX">
     <head>
@@ -74,13 +77,12 @@
             }
         </style>
     </head>
-    <body>
+    <body>        
         <div class="container-primary">
             <!-- Incluir el banner con PHP -->
             <div id="banner-container">
                 <?php include 'includes/banner.php'; ?>
             </div>
-
             <!-- Imágenes principales -->
             <a href="catalogo.php" class="a-img">
                 <div class="main-container-img">

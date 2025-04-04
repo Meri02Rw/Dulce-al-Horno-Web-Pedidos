@@ -1,3 +1,10 @@
+<?php 
+include 'config/config.php'; // Incluye configuración y asegura que la sesión esté iniciada
+include 'config/db.php'; // Incluye la conexión a la base de datos
+include 'includes/login-registro.php'; // Incluir el modal login-registro
+include 'includes/alert.php'; // Incluir alertas
+?>
+
 <!DOCTYPE html>
 <html lang="es-MX">
 <head>
@@ -8,27 +15,45 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/styles-banner-footer.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    <style>
-        
-    </style>
 </head>
 <body>
     <div>
+        
         <!-- Incluir el banner con PHP -->
         <div id="banner-container">
             <?php include 'includes/banner.php'; ?>
         </div>
         <div class="main-container">
+            <h2 class="title">Cuenta</h2>
+            <?php
+            if (isset($_SESSION['usuario_id'])) {
+                $usuario_id = $_SESSION['usuario_id'];
+            
+                // Obtener datos del cliente
+                $sql = ("
+                    SELECT c.nombre, c.apellidos, u.correo 
+                    FROM clientes c
+                    JOIN usuarios u ON c.usuario_id = u.usuario_id
+                    WHERE c.usuario_id = $usuario_id
+                ");
+                $resultado = $conn->query($sql);
+                $usuario = $resultado->fetch_assoc();
 
-            <!-- Botón para abrir el modal -->
-            <button id="btnAbrirModal">Acceder</button>
+                $nombre = $usuario['nombre'];
+                $apellidos = isset($usuario['apellidos']) ? $usuario['apellidos'] : '';
+                $correo = $usuario['correo'];
 
-            <!-- Incluir el login con PHP -->
-            <div id="login-container">
-                <?php include 'includes/login-registro.php'; ?>
-            </div>
-
-            <a href="./includes/logout.php">Cerrar Sesión</a>
+                // Mostrar datos del usuario
+                echo '<p><strong>Nombre:</strong> ' . $nombre . ' ' . $apellidos . '</p>';
+                echo '<p><strong>Correo:</strong> ' . $correo . '</p>';
+                echo '<a href="pedidos.php">Ver mis pedidos</a>';
+                echo '<a href="./users/logout.php">Cerrar Sesión</a>';
+            } else {
+                // Si no está logueado, mostrar botón de iniciar sesión
+                // Botón para abrir el modal
+                echo '<button id="btnAbrirModal">Acceder</button>';
+            }
+            ?>
         </div>
         <!-- Incluir el footer con PHP -->
         <div id="footer-container">

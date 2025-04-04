@@ -40,6 +40,5 @@
             </form> 
         </div>
     </div>
-    <script src="js/script-login-registro.js"></script>
 </body>
 </html>

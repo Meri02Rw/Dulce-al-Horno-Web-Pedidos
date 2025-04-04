@@ -1,6 +1,6 @@
 <?php
-// Incluir la conexión a la base de datos
-include '../db/db.php';
+include '../config/config.php'; // Incluye configuración y asegura que la sesión esté iniciada
+include '../config/db.php'; // Conectar a la base de datos
 
 // Obtener datos del formulario
 $nombre = $_POST['nombre'];
@@ -33,15 +33,14 @@ try {
 
     // Confirmar transacción
     $conn->commit();
-    echo "Registro exitoso";
-    echo "<div>";
-    echo "<a href='/DulceAlHornoWebPedidos/index.php'><button>Inicio</button></a>";
-    echo "</div>";
+    $_SESSION['mensaje'] = "Registro exitoso. Ahora puedes iniciar sesión.";
+    header("Location: ../cuenta.php");
 
 } catch (Exception $e) {
     // Si hay un error, deshacer la transacción
     $conn->rollback();
-    echo "Error en el registro: " . $e->getMessage();
+    $_SESSION['mensaje'] = "Error al registrar usuario.";
+    header("Location: ../cuenta.php");
 }
 
 // Cerrar conexiones

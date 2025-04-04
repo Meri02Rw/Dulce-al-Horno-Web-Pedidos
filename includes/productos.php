@@ -1,5 +1,5 @@
 <?php
-include 'db/db.php'; // Incluye la conexión a la base de datos
+include 'config/db.php'; // Conectar a la base de datos
 
 $sql = "SELECT * FROM productos WHERE estado = 'disponible'";
 $resultado = $conn->query($sql);

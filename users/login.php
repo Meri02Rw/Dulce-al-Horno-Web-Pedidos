@@ -1,8 +1,7 @@
 <?php
-session_start(); // Inicia sesión
-
-// Conectar a la base de datos
-include '../db/db.php';
+include 'includes/alert.php';
+include '../config/config.php'; // Incluye configuración y asegura que la sesión esté iniciada
+include '../config/db.php'; // Conectar a la base de datos
 
 // Verificar si el formulario fue enviado
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -22,13 +21,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['usuario_id'] = $usuario['usuario_id'];
             $_SESSION['correo'] = $usuario['correo'];
             
-            header("Location: ../index.php"); // Redirigir a la página principal
-            exit();
+            $_SESSION['mensaje'] = "Se ha iniciado sesión correctamente";
+            header("Location: ../index.php");
+            exit();            
         } else {
-            echo "Contraseña incorrecta";
+            $_SESSION['mensaje'] = "Contraseña incorrecta";
+            header("Location: ../cuenta.php");
+            exit();
         }
     } else {
-        echo "Usuario no encontrado";
+        $_SESSION['mensaje'] = "Usuario no encontrado";
+        header("Location: ../cuenta.php");
+        exit();
     }
     
     $stmt->close();

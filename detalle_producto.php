@@ -1,102 +1,75 @@
 <?php
-session_start();
-include 'config/config.php';
-include 'config/db.php';
-include 'includes/alert.php';
+include 'config/config.php'; // Incluye configuración y asegura que la sesión esté iniciada
+include 'config/db.php'; // Incluye la conexión a la base de datos
+include 'includes/alert.php'; // Incluir alertas
 
-// Verificar si el usuario está logueado
-if (!isset($_SESSION['usuario_id'])) {
-    $_SESSION['mensaje'] = "Debes iniciar sesión para confirmar tu pedido.";
-    header("Location: cuenta.php");
-    exit();
+if (!isset($_GET["id"])) {
+    die("Producto no encontrado.");
 }
 
-$usuario_id = $_SESSION['usuario_id'];
-
-// Obtener el carrito del usuario
-$stmt = $conn->prepare("SELECT carrito_id FROM carrito WHERE cliente_id = ?");
-$stmt->bind_param("i", $usuario_id);
+$producto_id = $_GET["id"];
+$sql = "SELECT * FROM productos WHERE producto_id = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("i", $producto_id);
 $stmt->execute();
-$result = $stmt->get_result();
-$carrito = $result->fetch_assoc();
+$resultado = $stmt->get_result();
+$producto = $resultado->fetch_assoc();
 
-if (!$carrito) {
-    $_SESSION['mensaje'] = "Tu carrito está vacío.";
-    header("Location: carrito.php");
-    exit();
+if (!$producto) {
+    die("Producto no encontrado.");
 }
 
-$carrito_id = $carrito['carrito_id'];
-
-// Obtener los productos del carrito
-$stmt = $conn->prepare("SELECT p.producto_id, p.nombre, cp.cantidad_producto, p.precio 
-                        FROM carrito_productos cp
-                        JOIN productos p ON p.producto_id = cp.producto_id
-                        WHERE cp.carrito_id = ?");
-$stmt->bind_param("i", $carrito_id);
-$stmt->execute();
-$result = $stmt->get_result();
-
-$productos = [];
-$total = 0;
-
-while ($producto = $result->fetch_assoc()) {
-    $producto['subtotal'] = $producto['precio'] * $producto['cantidad_producto'];
-    $total += $producto['subtotal'];
-    $productos[] = $producto;
-}
-
+$usuario_logueado = isset($_SESSION["usuario_id"]);
 ?>
 
+
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es-MX">
 <head>
     <meta charset="UTF-8">
-    <title>Confirmación de Pedido</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?php echo $producto["nombre"]; ?></title>
+    <link rel="icon" type="image/x-icon" href="resources/icon/Icon_DulceAlHorno_2.jpg">  
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/styles-banner-footer.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body>
-    <h2>Confirmación de Pedido</h2>
+    <div>
+        <!-- Incluir el banner con PHP -->
+        <div id="banner-container">
+            <?php include 'includes/banner.php'; ?>
+        </div>
+        
+        <div class="main-container">
+            <h2 class="title"><?= htmlspecialchars($producto['nombre']) ?></h2>
+            <img src="<?= htmlspecialchars($producto['img_url']) ?>" alt="<?= htmlspecialchars($producto['nombre']) ?>" width="200">
+            <p>Precio: $<?= number_format($producto['precio'], 2) ?></p>
+            <p><?= nl2br(htmlspecialchars($producto['descripcion'])) ?></p>
 
-    <?php if (!empty($productos)): ?>
-        <table>
-            <thead>
-                <tr>
-                    <th>Producto</th>
-                    <th>Cantidad</th>
-                    <th>Precio</th>
-                    <th>Subtotal</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php foreach ($productos as $producto): ?>
-                    <tr>
-                        <td><?= htmlspecialchars($producto['nombre']) ?></td>
-                        <td><?= $producto['cantidad_producto'] ?></td>
-                        <td>$<?= number_format($producto['precio'], 2) ?></td>
-                        <td>$<?= number_format($producto['subtotal'], 2) ?></td>
-                    </tr>
-                <?php endforeach; ?>
-            </tbody>
-        </table>
-        <h3>Total: $<?= number_format($total, 2) ?></h3>
 
-        <form action="procesar_pedido.php" method="POST">
-            <input type="hidden" name="carrito_id" value="<?= $carrito_id ?>">
-            <input type="checkbox" id="aceptar" required>
-            <label for="aceptar">Acepto enviar mi pedido por WhatsApp.</label><br>
-            <button type="submit" id="btnConfirmar" disabled>Confirmar Pedido</button>
-        </form>
+            <?php if ($usuario_logueado) { ?>
+                <form action="carrito/agregar_carrito.php" method="POST">
+                    <input type="hidden" name="producto_id" value="<?= $producto_id ?>">
+                    <label for="cantidad">Cantidad:</label>
+                    <input type="number" id="cantidad" name="cantidad" value="1" min="1" required>
+                    <button type="submit">Agregar al carrito</button>
+                </form>
+            <?php } else { ?>
+                <p>Debes <a href="cuenta.php" onclick="abrirModal()">iniciar sesión</a> para comprar.</p>
+            <?php } ?>
 
-        <script>
-            document.getElementById('aceptar').addEventListener('change', function() {
-                document.getElementById('btnConfirmar').disabled = !this.checked;
-            });
-        </script>
-
-    <?php else: ?>
-        <p>No hay productos en tu carrito.</p>
-    <?php endif; ?>
-
+        </div>
+        <!-- Incluir el footer con PHP -->
+        <div id="footer-container">
+            <?php include 'includes/footer.php'; ?>
+        </div>
+    </div>
+    <script src="js/script-login-registro.js"></script>
 </body>
 </html>
+<script>
+function abrirModal() {
+    document.getElementById('modal-productos').style.display = 'block';
+}
+</script>

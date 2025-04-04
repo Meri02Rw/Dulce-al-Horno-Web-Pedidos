@@ -74,18 +74,16 @@ include 'includes/alert.php'; // Incluir alertas
                     echo '</tbody>';
                     echo '</table>';
                     echo '</form>';
+
+                    echo '<form action="confirmar.php" method="POST">';
+                    echo '<button type="submit" name="confirmar_compra">Confirmar compra</button>';
+                    echo '</form>';
+
                 } else {
                     echo '<p>No hay productos en el carrito.</p>';
                 }
             } else {
                 echo '<p>Para acceder al carrito, por favor <button id="btnAbrirModal">inicia sesión</button>.</p> ';
-            }
-            ?>
-            <?php
-            if ($result->num_rows > 0) {
-                echo '<form action="confirmar.php" method="POST">';
-                echo '<button type="submit" name="confirmar_compra">Confirmar compra</button>';
-                echo '</form>';
             }
             ?>
 

@@ -23,14 +23,14 @@
     
             <!-- Buscador -->
             <div class="search-container">
-                <form class="search-box">
-                    <input type="text" placeholder="Buscar..." name="search">
+                <form class="search-box" method="GET" action="catalogo.php">
+                    <input type="text" placeholder="Buscar..." name="q">
                     <button type="submit">
                         <i class="bi bi-search"></i>
                     </button>
                 </form>
             </div>
-    
+
             <!-- Botón de menú para pantallas pequeñas -->
             <button class="menu-toggle" onclick="toggleMenu()"><i class="bi bi-list"></i></button>
     

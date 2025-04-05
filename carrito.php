@@ -35,7 +35,7 @@ include 'includes/alert.php'; // Incluir alertas
                 $usuario_id = $_SESSION['usuario_id']; // El usuario debe estar logueado
 
                 // Consultar los productos en el carrito
-                $stmt = $conn->prepare("SELECT p.producto_id, p.nombre, cp.cantidad_producto, p.precio 
+                $stmt = $conn->prepare("SELECT p.producto_id, p.nombre, cp.cantidad_producto, p.precio, p.img_url
                                         FROM carrito_productos cp
                                         JOIN productos p ON p.producto_id = cp.producto_id
                                         WHERE cp.carrito_id = (SELECT carrito_id FROM carrito WHERE cliente_id = ?)");
@@ -59,10 +59,11 @@ include 'includes/alert.php'; // Incluir alertas
                     while ($producto = $result->fetch_assoc()) {
                         $total = $producto['precio'] * $producto['cantidad_producto'];
                         echo '<tr>';
-                        echo '<td>' . $producto['nombre'] . '</td>';
-                        echo '<td>
-                                <input type="number" name="cantidad[' . $producto['producto_id'] . ']" value="' . $producto['cantidad_producto'] . '" min="1" required>
-                            </td>';
+                        echo '<td>';
+                        echo '<img src="' . $producto['img_url'] . '" alt="' . $producto['nombre'] . '" width="50">';
+                        echo $producto['nombre'];
+                        echo '<td>';
+                        echo '<td><input type="number" name="cantidad[' . $producto['producto_id'] . ']" value="' . $producto['cantidad_producto'] . '" min="1" required></td>';
                         echo '<td>' . "$" . number_format($producto['precio'], 2) . '</td>';
                         echo '<td>' . "$" . number_format($total, 2) . '</td>';
                         echo '<td>';
@@ -75,10 +76,9 @@ include 'includes/alert.php'; // Incluir alertas
                     echo '</table>';
                     echo '</form>';
 
-                    echo '<form action="confirmar.php" method="POST">';
+                    echo '<form action="confirmar_pedido.php" method="POST">';
                     echo '<button type="submit" name="confirmar_compra">Confirmar compra</button>';
                     echo '</form>';
-
                 } else {
                     echo '<p>No hay productos en el carrito.</p>';
                 }

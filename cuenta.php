@@ -30,12 +30,10 @@ include 'includes/alert.php'; // Incluir alertas
                 $usuario_id = $_SESSION['usuario_id'];
             
                 // Obtener datos del cliente
-                $sql = ("
-                    SELECT c.nombre, c.apellidos, u.correo 
-                    FROM clientes c
-                    JOIN usuarios u ON c.usuario_id = u.usuario_id
-                    WHERE c.usuario_id = $usuario_id
-                ");
+                $sql = ("SELECT c.nombre, c.apellidos, u.correo 
+                         FROM clientes c
+                         JOIN usuarios u ON c.usuario_id = u.usuario_id
+                         WHERE c.usuario_id = $usuario_id");
                 $resultado = $conn->query($sql);
                 $usuario = $resultado->fetch_assoc();
 
@@ -46,12 +44,15 @@ include 'includes/alert.php'; // Incluir alertas
                 // Mostrar datos del usuario
                 echo '<p><strong>Nombre:</strong> ' . $nombre . ' ' . $apellidos . '</p>';
                 echo '<p><strong>Correo:</strong> ' . $correo . '</p>';
-                echo '<a href="pedidos.php">Ver mis pedidos</a>';
-                echo '<a href="./users/logout.php">Cerrar Sesión</a>';
+                
+                // Enlace para ver los pedidos
+                echo '<p><a href="./pedidos.php">Ver mis pedidos</a></p>';
+
+                // Enlace para cerrar sesión
+                echo '<p><a href="./users/logout.php">Cerrar Sesión</a></p>';
             } else {
                 // Si no está logueado, mostrar botón de iniciar sesión
-                // Botón para abrir el modal
-                echo '<button id="btnAbrirModal">Acceder</button>';
+                echo '<button id="btnAbrirModal">Acceder</button>'; // Botón para abrir el modal
             }
             ?>
         </div>

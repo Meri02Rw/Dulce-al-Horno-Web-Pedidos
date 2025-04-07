@@ -1,7 +1,7 @@
 <?php
 include 'config/config.php'; // Incluye configuración y asegura que la sesión esté iniciada
 include 'config/db.php'; // Incluye la conexión a la base de datos
-include 'includes/login-registro.php'; // Incluir el modal login-registro
+include 'users/login-registro.php'; // Incluir el modal login-registro
 include 'includes/alert.php'; // Incluir alertas
 ?>
 
@@ -76,7 +76,7 @@ include 'includes/alert.php'; // Incluir alertas
                     echo '</table>';
                     echo '</form>';
 
-                    echo '<form action="confirmar_pedido.php" method="POST">';
+                    echo '<form action="pedidos/confirmar_pedido.php" method="POST">';
                     echo '<button type="submit" name="confirmar_compra">Confirmar compra</button>';
                     echo '</form>';
                 } else {
@@ -94,5 +94,6 @@ include 'includes/alert.php'; // Incluir alertas
         </div>
     </div>
     <script src="js/script-login-registro.js"></script>
+    <script src="js/script-alert.js"></script>
 </body>
 </html>

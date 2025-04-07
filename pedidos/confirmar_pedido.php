@@ -1,12 +1,12 @@
 <?php
-include 'config/config.php'; // Incluye configuración y asegura que la sesión esté iniciada
-include 'config/db.php'; // Incluye la conexión a la base de datos
-include 'includes/alert.php'; // Incluir alertas
+include __DIR__ . '/../includes/alert.php'; // Incluir alertas
+include __DIR__ .  '/../config/config.php'; // Incluye configuración y asegura que la sesión esté iniciada 
+include __DIR__ .  '/../config/db.php'; // Incluye la conexión a la base de datos
 
 // Verificar si el usuario está logueado
 if (!isset($_SESSION['usuario_id'])) {
     $_SESSION['mensaje'] = "Debes iniciar sesión para confirmar tu pedido.";
-    header("Location: ./cuenta.php");
+    header("Location: ../cuenta.php");
     exit();
 }
 
@@ -52,17 +52,17 @@ while ($producto = $result->fetch_assoc()) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carrito</title>
-    <link rel="icon" type="image/x-icon" href="resources/icon/Icon_DulceAlHorno_2.jpg">  
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/styles-banner-footer.css">
-    <link rel="stylesheet" href="css/styles-confirmar-pedido.css">
+    <link rel="icon" type="image/x-icon" href="/DulceAlHornoWebPedidos/resources/icon/Icon_DulceAlHorno_2.jpg">  
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/styles-banner-footer.css">
+    <link rel="stylesheet" href="../css/styles-confirmar-pedido.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body>
     <div>
         <!-- Incluir el banner con PHP -->
         <div id="banner-container">
-            <?php include 'includes/banner.php'; ?>
+            <?php include '../includes/banner.php'; ?>
         </div>
         
         <div class="main-container">
@@ -81,7 +81,7 @@ while ($producto = $result->fetch_assoc()) {
                         <?php foreach ($productos as $producto): ?>
                             <tr>
                                 <td>
-                                    <img src="<?= $producto['img_url'] ?>" alt="<?= htmlspecialchars($producto['nombre']) ?>" width="50"><br>
+                                    <img src="../<?= $producto['img_url'] ?>" alt="<?= htmlspecialchars($producto['nombre']) ?>" width="50"><br>
                                     <?= htmlspecialchars($producto['nombre']) ?>
                                 </td>
                                 <td><?= $producto['cantidad_producto'] ?></td>
@@ -117,8 +117,9 @@ while ($producto = $result->fetch_assoc()) {
         </div>
         <!-- Incluir el footer con PHP -->
         <div id="footer-container">
-            <?php include 'includes/footer.php'; ?>
+            <?php include '../includes/footer.php'; ?>
         </div>
     </div>
+    <script src="js/script-alert.js"></script>
 </body>
 </html>

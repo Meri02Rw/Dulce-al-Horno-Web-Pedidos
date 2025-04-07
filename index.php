@@ -1,5 +1,5 @@
 <?php 
-include 'includes/alert.php'; // Incluir alertas
+include __DIR__ . '/./includes/alert.php'; // Incluir alertas
 ?>
 <!DOCTYPE html>
 <html lang="es-MX">
@@ -103,7 +103,7 @@ include 'includes/alert.php'; // Incluir alertas
                 <h1 class="title">Algunos de nuestros productos</h1>
                 <div class="productos">
                     <!-- Aquí van algunos productos -->
-                    <?php include 'includes/productos.php'; ?>
+                    <?php include 'productos/productos.php'; ?>
                 </div>
             </div>
             <!-- Incluir el footer con PHP -->
@@ -111,5 +111,6 @@ include 'includes/alert.php'; // Incluir alertas
                 <?php include 'includes/footer.php'; ?>
             </div>
         </div>
+        <script src="js/script-alert.js"></script>
     </body>
 </html>

@@ -15,7 +15,7 @@
         <ul class="ul-banner">
             <!-- Logo -->
             <li class="logo">
-                <img src="resources/icon/Icon_DulceAlHorno_1.jpg" alt="Icon_DulceAlHorno" usemap="#inicio">
+                <img src="/DulceAlHornoWebPedidos/resources/icon/Icon_DulceAlHorno_1.jpg" alt="Icon_DulceAlHorno" usemap="#inicio">
                 <map name="inicio">
                     <area shape="rect" coords="0,0,90,90" href="/DulceAlHornoWebPedidos/index.php" alt="Icon_DulceAlHorno">
                 </map>
@@ -34,14 +34,14 @@
     
             <!-- Menú principal -->
             <div class="menu">
-                <li class="li-banner"><a href="index.php"><i class="bi bi-house-door-fill icon-banner"></i>Inicio</a></li>
-                <li class="li-banner"><a href="catalogo.php"><i class="bi bi-journal-text icon-banner"></i>Catálogo</a></li>
-                <li class="li-banner"><a href="contacto.php"><i class="bi bi-envelope-check-fill icon-banner"></i>Contacto</a></li>
-                <li class="li-banner"><a href="cuenta.php"><i class="bi bi-person-fill icon-banner"></i>Cuenta</a></li>
-                <li class="li-banner"><a href="carrito.php"><i class="bi bi-cart-fill icon-banner"></i>Carrito</a></li>
+                <li class="li-banner"><a href="/DulceAlHornoWebPedidos/index.php"><i class="bi bi-house-door-fill icon-banner"></i>Inicio</a></li>
+                <li class="li-banner"><a href="/DulceAlHornoWebPedidos/catalogo.php"><i class="bi bi-journal-text icon-banner"></i>Catálogo</a></li>
+                <li class="li-banner"><a href="/DulceAlHornoWebPedidos/contacto.php"><i class="bi bi-envelope-check-fill icon-banner"></i>Contacto</a></li>
+                <li class="li-banner"><a href="/DulceAlHornoWebPedidos/cuenta.php"><i class="bi bi-person-fill icon-banner"></i>Cuenta</a></li>
+                <li class="li-banner"><a href="/DulceAlHornoWebPedidos/carrito.php"><i class="bi bi-cart-fill icon-banner"></i>Carrito</a></li>
             </div>
         </ul>
     </div>
-    <script src="js/script-banner.js"></script>
+    <script src="/DulceAlHornoWebPedidos/js/script-banner.js"></script>
 </body>
 </html>

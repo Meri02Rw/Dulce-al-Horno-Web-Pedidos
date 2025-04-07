@@ -1,7 +1,7 @@
 <?php 
 include 'config/config.php'; // Incluye configuración y asegura que la sesión esté iniciada
 include 'config/db.php'; // Incluye la conexión a la base de datos
-include 'includes/login-registro.php'; // Incluir el modal login-registro
+include 'users/login-registro.php'; // Incluir el modal login-registro
 include 'includes/alert.php'; // Incluir alertas
 ?>
 
@@ -46,7 +46,7 @@ include 'includes/alert.php'; // Incluir alertas
                 echo '<p><strong>Correo:</strong> ' . $correo . '</p>';
                 
                 // Botón para ver los pedidos
-                echo '<form action="pedidos.php" method="get">
+                echo '<form action="pedidos/pedidos.php" method="get">
                         <button type="submit" class="view-orders-button">Ver mis pedidos</button>
                     </form>';
 
@@ -66,5 +66,6 @@ include 'includes/alert.php'; // Incluir alertas
         </div>
     </div>
     <script src="js/script-login-registro.js"></script>
+    <script src="js/script-alert.js"></script>
 </body>
 </html>

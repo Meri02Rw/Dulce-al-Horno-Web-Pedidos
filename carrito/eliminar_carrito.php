@@ -30,6 +30,8 @@ if (isset($_GET['producto_id'])) {
     $stmt = $conn->prepare("DELETE FROM carrito_productos WHERE carrito_id = ? AND producto_id = ?");
     $stmt->bind_param("ii", $carrito_id, $producto_id);
     $stmt->execute();
+
+    $_SESSION['mensaje'] = "Producto eliminado correctamente.";
 }
 
 header("Location: ../carrito.php");

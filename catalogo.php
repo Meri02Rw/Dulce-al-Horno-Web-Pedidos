@@ -24,7 +24,7 @@
         <div class="main-container">
             <h1 class="title">Catálogo</h1>
             <div class="productos">
-                <?php include 'includes/productos.php'; ?>
+                <?php include 'productos/productos.php'; ?>
             </div>
         </div>
         <!-- Incluir el footer con PHP -->

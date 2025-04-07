@@ -1,6 +1,7 @@
 <?php
-include '../config/config.php'; // Incluye configuración y asegura que la sesión esté iniciada
-include '../config/db.php'; // Conexión a la base de datos
+include __DIR__ . '/../includes/alert.php'; // Incluir alertas
+include __DIR__ .  '/../config/config.php'; // Incluye configuración y asegura que la sesión esté iniciada 
+include __DIR__ .  '/../config/db.php'; // Incluye la conexión a la base de datos
 
 session_start();
 
@@ -66,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
 
         // Redirigir al producto para que el mensaje sea visible
-        header("Location: ../detalle_producto.php?id=" . $producto_id);
+        header("Location: ../productos/detalle_producto.php?id=" . $producto_id);
         exit();
     }
 }

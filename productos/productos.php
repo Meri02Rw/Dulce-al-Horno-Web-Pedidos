@@ -4,6 +4,7 @@ include 'config/db.php'; // Conectar a la base de datos
 $isCatalogo = basename($_SERVER['PHP_SELF']) === 'catalogo.php';
 $productos = [];
 
+// Obtener productos
 if (isset($_GET['q']) && !empty(trim($_GET['q']))) {
     $busqueda = "%" . $_GET['q'] . "%";
     $stmt = $conn->prepare("SELECT * FROM productos WHERE estado = 'disponible' AND (nombre LIKE ? OR descripcion LIKE ?)");
@@ -23,10 +24,11 @@ if ($resultado->num_rows === 0) {
     echo "<p>No se encontraron productos.</p>";
 }
 
+// Mostrar productos
 echo '<div class="productos-grid">';
 while ($producto = $resultado->fetch_assoc()) { ?>
     <div class="producto-card">
-        <a href="detalle_producto.php?id=<?php echo $producto['producto_id']; ?>">
+        <a href="productos/detalle_producto.php?id=<?php echo $producto['producto_id']; ?>">
             <img src="<?php echo $producto['img_url']; ?>" alt="<?php echo $producto['nombre']; ?>">
             <h3><?php echo $producto['nombre']; ?></h3>
             <p>$<?php echo number_format($producto['precio'], 2); ?></p>

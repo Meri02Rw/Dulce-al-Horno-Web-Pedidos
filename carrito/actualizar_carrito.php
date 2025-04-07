@@ -32,6 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['cantidad'])) {
             $stmt->execute();
         }
     }
+    $_SESSION['mensaje'] = "Cantidad del producto actualizada correctamente.";
 }
 
 header("Location: ../carrito.php");

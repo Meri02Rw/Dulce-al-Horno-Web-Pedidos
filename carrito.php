@@ -14,6 +14,7 @@ include 'includes/alert.php'; // Incluir alertas
     <link rel="icon" type="image/x-icon" href="resources/icon/Icon_DulceAlHorno_2.jpg">  
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/styles-banner-footer.css">
+    <link rel="stylesheet" href="css/styles-carrito.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body>
@@ -60,16 +61,15 @@ include 'includes/alert.php'; // Incluir alertas
                         $total = $producto['precio'] * $producto['cantidad_producto'];
                         echo '<tr>';
                         echo '<td>';
-                        echo '<img src="' . $producto['img_url'] . '" alt="' . $producto['nombre'] . '" width="50">';
+                        echo '<img src="' . $producto['img_url'] . '" alt="' . $producto['nombre'] . '" width="50"><br>';
                         echo $producto['nombre'];
-                        echo '<td>';
+                        echo '</td>';
                         echo '<td><input type="number" name="cantidad[' . $producto['producto_id'] . ']" value="' . $producto['cantidad_producto'] . '" min="1" required></td>';
-                        echo '<td>' . "$" . number_format($producto['precio'], 2) . '</td>';
-                        echo '<td>' . "$" . number_format($total, 2) . '</td>';
+                        echo '<td>$' . number_format($producto['precio'], 2) . '</td>';
+                        echo '<td>$' . number_format($total, 2) . '</td>';
                         echo '<td>';
                         echo '<button type="submit" name="actualizar[' . $producto['producto_id'] . ']">Actualizar</button>';
-                        echo '<a href="carrito/eliminar_carrito.php?producto_id=' . $producto['producto_id'] . '" onclick="return confirm(\'¿Seguro que quieres eliminar este producto?\')">Eliminar</a>';
-                        echo '</td>';                        
+                        echo '<a href="carrito/eliminar_carrito.php?producto_id=' . $producto['producto_id'] . '" onclick="return confirm(\'¿Seguro que quieres eliminar este producto?\')" class="btn-eliminar">Eliminar</a>';
                         echo '</tr>';
                     }
                     echo '</tbody>';

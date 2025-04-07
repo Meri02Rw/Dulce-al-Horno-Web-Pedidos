@@ -54,7 +54,7 @@ $conn->query("DELETE FROM carrito_productos WHERE carrito_id = $carrito_id");
 
 // Crear el link de WhatsApp
 $mensaje = urlencode("Hola, Dulce al Horno.\nQuiero hacer un pedido:\n\n" . $mensajeWhatsApp . "\nTotal: $" . number_format($total, 2));
-$telefono = "5216682216232";
+$telefono = "5211234567890"; // Número de repostero
 $link = "https://wa.me/$telefono?text=$mensaje";
 
 // Guardar el link en sesión

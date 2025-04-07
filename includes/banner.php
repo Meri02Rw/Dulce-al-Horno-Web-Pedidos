@@ -24,10 +24,8 @@
             <!-- Buscador -->
             <div class="search-container">
                 <form class="search-box" method="GET" action="catalogo.php">
-                    <input type="text" placeholder="Buscar..." name="q">
-                    <button type="submit">
-                        <i class="bi bi-search"></i>
-                    </button>
+                    <input type="text" placeholder="Buscar..." name="q" style="margin: 5px;">
+                    <button type="submit" class="bi bi-search" style="color: black;"></button>
                 </form>
             </div>
 

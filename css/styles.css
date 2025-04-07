@@ -6,45 +6,51 @@
 }
 
 body {
-  background-color: #FAF3E0; 
+  background-color: #FAF3E0;
   height: 100%;
   margin: 0;
   padding: 0;
   display: flex;
   flex-direction: column;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 .title {
   font-size: 28px;
-  color: #6D4C41;
+  color: #6D4C41; 
   text-align: center;
   margin-top: 20px;
   font-weight: bold;
 }
 
 p {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 18px;
-  color: #3E2723;
+  color: #3E2723; 
+  margin-bottom: 20px;
 }
 
 .main-container {
   display: flex;
   padding: 25px;
-  gap: 25px; 
+  gap: 25px;
   flex-direction: column;
   min-height: 100vh;
   flex: 1;
   margin: 10px;
   background-color: #F5F5F5;
   border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+/* Estilos para lista */
 ul {
   list-style-type: none;
   font-size: 18px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   color: #5D4037;
+}
+
+li {
+  margin-bottom: 15px;
 }
 
 li a {
@@ -52,13 +58,82 @@ li a {
   text-decoration: none;
   color: #3E2723;
   font-size: 16px;
-  transition: color 0.3s ease;
+  transition: color 0.3s ease, transform 0.3s ease;
 }
 
 li a:hover {
   color: #D32F2F;
+  transform: scale(1.05);
 }
 
-.main-container {
-  margin: 40px;
+/* Estilos generales de botones */
+button {
+  padding: 10px 20px;
+  background-color: #6D4C41;
+  border: none;
+  color: white;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+button:hover {
+  background-color: #5A4030;
+  transform: scale(1.05);
+}
+
+button:active {
+  background-color: #4B3621;
+}
+
+/* Estilos de input */
+input, select {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #D32F2F;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: #6D4C41;
+}
+
+/* Enlaces de pie de página */
+footer a {
+  text-decoration: none;
+  color: #6D4C41;
+  font-size: 14px;
+}
+
+footer a:hover {
+  color: #D32F2F;
+}
+
+/* Responsivos */
+@media (max-width: 768px) {
+  .main-container {
+    margin: 15px;
+    padding: 20px;
+  }
+
+  .title {
+    font-size: 24px;
+  }
+
+  p {
+    font-size: 16px;
+  }
+
+  li a {
+    font-size: 14px;
+  }
+
+  button {
+    font-size: 14px;
+    padding: 8px 15px;
+  }
 }

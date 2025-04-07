@@ -28,7 +28,7 @@ if (!$carrito) {
 $carrito_id = $carrito['carrito_id'];
 
 // Obtener los productos del carrito
-$stmt = $conn->prepare("SELECT p.producto_id, p.nombre, cp.cantidad_producto, p.precio 
+$stmt = $conn->prepare("SELECT p.producto_id, p.nombre, cp.cantidad_producto, p.precio, p.img_url
                         FROM carrito_productos cp
                         JOIN productos p ON p.producto_id = cp.producto_id
                         WHERE cp.carrito_id = ?");
@@ -55,6 +55,7 @@ while ($producto = $result->fetch_assoc()) {
     <link rel="icon" type="image/x-icon" href="resources/icon/Icon_DulceAlHorno_2.jpg">  
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/styles-banner-footer.css">
+    <link rel="stylesheet" href="css/styles-confirmar-pedido.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body>
@@ -79,7 +80,10 @@ while ($producto = $result->fetch_assoc()) {
                     <tbody>
                         <?php foreach ($productos as $producto): ?>
                             <tr>
-                                <td><?= htmlspecialchars($producto['nombre']) ?></td>
+                                <td>
+                                    <img src="<?= $producto['img_url'] ?>" alt="<?= htmlspecialchars($producto['nombre']) ?>" width="50"><br>
+                                    <?= htmlspecialchars($producto['nombre']) ?>
+                                </td>
                                 <td><?= $producto['cantidad_producto'] ?></td>
                                 <td>$<?= number_format($producto['precio'], 2) ?></td>
                                 <td>$<?= number_format($producto['subtotal'], 2) ?></td>
@@ -91,11 +95,15 @@ while ($producto = $result->fetch_assoc()) {
 
                 <form action="pedidos/procesar_pedido.php" method="POST">
                     <input type="hidden" name="carrito_id" value="<?= $carrito_id ?>">
-                    <input type="checkbox" id="aceptar" required>
-                    <label for="aceptar">Acepto enviar mi pedido por WhatsApp.</label><br>
+                
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="aceptar" required>
+                        <label for="aceptar">Acepto enviar mi pedido por WhatsApp.</label>
+                    </div>
+                
                     <button type="submit" id="btnConfirmar" disabled>Confirmar Pedido</button>
                 </form>
-
+                
                 <script>
                     document.getElementById('aceptar').addEventListener('change', function() {
                         document.getElementById('btnConfirmar').disabled = !this.checked;

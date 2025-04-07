@@ -1,11 +1,14 @@
 body {
     font-family: Arial, sans-serif;
     text-align: center;
+    background-color: #f4f4f4;
 }
 
 button {
     padding: 10px 20px;
     cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
 }
 
 /* Estilos del modal */
@@ -26,6 +29,7 @@ button {
     border-radius: 10px;
     position: relative;
     text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .cerrar {
@@ -34,6 +38,7 @@ button {
     right: 15px;
     font-size: 20px;
     cursor: pointer;
+    color: #6D4C41;
 }
 
 .botones {
@@ -47,10 +52,18 @@ button {
     border: none;
     padding: 8px 15px;
     cursor: pointer;
+    background-color: #6D4C41;
+    color: white;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.botones button:hover {
+    background-color: #5b3d2a;
 }
 
 .activo {
-    background: #007bff;
+    background: #5b3d2a;
     color: white;
 }
 
@@ -59,11 +72,17 @@ button {
     display: flex;
     flex-direction: column;
     gap: 10px;
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .formulario input {
-    padding: 8px;
+    padding: 10px;
     width: 100%;
+    border-radius: 5px;
+    border: 1px solid #ddd;
 }
 
 .oculto {

@@ -1,0 +1,40 @@
+.productos-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 1fr);    
+    gap: 30px;
+    padding: 20px;
+    justify-items: center;
+    max-width: 100%; 
+    margin: 0 auto;
+}
+
+.producto-card {
+    background-color: #FFF7F2; 
+    border: 1px solid #E0D2C0;
+    border-radius: 8px;
+    text-align: center;
+    padding: 20px;
+    width: 100%;
+    max-width: 250px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    transition: transform 0.2s ease-in-out;
+}
+
+.producto-card img {
+    max-width: 100%;
+    height: 150px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.producto-card h3 {
+    margin: 10px 0 5px;
+    font-size: 18px;
+    color: #6D4C41;
+}
+
+.producto-card p {
+    font-size: 16px;
+    color: #6D4C41;
+}

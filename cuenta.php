@@ -45,11 +45,15 @@ include 'includes/alert.php'; // Incluir alertas
                 echo '<p><strong>Nombre:</strong> ' . $nombre . ' ' . $apellidos . '</p>';
                 echo '<p><strong>Correo:</strong> ' . $correo . '</p>';
                 
-                // Enlace para ver los pedidos
-                echo '<p><a href="./pedidos.php">Ver mis pedidos</a></p>';
+                // Botón para ver los pedidos
+                echo '<form action="pedidos.php" method="get">
+                        <button type="submit" class="view-orders-button">Ver mis pedidos</button>
+                    </form>';
 
-                // Enlace para cerrar sesión
-                echo '<p><a href="./users/logout.php">Cerrar Sesión</a></p>';
+                // Botón para cerrar sesión
+                echo '<form action="users/logout.php" method="get">
+                        <button type="submit" class="logout-button">Cerrar Sesión</button>
+                    </form>';
             } else {
                 // Si no está logueado, mostrar botón de iniciar sesión
                 echo '<button id="btnAbrirModal">Acceder</button>'; // Botón para abrir el modal

@@ -10,6 +10,7 @@ include 'includes/alert.php'; // Incluir alertas
         <link rel="icon" type="image/x-icon" href="resources/icon/Icon_DulceAlHorno_2.jpg">  
         <link rel="stylesheet" href="css/styles.css">
         <link rel="stylesheet" href="css/styles-banner-footer.css">
+        <link rel="stylesheet" href="css/styles-productos.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
         <style>
             .main-img {
@@ -94,7 +95,7 @@ include 'includes/alert.php'; // Incluir alertas
                     </div>
                 </div>
                 <div class="div-button-img" style="background-color: #d4b58c;">
-                    <button class="button-img"><p style="font-size: 16px;">Comprar</p></button>
+                    <button class="button-img">Comprar</button>
                 </div>
             </a>
             <div class="separador"></div>

@@ -93,7 +93,7 @@ while ($producto = $result->fetch_assoc()) {
                 </table>
                 <h3>Total: $<?= number_format($total, 2) ?></h3>
 
-                <form action="pedidos/procesar_pedido.php" method="POST">
+                <form action="procesar_pedido.php" method="POST">
                     <input type="hidden" name="carrito_id" value="<?= $carrito_id ?>">
                 
                     <div class="checkbox-container">

@@ -56,7 +56,7 @@ include 'includes/alert.php'; // Incluir alertas
                     </form>';
             } else {
                 // Si no está logueado, mostrar botón de iniciar sesión
-                echo '<button id="btnAbrirModal">Acceder</button>'; // Botón para abrir el modal
+                echo '<div style="text-align: center;"><button id="btnAbrirModal" style="width: auto;">Acceder</button></div>'; // Botón para abrir el modal
             }
             ?>
         </div>

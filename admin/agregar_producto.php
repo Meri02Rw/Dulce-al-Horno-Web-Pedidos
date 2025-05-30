@@ -1,4 +1,7 @@
 <?php
+include __DIR__ . '/../config/config.php';
+include __DIR__ . '/../config/db.php';
+
 // Verificar sesión y rol de admin
 if (!isset($_SESSION['usuario_id']) || $_SESSION['correo'] !== 'dulcealhorno@gmail.com') {
     $_SESSION['mensaje'] = "Acceso denegado.";

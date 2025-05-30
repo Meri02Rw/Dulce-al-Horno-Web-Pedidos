@@ -43,10 +43,15 @@ $usuario_logueado = isset($_SESSION["usuario_id"]);
         
         <div class="main-container">
             <h2 class="title"><?= htmlspecialchars($producto['nombre']) ?></h2>
-            <img src="../<?= htmlspecialchars($producto['img_url']) ?>" alt="<?= htmlspecialchars($producto['nombre']) ?>" width="200">
+            <div class="producto-img">
+                <?php if (!empty($producto['img_url'])): ?>
+                    <img src="../<?= htmlspecialchars($producto['img_url']) ?>" alt="<?= htmlspecialchars($producto['nombre']) ?>">
+                <?php else: ?>
+                    <i class="bi bi-image" style="font-size: 40px; color: gray;"></i>
+                <?php endif; ?>
+            </div>
             <p>Precio: $<?= number_format($producto['precio'], 2) ?></p>
             <p><?= nl2br(htmlspecialchars($producto['descripcion'])) ?></p>
-
 
             <?php if ($usuario_logueado) { ?>
                 <form action="../carrito/agregar_carrito.php" method="POST">

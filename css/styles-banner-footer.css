@@ -24,7 +24,8 @@
   
   .menu {
     display: flex;
-    gap: 20px;
+    gap: 15px;
+    padding-right: 10px;
   }
   
   .search-container {
@@ -138,6 +139,7 @@
       text-align: center;
       z-index: 3;
       right: 0;
+      padding-right: 0px;
     }
   
     .menu.active {

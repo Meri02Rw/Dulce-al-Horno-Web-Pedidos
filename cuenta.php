@@ -46,9 +46,18 @@ include 'includes/alert.php'; // Incluir alertas
                 echo '<p><strong>Correo:</strong> ' . $correo . '</p>';
                 
                 // Botón para ver los pedidos
-                echo '<form action="pedidos/pedidos.php" method="get">
-                        <button type="submit" class="view-orders-button">Ver mis pedidos</button>
-                    </form>';
+                // Verificar si el usuario es admin
+                if ($correo === 'dulcealhorno@gmail.com') {
+                    echo '<form action="admin/pedidos_recibidos.php" method="get">
+                            <button type="submit" class="view-orders-button">Ver pedidos recibidos</button>
+                        </form>
+                        <a href="admin/productos.php" class="btn btn-admin">Gestionar Productos</a>';
+                } else {
+                    echo '<form action="pedidos/pedidos.php" method="get">
+                            <button type="submit" class="view-orders-button">Ver mis pedidos</button>
+                        </form>';
+                }
+
 
                 // Botón para cerrar sesión
                 echo '<form action="users/logout.php" method="get">

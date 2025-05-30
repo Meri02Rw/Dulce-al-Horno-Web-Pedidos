@@ -29,7 +29,13 @@ echo '<div class="productos-grid">';
 while ($producto = $resultado->fetch_assoc()) { ?>
     <div class="producto-card">
         <a href="productos/detalle_producto.php?id=<?php echo $producto['producto_id']; ?>">
-            <img src="<?php echo $producto['img_url']; ?>" alt="<?php echo $producto['nombre']; ?>">
+            <div class="producto-img">
+                <?php if (!empty($producto['img_url'])): ?>
+                    <img src="<?= $producto['img_url'] ?>" alt="<?= $producto['nombre'] ?>">
+                <?php else: ?>
+                    <i class="bi bi-image" style="font-size: 40px; color: gray;"></i>
+                <?php endif; ?>
+            </div>
             <h3><?php echo $producto['nombre']; ?></h3>
             <p>$<?php echo number_format($producto['precio'], 2); ?></p>
         </a>

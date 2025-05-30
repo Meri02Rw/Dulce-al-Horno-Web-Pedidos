@@ -1,7 +1,7 @@
 <?php 
-include '../includes/alert.php';
-include '../config/config.php'; // Configuración general y sesión
-include '../config/db.php'; // Conexión a la base de datos
+include '../config/config.php'; // Incluye configuración y asegura que la sesión esté iniciada
+include '../config/db.php'; // Incluye la conexión a la base de datos
+include '../includes/alert.php'; // Incluir alertas
 ?>
 <!DOCTYPE html>
 <html lang="es-MX">

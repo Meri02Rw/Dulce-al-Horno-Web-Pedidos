@@ -32,9 +32,10 @@ while ($row = $result->fetch_assoc()) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cuenta</title>
+    <title>Pedidos</title>
     <link rel="icon" type="image/x-icon" href="/DulceAlHornoWebPedidos/resources/icon/Icon_DulceAlHorno_2.jpg">  
     <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/styles-pedidos.css">
     <link rel="stylesheet" href="../css/styles-banner-footer.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </head>
@@ -49,7 +50,7 @@ while ($row = $result->fetch_assoc()) {
             <h2 class="title">Mis Pedidos</h2>
 
             <?php if (count($pedidos) > 0): ?>
-                <table>
+                <table class="tabla-pedidos">
                     <tr>
                         <th>Pedido ID</th>
                         <th>Fecha</th>
@@ -62,7 +63,15 @@ while ($row = $result->fetch_assoc()) {
                             <td><?= $pedido['pedido_id'] ?></td>
                             <td><?= date("d/m/Y", strtotime($pedido['fecha'])) ?></td>
                             <td>$<?= number_format($pedido['total'], 2) ?></td>
-                            <td><?= ucfirst($pedido['estado']) ?></td>
+                            <td>
+                                <?= ucfirst($pedido['estado']) ?>
+                                <?php if ($pedido['estado'] == 'en espera'): ?>
+                                    <form method="POST" action="cancelar_pedido.php" onsubmit="return confirmarCancelacion();" style="display:inline-block; margin-left: 10px;">
+                                        <input type="hidden" name="pedido_id" value="<?= $pedido['pedido_id'] ?>">
+                                        <button type="submit" style="background-color: #e74c3c; color: white; border: none; padding: 5px 10px; cursor: pointer; font-size: 0.85em;">Cancelar</button>
+                                    </form>
+                                <?php endif; ?>
+                            </td>
                             <td><a href="detalles_pedido.php?pedido_id=<?= $pedido['pedido_id'] ?>">Ver Detalles</a></td>
                         </tr>
                     <?php endforeach; ?>
@@ -78,5 +87,10 @@ while ($row = $result->fetch_assoc()) {
     </div>
     <script src="js/script-login-registro.js"></script>
     <script src="js/script-alert.js"></script>
+    <script>
+    function confirmarCancelacion() {
+        return confirm("¿Estás seguro de que deseas cancelar este pedido?");
+    }
+    </script>
 </body>
 </html>

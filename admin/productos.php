@@ -58,7 +58,7 @@ while ($row = $result->fetch_assoc()) {
                             </div>
 
                             <div class="producto-opciones">
-                                <form method="POST" action="cambiar_estado_producto.php">
+                                <form method="POST" action="cambiar_estado.php">
                                     <input type="hidden" name="producto_id" value="<?= $producto['producto_id'] ?>">
 
                                     <select name="nuevo_estado" onchange="this.form.submit()" class="selector-estado">

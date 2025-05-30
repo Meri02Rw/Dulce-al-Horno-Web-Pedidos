@@ -33,6 +33,7 @@ if ($isAdmin) {
             ORDER BY p.fecha DESC";
     $stmt = $conn->prepare($sql);
 } else {
+    $_SESSION['mensaje'] = "Acceso denegado.";
     header("Location: ../cuenta.php");
     exit();
 }

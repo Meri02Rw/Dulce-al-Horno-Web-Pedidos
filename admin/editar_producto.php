@@ -2,6 +2,13 @@
 include '../config/config.php';
 include '../config/db.php';
 
+// Verificar sesión y rol de admin
+if (!isset($_SESSION['usuario_id']) || $_SESSION['correo'] !== 'dulcealhorno@gmail.com') {
+    $_SESSION['mensaje'] = "Acceso denegado.";
+    header("Location: ../cuenta.php");
+    exit();
+}
+
 $producto_id = $_GET['id'];
 $stmt = $conn->prepare("SELECT * FROM productos WHERE producto_id = ?");
 $stmt->bind_param("i", $producto_id);

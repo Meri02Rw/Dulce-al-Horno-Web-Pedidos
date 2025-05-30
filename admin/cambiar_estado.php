@@ -1,59 +1,32 @@
 <?php
-include __DIR__ . '/../config/config.php';
-include __DIR__ . '/../config/db.php';
+include '../config/config.php';
+include '../config/db.php';
 
-// Asegúrate de que el usuario esté logueado
-if (!isset($_SESSION['usuario_id'])) {
-    $_SESSION['mensaje'] = "Debes iniciar sesión para realizar esta acción.";
-    header("Location: ../cuenta.php");
-    exit();
-}
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $producto_id = $_POST['producto_id'];
 
-// Solo el admin puede cambiar estados
-$usuario_id = $_SESSION['usuario_id'];
-$correo_admin = 'dulcealhorno@gmail.com';
+    // Obtener el estado actual
+    $stmt = $conn->prepare("SELECT estado FROM productos WHERE producto_id = ?");
+    $stmt->bind_param("i", $producto_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $producto = $result->fetch_assoc();
 
-$sqlAdminCheck = "SELECT correo FROM usuarios WHERE usuario_id = ?";
-$stmtCheck = $conn->prepare($sqlAdminCheck);
-$stmtCheck->bind_param("i", $usuario_id);
-$stmtCheck->execute();
-$resultCheck = $stmtCheck->get_result();
+    // Alternar el estado
+    $nuevo_estado = ($producto['estado'] == 'disponible') ? 'no disponible' : 'disponible';
 
-if (!$usuario = $resultCheck->fetch_assoc() || $usuario['correo'] !== $correo_admin) {
-    $_SESSION['mensaje'] = "No tienes permiso para cambiar el estado del pedido.";
-    header("Location: ../cuenta.php");
-    exit();
-}
-
-// Validar datos del formulario
-if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST['pedido_id'], $_POST['nuevo_estado'])) {
-    $pedido_id = intval($_POST['pedido_id']);
-    $nuevo_estado = trim($_POST['nuevo_estado']);
-
-    $estados_validos = ['en espera', 'entregado', 'no entregado', 'cancelado'];
-
-    if (!in_array($nuevo_estado, $estados_validos)) {
-        $_SESSION['mensaje'] = "Estado inválido.";
-        header("Location: pedidos_recibidos.php");
-        exit();
-    }
-
-    // Actualizar estado en la base de datos
-    $sql = "UPDATE pedidos SET estado = ? WHERE pedido_id = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("si", $nuevo_estado, $pedido_id);
+    // Actualizar el estado en la base de datos
+    $stmt = $conn->prepare("UPDATE productos SET estado = ? WHERE producto_id = ?");
+    $stmt->bind_param("si", $nuevo_estado, $producto_id);
+    $stmt->execute();
 
     if ($stmt->execute()) {
-        $_SESSION['mensaje'] = "Estado del pedido actualizado correctamente.";
+        $_SESSION['mensaje'] = "Se actualizo el estado del producto correctamente.";
     } else {
-        $_SESSION['mensaje'] = "Error al actualizar el estado del pedido.";
+        $_SESSION['mensaje'] = "Error al actualizar  el estado del producto.";
     }
 
-    header("Location: pedidos_recibidos.php");
-    exit();
-} else {
-    $_SESSION['mensaje'] = "Datos incompletos.";
-    header("Location: pedidos_recibidos.php");
+    header("Location: productos.php");
     exit();
 }
 ?>

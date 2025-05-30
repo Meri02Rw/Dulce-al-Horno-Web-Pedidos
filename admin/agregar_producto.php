@@ -1,3 +1,12 @@
+<?php
+// Verificar sesión y rol de admin
+if (!isset($_SESSION['usuario_id']) || $_SESSION['correo'] !== 'dulcealhorno@gmail.com') {
+    $_SESSION['mensaje'] = "Acceso denegado.";
+    header("Location: ../cuenta.php");
+    exit();
+}
+?>
+
 <!DOCTYPE html>
 <html lang="es-MX">
 <head>
@@ -11,7 +20,7 @@
 </head>
 <body>
     <div>
-            <!-- Incluir el banner con PHP -->
+        <!-- Incluir el banner con PHP -->
         <div id="banner-container">
             <?php include '../includes/banner.php'; ?>
         </div>

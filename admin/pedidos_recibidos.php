@@ -76,7 +76,7 @@ while ($row = $result->fetch_assoc()) {
 
                                 <div class="card-buttons">
                                     <!-- Cambiar estado -->
-                                    <form method="POST" action="cambiar_estado.php" onsubmit="return confirmarCambioEstado();">
+                                    <form method="POST" action="cambiar_estado_pedido.php" onsubmit="return confirmarCambioEstado();">
                                         <input type="hidden" name="pedido_id" value="<?= $pedido['pedido_id'] ?>">
                                         <select name="nuevo_estado">
                                             <?php

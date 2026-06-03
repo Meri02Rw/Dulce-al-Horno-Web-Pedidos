@@ -1,12 +1,12 @@
 <?php
-include __DIR__ . '/../includes/alert.php';
-include __DIR__ . '/../config/config.php';
-include __DIR__ . '/../config/db.php';
+include __DIR__ . '/../../includes/alert.php';
+include __DIR__ . '/../../config/config.php';
+include __DIR__ . '/../../config/db.php';
 
 // Verificar sesión
 if (!isset($_SESSION['usuario_id'])) {
     $_SESSION['mensaje'] = "Debes iniciar sesión para ver los pedidos";
-    header("Location: ../cuenta.php");
+    header("Location: ../../pages/cuenta.php");
     exit();
 }
 
@@ -34,7 +34,7 @@ if ($isAdmin) {
     $stmt = $conn->prepare($sql);
 } else {
     $_SESSION['mensaje'] = "Acceso denegado.";
-    header("Location: ../cuenta.php");
+    header("Location: ../../pages/cuenta.php");
     exit();
 }
 
@@ -53,15 +53,15 @@ while ($row = $result->fetch_assoc()) {
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Pedidos Recibidos</title>
         <link rel="icon" type="image/x-icon" href="/DulceAlHornoWebPedidos/resources/icon/Icon_DulceAlHorno_2.jpg">  
-        <link rel="stylesheet" href="../css/styles.css">
-        <link rel="stylesheet" href="../css/styles-pedidos.css">
-        <link rel="stylesheet" href="../css/styles-banner-footer.css">
+        <link rel="stylesheet" href="../../css/styles.css">
+        <link rel="stylesheet" href="../../css/styles-pedidos.css">
+        <link rel="stylesheet" href="../../css/styles-banner-footer.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     </head>
     <body>
         <div>
             <div id="banner-container">
-                <?php include '../includes/banner.php'; ?>
+                <?php include '../../includes/banner.php'; ?>
             </div>
             <div class="main-container">
                 <h2 class="title">Pedidos Recibidos</h2>
@@ -110,7 +110,7 @@ while ($row = $result->fetch_assoc()) {
 
             </div>
             <div id="footer-container">
-                <?php include '../includes/footer.php'; ?>
+                <?php include '../../includes/footer.php'; ?>
             </div>
 
         </div>

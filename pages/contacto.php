@@ -5,9 +5,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Contacto</title>
         <link rel="icon" type="image/x-icon" href="resources/icon/Icon_DulceAlHorno_2.jpg">  
-        <link rel="stylesheet" href="css/styles.css">
-        <link rel="stylesheet" href="css/styles-banner-footer.css">
-        <link rel="stylesheet" href="css/styles-contacto.css">
+        <link rel="stylesheet" href="/assets/css/styles.css">
+        <link rel="stylesheet" href="/assets/css/styles-banner-footer.css">
+        <link rel="stylesheet" href="/assets/css/styles-contacto.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     </head>
     <body>

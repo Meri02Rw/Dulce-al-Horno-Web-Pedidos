@@ -8,9 +8,9 @@ include __DIR__ . '/./includes/alert.php'; // Incluir alertas
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Dulce al Horno</title>
         <link rel="icon" type="image/x-icon" href="resources/icon/Icon_DulceAlHorno_2.jpg">  
-        <link rel="stylesheet" href="css/styles.css">
-        <link rel="stylesheet" href="css/styles-banner-footer.css">
-        <link rel="stylesheet" href="css/styles-productos.css">
+        <link rel="stylesheet" href="/assets/css/styles.css">
+        <link rel="stylesheet" href="/assets/css/styles-banner-footer.css">
+        <link rel="stylesheet" href="/assets/css/styles-productos.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
         <style>
             .main-img {
@@ -111,6 +111,6 @@ include __DIR__ . '/./includes/alert.php'; // Incluir alertas
                 <?php include 'includes/footer.php'; ?>
             </div>
         </div>
-        <script src="js/script-alert.js"></script>
+        <script src="/assets/js/script.js"></script>
     </body>
 </html>

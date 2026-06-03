@@ -1,11 +1,11 @@
 <?php
-include __DIR__ . '/../config/config.php';
-include __DIR__ . '/../config/db.php';
+include __DIR__ . '/../../config/config.php';
+include __DIR__ . '/../../config/db.php';
 
 // Asegúrate de que el usuario esté logueado
 if (!isset($_SESSION['usuario_id'])) {
     $_SESSION['mensaje'] = "Debes iniciar sesión para realizar esta acción.";
-    header("Location: ../cuenta.php");
+    header("Location: ../../pages/cuenta.php");
     exit();
 }
 
@@ -19,9 +19,11 @@ $stmtCheck->bind_param("i", $usuario_id);
 $stmtCheck->execute();
 $resultCheck = $stmtCheck->get_result();
 
-if (!$usuario = $resultCheck->fetch_assoc() || $usuario['correo'] !== $correo_admin) {
+$usuario = $resultCheck->fetch_assoc();
+
+if (!$usuario || $usuario['correo'] !== $correo_admin) {
     $_SESSION['mensaje'] = "No tienes permiso para cambiar el estado del pedido.";
-    header("Location: ../cuenta.php");
+    header("Location: ../../pages/cuenta.php");
     exit();
 }
 

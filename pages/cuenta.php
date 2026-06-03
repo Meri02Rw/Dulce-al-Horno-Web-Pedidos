@@ -1,7 +1,7 @@
 <?php 
 include 'config/config.php'; // Incluye configuración y asegura que la sesión esté iniciada
 include 'config/db.php'; // Incluye la conexión a la base de datos
-include 'users/login-registro.php'; // Incluir el modal login-registro
+include 'users/login_registro.php'; // Incluir el modal login-registro
 include 'includes/alert.php'; // Incluir alertas
 ?>
 
@@ -12,8 +12,8 @@ include 'includes/alert.php'; // Incluir alertas
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cuenta</title>
     <link rel="icon" type="image/x-icon" href="resources/icon/Icon_DulceAlHorno_2.jpg">  
-    <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/styles-banner-footer.css">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="/assets/css/styles-banner-footer.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body>
@@ -74,7 +74,7 @@ include 'includes/alert.php'; // Incluir alertas
             <?php include 'includes/footer.php'; ?>
         </div>
     </div>
-    <script src="js/script-login-registro.js"></script>
-    <script src="js/script-alert.js"></script>
+    <script src="/assets/js/script-login-registro.js"></script>
+    <script src="/assets/js/script-alert.js"></script>
 </body>
 </html>

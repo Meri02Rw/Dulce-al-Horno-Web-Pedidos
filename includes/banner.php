@@ -35,10 +35,10 @@
             <!-- Menú principal -->
             <div class="menu">
                 <li class="li-banner"><a href="/DulceAlHornoWebPedidos/index.php"><i class="bi bi-house-door-fill icon-banner"></i>Inicio</a></li>
-                <li class="li-banner"><a href="/DulceAlHornoWebPedidos/catalogo.php"><i class="bi bi-journal-text icon-banner"></i>Catálogo</a></li>
-                <li class="li-banner"><a href="/DulceAlHornoWebPedidos/contacto.php"><i class="bi bi-envelope-check-fill icon-banner"></i>Contacto</a></li>
-                <li class="li-banner"><a href="/DulceAlHornoWebPedidos/cuenta.php"><i class="bi bi-person-fill icon-banner"></i>Cuenta</a></li>
-                <li class="li-banner"><a href="/DulceAlHornoWebPedidos/carrito.php"><i class="bi bi-cart-fill icon-banner"></i>Carrito</a></li>
+                <li class="li-banner"><a href="/DulceAlHornoWebPedidos/./catalogo.php"><i class="bi bi-journal-text icon-banner"></i>Catálogo</a></li>
+                <li class="li-banner"><a href="/DulceAlHornoWebPedidos/./contacto.php"><i class="bi bi-envelope-check-fill icon-banner"></i>Contacto</a></li>
+                <li class="li-banner"><a href="/DulceAlHornoWebPedidos/./cuenta.php"><i class="bi bi-person-fill icon-banner"></i>Cuenta</a></li>
+                <li class="li-banner"><a href="/DulceAlHornoWebPedidos/./carrito.php"><i class="bi bi-cart-fill icon-banner"></i>Carrito</a></li>
             </div>
         </ul>
     </div>

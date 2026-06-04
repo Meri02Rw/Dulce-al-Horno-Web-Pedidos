@@ -1,5 +1,5 @@
 <?php
-include 'config/db.php'; // Conectar a la base de datos
+include __DIR__ . '/../config/db.php'; // Conectar a la base de datos
 
 $isCatalogo = basename($_SERVER['PHP_SELF']) === 'catalogo.php';
 $productos = [];
@@ -21,17 +21,32 @@ if (isset($_GET['q']) && !empty(trim($_GET['q']))) {
 }
 
 if ($resultado->num_rows === 0) {
-    echo "<p>No se encontraron productos.</p>";
+    $_SESSION['mensaje'] = "No se encontraron productos.";
+    header("Location: ../../index.php");
+    exit();
 }
-
+    
 // Mostrar productos
 echo '<div class="productos-grid">';
 while ($producto = $resultado->fetch_assoc()) { ?>
     <div class="producto-card">
-        <a href="productos/detalle_producto.php?id=<?php echo $producto['producto_id']; ?>">
+        <?php
+        $rutaDetalle = basename($_SERVER['PHP_SELF']) === 'catalogo.php'
+            ? '../productos/detalle_producto.php?id=' . $producto['producto_id']
+            : 'productos/detalle_producto.php?id=' . $producto['producto_id'];
+        ?>
+
+        <a href="<?= $rutaDetalle ?>">
             <div class="producto-img">
+                <?php
+                $rutaImg = basename($_SERVER['PHP_SELF']) === 'catalogo.php'
+                    ? '../' . $producto['img_url']
+                    : $producto['img_url'];
+                ?>
+
                 <?php if (!empty($producto['img_url'])): ?>
-                    <img src="<?= $producto['img_url'] ?>" alt="<?= $producto['nombre'] ?>">
+                    <img src="<?= htmlspecialchars($rutaImg) ?>" 
+                        alt="<?= htmlspecialchars($producto['nombre']) ?>">
                 <?php else: ?>
                     <i class="bi bi-image" style="font-size: 40px; color: gray;"></i>
                 <?php endif; ?>

@@ -1,6 +1,6 @@
 <?php
-include '../config/config.php';
-include '../config/db.php';
+include '../../config/config.php';
+include '../../config/db.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $producto_id = $_POST['producto_id'];

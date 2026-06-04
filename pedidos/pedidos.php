@@ -34,9 +34,9 @@ while ($row = $result->fetch_assoc()) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pedidos</title>
     <link rel="icon" type="image/x-icon" href="/DulceAlHornoWebPedidos/resources/icon/Icon_DulceAlHorno_2.jpg">  
-    <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="../css/styles-pedidos.css">
-    <link rel="stylesheet" href="../css/styles-banner-footer.css">
+    <link rel="stylesheet" href="../assets/css/styles.css">
+    <link rel="stylesheet" href="../assets/css/styles-pedidos.css">
+    <link rel="stylesheet" href="../assets/css/styles-banner-footer.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body>
@@ -85,8 +85,8 @@ while ($row = $result->fetch_assoc()) {
             <?php include '../includes/footer.php'; ?>
         </div>
     </div>
-    <script src="js/script-login-registro.js"></script>
-    <script src="js/script-alert.js"></script>
+    <script src="/assets/js/script.js"></script>
+    <script src="/assets/js/script-alert.js"></script>
     <script>
     function confirmarCancelacion() {
         return confirm("¿Estás seguro de que deseas cancelar este pedido?");

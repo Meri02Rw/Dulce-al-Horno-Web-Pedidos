@@ -1,13 +1,7 @@
 <?php
-include '../config/config.php';
-include '../config/db.php';
-
-// Verificar sesión y rol de admin
-if (!isset($_SESSION['usuario_id']) || $_SESSION['correo'] !== 'dulcealhorno@gmail.com') {
-    $_SESSION['mensaje'] = "Acceso denegado.";
-    header("Location: ../cuenta.php");
-    exit();
-}
+include '../../config/config.php';
+include  '../../config/db.php';
+include __DIR__ . '/../../includes/auth_admin.php';
 
 $producto_id = $_GET['id'];
 $stmt = $conn->prepare("SELECT * FROM productos WHERE producto_id = ?");
@@ -23,16 +17,16 @@ $producto = $result->fetch_assoc();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Producto</title>
-    <link rel="icon" type="image/x-icon" href="../resources/icon/Icon_DulceAlHorno_2.jpg">  
-    <link rel="stylesheet" href="../css/styles.css">
-    <link rel="stylesheet" href="../css/styles-banner-footer.css">
-    <link rel="stylesheet" href="../css/styles-productos.css">
+    <link rel="icon" type="image/x-icon" href="../../resources/icon/Icon_DulceAlHorno_2.jpg">  
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="stylesheet" href="../../css/styles-banner-footer.css">
+    <link rel="stylesheet" href="../../css/styles-productos.css">
 </head>
 <body>
     <div>
         <!-- Incluir el banner con PHP -->
         <div id="banner-container">
-            <?php include '../includes/banner.php'; ?>
+            <?php include '../../includes/banner.php'; ?>
         </div>
         <h1 class="title">Editar Producto</h1>
         <form action="actualizar_producto.php" method="POST" enctype="multipart/form-data">
@@ -67,7 +61,7 @@ $producto = $result->fetch_assoc();
         </form>
         <!-- Incluir el footer con PHP -->
         <div id="footer-container">
-            <?php include '../includes/footer.php'; ?>
+            <?php include '../../includes/footer.php'; ?>
         </div>
     </div>
 </body>

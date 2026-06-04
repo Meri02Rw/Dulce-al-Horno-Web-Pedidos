@@ -2,10 +2,7 @@
 include '../config/config.php'; 
 include '../config/db.php'; 
 include '../includes/alert.php'; 
-
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
-require '../vendor/autoload.php';
+include '../includes/mail_helper.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $correo = $_POST['correo'];
@@ -21,13 +18,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($usuario['verificado'] != 1) {
             $_SESSION['mensaje'] = "Correo no verificado. Verifícalo para poder iniciar sesión.";
-            header("Location: ../cuenta.php");
+            header("Location: /DulceAlHornoWebPedidos/v4 (mejorada)/cuenta.php");
             exit();
         }
 
         if (!password_verify($password, $usuario['contraseña'])) {
             $_SESSION['mensaje'] = "Correo o contraseña incorrectos.";
-            header("Location: ../cuenta.php");
+            header("Location: /DulceAlHornoWebPedidos/v4 (mejorada)/cuenta.php");
             exit();
         }
 
@@ -36,7 +33,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['mfa_usuario_id'] = $usuario['usuario_id'];
             $_SESSION['correo_mfa'] = $usuario['correo'];
             $_SESSION['mensaje'] = "Usuario ADMIN. Escriba cualquier numero y presione el botón verificar.";
-            header("Location: ../mfa/verificar-login.php");
+            header("Location: /DulceAlHornoWebPedidos/v4 (mejorada)/mfa/verificar_login.php");
             exit();
         }
 
@@ -48,35 +45,25 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $updateStmt->bind_param("ssi", $codigo, $expira, $usuario['usuario_id']);
         $updateStmt->execute();
 
-        $mail = new PHPMailer(true);
-        try {
-            $mail->isSMTP();
-            $mail->Host = 'smtp.gmail.com';
-            $mail->SMTPAuth = true;
-            $mail->Username = 'correo.0102@gmail.com';
-            $mail->Password = 'ilwkbpjhejumfhbl';
-            $mail->SMTPSecure = 'tls';
-            $mail->Port = 587;
-
-            $mail->setFrom('correo.0102@gmail.com', 'Dulce al Horno');
-            $mail->addAddress($usuario['correo']);
-            $mail->Subject = 'Tu código de verificación';
-            $mail->Body = 'Tu código es: ' . $codigo;
-
-            $mail->send();
-        } catch (Exception $e) {
-            echo "Error al enviar el correo: {$mail->ErrorInfo}";
+        $enviado = enviarCorreo(
+            $correo,
+            'Verificación de correo',
+            "Tu código de verificación es: $codigo"
+        );
+        if (!$enviado) {
+            $_SESSION['mensaje'] = "No se pudo enviar el correo de verificación.";
+            header("Location: /DulceAlHornoWebPedidos/v4 (mejorada)/pages/cuenta.php");
             exit();
         }
 
         $_SESSION['mfa_usuario_id'] = $usuario['usuario_id'];
         $_SESSION['correo_mfa'] = $usuario['correo'];
         $_SESSION['mensaje'] = "Se envió un código a tu correo para iniciar sesión.";
-        header("Location: ../mfa/verificar-login.php");
+        header("Location: /DulceAlHornoWebPedidos/v4 (mejorada)/mfa/verificar_login.php");
         exit();
     } else {
         $_SESSION['mensaje'] = "Usuario no registrado. Regístrate para poder iniciar sesión.";
-        header("Location: ../cuenta.php");
+        header("Location: /DulceAlHornoWebPedidos/v4 (mejorada)/pages/cuenta.php");
         exit();
     }
 }

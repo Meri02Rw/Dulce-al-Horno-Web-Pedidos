@@ -1,8 +1,8 @@
 <?php
-include 'config/config.php'; // Incluye configuración y asegura que la sesión esté iniciada
-include 'config/db.php'; // Incluye la conexión a la base de datos
-include 'users/login_registro.php'; // Incluir el modal login-registro
-include 'includes/alert.php'; // Incluir alertas
+include '../config/config.php'; // Incluye configuración y asegura que la sesión esté iniciada
+include '../config/db.php'; // Incluye la conexión a la base de datos
+include '../users/login_registro.php'; // Incluir el modal login-registro
+include '../includes/alert.php'; // Incluir alertas
 ?>
 
 <!DOCTYPE html>
@@ -11,17 +11,17 @@ include 'includes/alert.php'; // Incluir alertas
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carrito</title>
-    <link rel="icon" type="image/x-icon" href="resources/icon/Icon_DulceAlHorno_2.jpg">  
-    <link rel="stylesheet" href="/assets/css/styles.css">
-    <link rel="stylesheet" href="/assets/css/styles-banner-footer.css">
-    <link rel="stylesheet" href="/assets/css/styles-carrito.css">
+    <link rel="icon" type="image/x-icon" href="/DulceAlHornoWebPedidos/v4 (mejorada)/resources/icon/Icon_DulceAlHorno_2.jpg"> 
+    <link rel="stylesheet" href="/DulceAlHornoWebPedidos/v4 (mejorada)/assets/css/styles.css">
+    <link rel="stylesheet" href="/DulceAlHornoWebPedidos/v4 (mejorada)/assets/css/styles-banner-footer.css">
+    <link rel="stylesheet" href="/DulceAlHornoWebPedidos/v4 (mejorada)/assets/css/styles-carrito.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body>
     <div>
         <!-- Incluir el banner con PHP -->
         <div id="banner-container">
-            <?php include 'includes/banner.php'; ?>
+            <?php include __DIR__ . '/../includes/banner.php'; ?>
         </div>
         
         <div class="main-container">
@@ -90,10 +90,10 @@ include 'includes/alert.php'; // Incluir alertas
         </div>
         <!-- Incluir el footer con PHP -->
         <div id="footer-container">
-            <?php include 'includes/footer.php'; ?>
+            <?php include __DIR__ . '/../includes/footer.php'; ?>
         </div>
     </div>
-    <script src="/assets/js/script-login-registro.js"></script>
-    <script src="/assets/js/script-alert.js"></script>
+    <script src="/DulceAlHornoWebPedidos/v4 (mejorada)/assets/js/script-login-registro.js"></script>
+    <script src="/DulceAlHornoWebPedidos/v4 (mejorada)/assets/js/script-alert.js"></script>
 </body>
 </html>

@@ -1,7 +1,7 @@
 <?php
 $host = 'localhost';
 $user = 'root';
-$password = '12345';
+$password = '';
 $dbname = 'dulcealhornowebpedidos';
 
 // Crear una conexión

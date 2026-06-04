@@ -1,10 +1,8 @@
 <?php
 include '../config/config.php'; // Incluye configuración y asegura que la sesión esté iniciada
 include '../config/db.php'; // Incluye la conexión a la base de datos
-require '../vendor/autoload.php';
-
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
+include '../includes/alert.php'; // Incluir alertas
+include '../includes/mail_helper.php'; // Incluir helper de correo
 
 $nombre = $_POST['nombre'];
 $apellidos = $_POST['apellidos'] ?: NULL;
@@ -19,7 +17,7 @@ $resultado = $stmtVerificar->get_result();
 
 if ($resultado->num_rows > 0) {
     $_SESSION['mensaje'] = "El correo ya está registrado. Intenta con otro.";
-    header("Location: ../cuenta.php");
+    header("Location: ../pages/cuenta.php");
     exit();
 }
 
@@ -42,33 +40,26 @@ try {
     $stmtClientes->execute();
 
     // Enviar correo
-    $mail = new PHPMailer(true);
-    $mail->isSMTP();
-    $mail->Host       = 'smtp.gmail.com';
-    $mail->SMTPAuth   = true;
-    $mail->Username   = 'correo.0102@gmail.com';
-    $mail->Password   = 'ilwkbpjhejumfhbl';
-    $mail->SMTPSecure = 'tls';
-    $mail->Port       = 587;
+    $enviado = enviarCorreo(
+        $correo,
+        'Verificación de correo',
+        "Tu código de verificación es: $codigo"
+    );
 
-    $mail->setFrom('correo.0102@gmail.com', 'Dulce al Horno');
-    $mail->addAddress($correo);
-    $mail->Subject = 'Verificación de correo';
-    $mail->Body    = "Tu código de verificación es: $codigo";
-
-    $mail->send();
+    if (!$enviado) {
+        throw new Exception("No se pudo enviar el correo.");
+    }
 
     $conn->commit();
     $_SESSION['registro_usuario_id'] = $usuarios_id;
     $_SESSION['mensaje'] = "Se envió un código a tu correo para verificar tu cuenta.";
-    header("Location: ../mfa/verificar-registro.php");
+    header("Location: ../mfa/verificar_registro.php");
 
 } catch (Exception $e) {
     $conn->rollback();
     $_SESSION['mensaje'] = "Error al registrar: " . $e->getMessage();
-    header("Location: ../cuenta.php");
+    header("Location: ../pages/cuenta.php");
 }
-
 $stmtUsuarios->close();
 $stmtClientes->close();
 $conn->close();

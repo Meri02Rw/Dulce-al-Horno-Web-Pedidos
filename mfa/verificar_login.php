@@ -21,11 +21,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $conn->query("UPDATE usuarios SET mfa_codigo = NULL, mfa_expira = NULL WHERE usuario_id = $usuario_id");
 
         $_SESSION['mensaje'] = "Sesión iniciada correctamente";
-        header("Location: ../index.php");
+        header("Location: /DulceAlHornoWebPedidos/v4 (mejorada)/index.php");
         exit();
     } else {
         $_SESSION['mensaje'] = "Código inválido o expirado.";
-        header("Location: verificar-login.php");
+        header("Location: /DulceAlHornoWebPedidos/v4 (mejorada)/mfa/verificar-login.php");
         exit();
     }
 }

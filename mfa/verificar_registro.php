@@ -16,11 +16,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($codigo === $usuario['verificacion_codigo'] && strtotime($usuario['verificacion_expira']) > time()) {
         $conn->query("UPDATE usuarios SET verificado = 1, verificacion_codigo = NULL, verificacion_expira = NULL WHERE usuario_id = $usuario_id");
         $_SESSION['mensaje'] = "Correo verificado. Ya puedes iniciar sesión.";
-        header("Location: ../cuenta.php");
+        header("Location: /DulceAlHornoWebPedidos/v4 (mejorada)/pages/cuenta.php");
         exit();
     } else {
         $_SESSION['mensaje'] = "Código inválido o expirado.";
-        header("Location: verificar-registro.php");
+        header("Location: /DulceAlHornoWebPedidos/v4 (mejorada)/mfa/verificar_registro.php");
         exit();
     }
 }

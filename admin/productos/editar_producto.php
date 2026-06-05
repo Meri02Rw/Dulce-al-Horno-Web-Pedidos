@@ -1,14 +1,36 @@
 <?php
-include '../../config/config.php';
-include  '../../config/db.php';
+include __DIR__ . '/../../config/config.php';
+include __DIR__ . '/../../config/db.php';
+include __DIR__ . '/../../includes/alert.php';
 include __DIR__ . '/../../includes/auth_admin.php';
 
+/* Verificar que exista ID */
+if (!isset($_GET['id']) || empty($_GET['id'])) {
+    $_SESSION['mensaje'] = "Producto no encontrado.";
+    header("Location: productos.php");
+    exit();
+}
+
 $producto_id = $_GET['id'];
-$stmt = $conn->prepare("SELECT * FROM productos WHERE producto_id = ?");
+
+$stmt = $conn->prepare("
+    SELECT * 
+    FROM productos 
+    WHERE producto_id = ?
+");
+
 $stmt->bind_param("i", $producto_id);
 $stmt->execute();
+
 $result = $stmt->get_result();
 $producto = $result->fetch_assoc();
+
+/* Validar existencia */
+if (!$producto) {
+    $_SESSION['mensaje'] = "Producto no encontrado.";
+    header("Location: productos.php");
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -17,51 +39,76 @@ $producto = $result->fetch_assoc();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar Producto</title>
-    <link rel="icon" type="image/x-icon" href="../../resources/icon/Icon_DulceAlHorno_2.jpg">  
-    <link rel="stylesheet" href="../../css/styles.css">
-    <link rel="stylesheet" href="../../css/styles-banner-footer.css">
-    <link rel="stylesheet" href="../../css/styles-productos.css">
+    <link rel="icon" type="image/x-icon" href="/DulceAlHornoWebPedidos/v4 (mejorada)/resources/icon/Icon_DulceAlHorno_2.jpg">
+    <link rel="stylesheet" href="/DulceAlHornoWebPedidos/v4 (mejorada)/assets/css/styles.css">
+    <link rel="stylesheet" href="/DulceAlHornoWebPedidos/v4 (mejorada)/assets/css/styles-banner-footer.css">
+    <link rel="stylesheet" href="/DulceAlHornoWebPedidos/v4 (mejorada)/assets/css/styles-productos.css">
 </head>
 <body>
     <div>
         <!-- Incluir el banner con PHP -->
         <div id="banner-container">
-            <?php include '../../includes/banner.php'; ?>
+            <?php include __DIR__ . '/../../includes/banner.php'; ?>
         </div>
-        <h1 class="title">Editar Producto</h1>
-        <form action="actualizar_producto.php" method="POST" enctype="multipart/form-data">
-            <input type="hidden" name="producto_id" value="<?= $producto['producto_id'] ?>">
+        <div class="main-container">
+            <h1 class="title">Editar Producto</h1>
+            <form action="actualizar_producto.php" method="POST" enctype="multipart/form-data" class="form-editar-producto" style="margin-top: 30px; display: flex; flex-direction: column; gap: 15px; max-width: 400px;">
+                <input type="hidden" name="producto_id" value="<?= $producto['producto_id'] ?>">
 
-            <label>Nombre:</label>
-            <input type="text" name="nombre" value="<?= htmlspecialchars($producto['nombre']) ?>" required><br>
+                <label>Nombre:</label>
+                <input type="text" name="nombre"value="<?= htmlspecialchars($producto['nombre']) ?>"required>
 
-            <label>Precio:</label>
-            <input type="number" name="precio" step="0.01" value="<?= $producto['precio'] ?>" required><br>
+                <label>Precio:</label>
+                <input type="number" name="precio" step="0.01" value="<?= $producto['precio'] ?>" required>
 
-            <label>Descripción:</label>
-            <textarea name="descripcion"><?= htmlspecialchars($producto['descripcion']) ?></textarea><br>
+                <label>Descripción:</label>
+                <textarea name="descripcion"><?= htmlspecialchars($producto['descripcion']) ?></textarea>
 
-            <label>Estado:</label>
-            <select name="estado">
-                <option value="disponible" <?= $producto['estado'] == 'disponible' ? 'selected' : '' ?>>Disponible</option>
-                <option value="no disponible" <?= $producto['estado'] == 'no disponible' ? 'selected' : '' ?>>No disponible</option>
-            </select><br>
+                <label>Estado:</label>
+                <select name="estado">
+                    <option 
+                        value="disponible"
+                        <?= $producto['estado'] == 'disponible' ? 'selected' : '' ?>
+                    >
+                        Disponible
+                    </option>
+                    <option
+                        value="no disponible"
+                        <?= $producto['estado'] == 'no disponible' ? 'selected' : '' ?>
+                    >
+                        No disponible
+                    </option>
+                </select>
 
-            <label>Imagen actual:</label><br>
-            <?php if ($producto['img_url']): ?>
-                <img src="../<?= $producto['img_url'] ?>" alt="Imagen del producto" width="100"><br>
-            <?php else: ?>
-                <p>No hay imagen disponible.</p>
-            <?php endif; ?>
+                <label>Imagen actual:</label>
+                <?php if (!empty($producto['img_url'])): ?>
+                    <img
+                        src="/DulceAlHornoWebPedidos/v4 (mejorada)/<?= htmlspecialchars($producto['img_url']) ?>"
+                        alt="Imagen producto"
+                        width="120"
+                    >
+                <?php else: ?>
 
-            <label>Cambiar imagen:</label>
-            <input type="file" name="imagen" accept="image/*"><br>
+                    <p>No hay imagen disponible.</p>
+                <?php endif; ?>
 
-            <button style="margin-bottom: 20px;" type="submit">Actualizar Producto</button>
-        </form>
+                <label>Cambiar imagen:</label>
+                <input
+                    type="file"
+                    name="imagen"
+                    accept="image/*"
+                >
+                <button 
+                    type="submit"
+                    style="margin-top:20px;"
+                >
+                    Actualizar Producto
+                </button>
+            </form>
+        </div>
         <!-- Incluir el footer con PHP -->
         <div id="footer-container">
-            <?php include '../../includes/footer.php'; ?>
+            <?php include __DIR__ . '/../../includes/footer.php'; ?>
         </div>
     </div>
 </body>

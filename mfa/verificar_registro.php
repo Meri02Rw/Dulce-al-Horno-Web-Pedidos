@@ -1,26 +1,120 @@
 <?php
-include '../config/config.php'; // Incluye configuración y asegura que la sesión esté iniciada
-include '../config/db.php'; // Incluye la conexión a la base de datos
-include '../includes/alert.php'; // Incluir alertas
+include '../config/config.php';
+include '../config/db.php';
+include '../includes/alert.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $codigo = $_POST['codigo'];
-    $usuario_id = $_SESSION['registro_usuario_id'];
-
-    $stmt = $conn->prepare("SELECT verificacion_codigo, verificacion_expira FROM usuarios WHERE usuario_id = ?");
-    $stmt->bind_param("i", $usuario_id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $usuario = $result->fetch_assoc();
-
-    if ($codigo === $usuario['verificacion_codigo'] && strtotime($usuario['verificacion_expira']) > time()) {
-        $conn->query("UPDATE usuarios SET verificado = 1, verificacion_codigo = NULL, verificacion_expira = NULL WHERE usuario_id = $usuario_id");
-        $_SESSION['mensaje'] = "Correo verificado. Ya puedes iniciar sesión.";
-        header("Location: /DulceAlHornoWebPedidos/v4 (mejorada)/pages/cuenta.php");
+    if (!isset($_SESSION['registro_temp'])) {
+        $_SESSION['mensaje'] =
+        "Sesión expirada.";
+        header(
+            "Location: ../pages/cuenta.php"
+        );
         exit();
+    }
+
+    $codigoIngresado =
+    trim($_POST['codigo']);
+
+    $datos =
+    $_SESSION['registro_temp'];
+
+    if (
+        $codigoIngresado ===
+        $datos['codigo']
+        &&
+        strtotime(
+            $datos['expira']
+        ) > time()
+    ) {
+        $conn->begin_transaction();
+        try {
+            // Insertar usuario
+            $sqlUsuarios = "
+            INSERT INTO usuarios
+            (
+                correo,
+                contraseña,
+                verificacion_codigo,
+                verificacion_expira,
+                verificado
+            )
+            VALUES
+            (
+                ?,
+                ?,
+                NULL,
+                NULL,
+                1
+            )
+            ";
+            $stmtUsuarios =
+            $conn->prepare(
+                $sqlUsuarios
+            );
+            $stmtUsuarios->bind_param(
+                "ss",
+                $datos['correo'],
+                $datos['contraseña']
+            );
+            $stmtUsuarios->execute();
+            $usuario_id =
+            $conn->insert_id;
+
+            // Insertar cliente
+            $sqlClientes = "
+            INSERT INTO clientes
+            (
+                usuario_id,
+                nombre,
+                apellidos
+            )
+            VALUES
+            (
+                ?,
+                ?,
+                ?
+            )
+            ";
+            $stmtClientes =
+            $conn->prepare(
+                $sqlClientes
+            );
+            $stmtClientes->bind_param(
+
+                "iss",
+                $usuario_id,
+                $datos['nombre'],
+                $datos['apellidos']
+            );
+            $stmtClientes->execute();
+            $conn->commit();
+
+            unset(
+                $_SESSION['registro_temp']
+            );
+
+            $_SESSION['mensaje'] =
+            "Correo verificado correctamente. Ya puedes acceder.";
+            header(
+            "Location: /DulceAlHornoWebPedidos/v4 (mejorada)/pages/cuenta.php"
+            );
+            exit();
+        } catch (Exception $e) {
+            $conn->rollback();
+            $_SESSION['mensaje'] =
+            "Error al crear cuenta.";
+            header(
+            "Location: ../pages/cuenta.php"
+            );
+            exit();
+        }
     } else {
-        $_SESSION['mensaje'] = "Código inválido o expirado.";
-        header("Location: /DulceAlHornoWebPedidos/v4 (mejorada)/mfa/verificar_registro.php");
+        $_SESSION['mensaje'] =
+        "Código inválido o expirado.";
+        header(
+        "Location: /DulceAlHornoWebPedidos/v4 (mejorada)/mfa/verificar_registro.php"
+        );
         exit();
     }
 }

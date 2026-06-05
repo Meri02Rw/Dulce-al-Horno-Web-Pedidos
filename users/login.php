@@ -18,13 +18,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($usuario['verificado'] != 1) {
             $_SESSION['mensaje'] = "Correo no verificado. Verifícalo para poder iniciar sesión.";
-            header("Location: /DulceAlHornoWebPedidos/v4 (mejorada)/cuenta.php");
+            header("Location: /DulceAlHornoWebPedidos/v4 (mejorada)/pages/cuenta.php");
             exit();
         }
 
         if (!password_verify($password, $usuario['contraseña'])) {
             $_SESSION['mensaje'] = "Correo o contraseña incorrectos.";
-            header("Location: /DulceAlHornoWebPedidos/v4 (mejorada)/cuenta.php");
+            header("Location: /DulceAlHornoWebPedidos/v4 (mejorada)/pages/cuenta.php");
             exit();
         }
 

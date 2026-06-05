@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit();
     } else {
         $_SESSION['mensaje'] = "Código inválido o expirado.";
-        header("Location: /DulceAlHornoWebPedidos/v4 (mejorada)/mfa/verificar-login.php");
+        header("Location: /DulceAlHornoWebPedidos/v4 (mejorada)/mfa/verificar_login.php");
         exit();
     }
 }

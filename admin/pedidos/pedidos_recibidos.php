@@ -93,7 +93,7 @@ while ($row = $result->fetch_assoc()) {
 
                                     <!-- Cancelar pedido -->
                                     <?php if ($pedido['estado'] == 'en espera'): ?>
-                                        <form method="POST" action="cancelar_pedido.php" onsubmit="return confirmarCancelacion();">
+                                        <form method="POST" action="/DulceAlHornoWebPedidos/v4 (mejorada)/admin/pedidos/cancelar_pedido.php" onsubmit="return confirmarCancelacion();">
                                             <input type="hidden" name="pedido_id" value="<?= $pedido['pedido_id'] ?>">
                                             <button type="submit" class="cancelar">Cancelar</button>
                                         </form>

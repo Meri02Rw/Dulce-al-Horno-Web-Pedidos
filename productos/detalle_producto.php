@@ -76,7 +76,7 @@ $usuario_logueado = isset($_SESSION["usuario_id"]);
                     <button type="submit">Agregar al carrito</button>
                 </form>
             <?php } else { ?>
-                <p>Debes <a href="../cuenta.php" onclick="abrirModal()">iniciar sesión</a> para comprar.</p>
+                <p>Debes <a href="../pages/cuenta.php" onclick="abrirModal()">iniciar sesión</a> para comprar.</p>
             <?php } ?>
 
         </div>

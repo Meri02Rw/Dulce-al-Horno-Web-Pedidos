@@ -22,32 +22,33 @@ include __DIR__ . '/../../includes/auth_admin.php';
         <div id="banner-container">
             <?php include __DIR__ . '/../../includes/banner.php'; ?>
         </div>
-        <h1 class="title">Agregar Producto</h1>
-        <form action="guardar_producto.php" method="POST" enctype="multipart/form-data">
-            <label style="display: block; margin-bottom: 10px;">Nombre:</label>
-            <input type="text" name="nombre" required size="30"><br>
+        </div class="main-container">
+            <h1 class="title">Agregar Producto</h1>
+            <form action="guardar_producto.php" method="POST" enctype="multipart/form-data" style="display: flex; flex-direction: column; max-width: 400px; margin-left: 20px;">
+                <label>Nombre:</label>
+                <input type="text" name="nombre" required size="30"><br>
 
-            <label style="display: block; margin-bottom: 10px;">Precio:</label>
-            <input type="number" name="precio" step="0.01" required><br>
+                <label>Precio:</label>
+                <input type="number" name="precio" step="0.01" required><br>
 
-            <label style="display: block; margin-bottom: 10px;">Descripción:</label>
-            <textarea name="descripcion"></textarea><br>
+                <label>Descripción:</label>
+                <textarea name="descripcion"></textarea><br>
 
-            <label style="display: block; margin-bottom: 10px;">Estado:</label>
-            <select name="estado">
-                <option value="disponible">Disponible</option>
-                <option value="no disponible">No disponible</option>
-            </select><br>
+                <label>Estado:</label>
+                <select name="estado">
+                    <option value="disponible">Disponible</option>
+                    <option value="no disponible">No disponible</option>
+                </select><br>
 
-            <label style="display: block; margin-bottom: 10px;">Imagen:</label>
-            <input type="file" name="imagen" accept="image/*"><br>
+                <label>Imagen:</label>
+                <input type="file" name="imagen" accept="image/*"><br>
 
-            <button style="margin-bottom: 20px;" type="submit">Agregar Producto</button>
-        </form>
-        <!-- Incluir el footer con PHP -->
-        <div id="footer-container">
-            <?php include __DIR__ . '/../../includes/footer.php'; ?>
+                <button style="margin-bottom: 20px;" type="submit">Agregar Producto</button>
+            </form>
+            <!-- Incluir el footer con PHP -->
+            <div id="footer-container">
+                <?php include __DIR__ . '/../../includes/footer.php'; ?>
+            </div>
         </div>
-    </div>
 </body>
 </html>

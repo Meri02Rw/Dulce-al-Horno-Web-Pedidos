@@ -123,7 +123,9 @@ while ($row = $result->fetch_assoc()) {
                                     </select>
                                 </form>
 
-                                <form action="/DulceAlHornoWebPedidos/v4 (mejorada)/admin/productos/editar_producto.php?id=<?= $producto['producto_id'] ?>" method="GET">
+                                <form action="/DulceAlHornoWebPedidos/v4 (mejorada)/admin/productos/editar_producto.php" method="GET">
+                                    <input type="hidden" name="id" value="<?= $producto['producto_id'] ?>">
+
                                     <button type="submit" class="btn-editar">
                                         Editar
                                     </button>

@@ -2,15 +2,30 @@
 include __DIR__ . '/../includes/alert.php'; // Incluir alertas
 include __DIR__ .  '/../config/config.php'; // Incluye configuración y asegura que la sesión esté iniciada 
 include __DIR__ .  '/../config/db.php'; // Incluye la conexión a la base de datos
+include __DIR__ . '/../includes/cliente_helper.php'; 
+
 
 // Verificamos si el usuario está logueado
 if (!isset($_SESSION['usuario_id'])) {
     $_SESSION['mensaje'] = "Debes iniciar sesión para ver los detalles de tu pedido";
-    header("Location: ../cuenta.php");
+    header("Location: ../pages/cuenta.php");
     exit();
 }
 
-$usuario_id = $_SESSION['usuario_id'];
+$cliente_id = obtenerClienteId($conn, $_SESSION['usuario_id']);
+$correo_admin = 'dulcealhorno@gmail.com';
+
+$isAdmin = false;
+$sqlAdminCheck = "SELECT correo FROM usuarios WHERE usuario_id = ?";
+$stmtCheck = $conn->prepare($sqlAdminCheck);
+$stmtCheck->bind_param("i", $_SESSION['usuario_id']);
+$stmtCheck->execute();
+$resultCheck = $stmtCheck->get_result();
+if ($usuario = $resultCheck->fetch_assoc()) {
+    if ($usuario['correo'] === $correo_admin) {
+        $isAdmin = true;
+    }
+}
 
 // Verificamos que el ID del pedido esté presente
 if (!isset($_GET['pedido_id'])) {
@@ -18,25 +33,35 @@ if (!isset($_GET['pedido_id'])) {
     header("Location: pedidos.php");
     exit();
 }
-
 $pedido_id = $_GET['pedido_id'];
+    // Verificar que el pedido pertenece al usuario
+    $stmt = $conn->prepare("SELECT * FROM pedidos WHERE pedido_id = ? AND cliente_id = ?");
+    $stmt->bind_param("ii", $pedido_id, $cliente_id);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-// Obtener detalles del pedido
-$sql = "SELECT dp.detalle_id, p.nombre, dp.cantidad_producto, dp.precio, p.img_url, (dp.cantidad_producto * dp.precio) AS total
-        FROM detallepedido dp
-        JOIN productos p ON p.producto_id = dp.producto_id
-        WHERE dp.pedido_id = ?";
-$stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $pedido_id);
-$stmt->execute();
-$result = $stmt->get_result();
+    if ($result->num_rows === 1 || $isAdmin) {
+        // Obtener detalles del pedido
+        $sql = "SELECT dp.detalle_id, p.nombre, dp.cantidad_producto, dp.precio, p.img_url, (dp.cantidad_producto * dp.precio) AS total
+                FROM detallepedido dp
+                JOIN productos p ON p.producto_id = dp.producto_id
+                WHERE dp.pedido_id = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("i", $pedido_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-$productos = [];
-$total = 0;
-while ($row = $result->fetch_assoc()) {
-    $productos[] = $row;
-    $total += $row['total'];
-}
+        $productos = [];
+        $total = 0;
+        while ($row = $result->fetch_assoc()) {
+            $productos[] = $row;
+            $total += $row['total'];
+        }
+    } else {
+        $_SESSION['mensaje'] = "Este pedido no te pertenece.";
+        header("Location: ../pedidos/pedidos.php");
+        exit();
+    }
 ?>
 
 <!DOCTYPE html>

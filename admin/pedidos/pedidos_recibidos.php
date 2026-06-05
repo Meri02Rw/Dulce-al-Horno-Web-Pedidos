@@ -10,13 +10,12 @@ if (!isset($_SESSION['usuario_id'])) {
     exit();
 }
 
-$usuario_id = $_SESSION['usuario_id'];
 $correo_admin = 'dulcealhorno@gmail.com';
 
 $isAdmin = false;
 $sqlAdminCheck = "SELECT correo FROM usuarios WHERE usuario_id = ?";
 $stmtCheck = $conn->prepare($sqlAdminCheck);
-$stmtCheck->bind_param("i", $usuario_id);
+$stmtCheck->bind_param("i", $_SESSION['usuario_id']);
 $stmtCheck->execute();
 $resultCheck = $stmtCheck->get_result();
 if ($usuario = $resultCheck->fetch_assoc()) {
@@ -29,7 +28,7 @@ if ($usuario = $resultCheck->fetch_assoc()) {
 if ($isAdmin) {
     $sql = "SELECT p.pedido_id, p.fecha, p.total, p.estado, c.nombre, c.apellidos 
             FROM pedidos p 
-            INNER JOIN clientes c ON p.cliente_id = c.usuario_id
+            INNER JOIN clientes c ON p.cliente_id = c.cliente_id
             ORDER BY p.fecha DESC";
     $stmt = $conn->prepare($sql);
 } else {

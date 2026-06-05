@@ -1,7 +1,19 @@
 <?php 
-include '../config/config.php'; // Incluye configuración y asegura que la sesión esté iniciada
-include '../config/db.php'; // Incluye la conexión a la base de datos
-include '../includes/alert.php'; // Incluir alertas
+include '../config/config.php';
+include '../config/db.php';
+include '../includes/alert.php';
+
+// Bloquear acceso directo
+if (!isset($_SESSION['permitir_verificacion'])) {
+
+    $_SESSION['mensaje'] = "Acceso no autorizado.";
+
+    header("Location: ../index.php");
+    exit();
+}
+
+// Evitar reutilizar acceso
+unset($_SESSION['permitir_verificacion']);
 ?>
 <!DOCTYPE html>
 <html lang="es-MX">

@@ -2,26 +2,33 @@
 include __DIR__ . '/../includes/alert.php'; // Incluir alertas
 include __DIR__ .  '/../config/config.php'; // Incluye configuración y asegura que la sesión esté iniciada 
 include __DIR__ .  '/../config/db.php'; // Incluye la conexión a la base de datos
+include __DIR__ . '/../includes/cliente_helper.php'; 
 
 // Verificar si el usuario está logueado
 if (!isset($_SESSION['usuario_id'])) {
     $_SESSION['mensaje'] = "Debes iniciar sesión para confirmar tu pedido.";
-    header("Location: ../cuenta.php");
+    header("Location: ../pages/cuenta.php");
     exit();
 }
 
-$usuario_id = $_SESSION['usuario_id'];
+$cliente_id = obtenerClienteId($conn, $_SESSION['usuario_id']);
+
+if (!$cliente_id) {
+    $_SESSION['mensaje'] = "Cliente no encontrado.";
+    header("Location: ../pages/carrito.php");
+    exit();
+}
 
 // Obtener el carrito del usuario
 $stmt = $conn->prepare("SELECT carrito_id FROM carrito WHERE cliente_id = ?");
-$stmt->bind_param("i", $usuario_id);
+$stmt->bind_param("i", $cliente_id);
 $stmt->execute();
 $result = $stmt->get_result();
 $carrito = $result->fetch_assoc();
 
 if (!$carrito) {
     $_SESSION['mensaje'] = "Tu carrito está vacío.";
-    header("Location: carrito.php");
+    header("Location: ../pages/carrito.php");
     exit();
 }
 
@@ -96,17 +103,19 @@ while ($producto = $result->fetch_assoc()) {
                 <form action="procesar_pedido.php" method="POST">
                     <input type="hidden" name="carrito_id" value="<?= $carrito_id ?>">
                 
-                    <div class="checkbox-container">
-                        <input type="checkbox" id="aceptar" required>
+                    <div class="checkbox-container" style="margin-top: 20px; display: flex; align-items: center;">
+                        <input type="checkbox" id="aceptar" required style="margin-right: 10px; width: 20px; height: 20px; cursor: pointer;">
                         <label for="aceptar">Acepto enviar mi pedido por WhatsApp.</label>
                     </div>
-                
-                    <button type="submit" id="btnConfirmar" disabled>Confirmar Pedido</button>
+                            
+                    <button style="background-color: #ccc; cursor: not-allowed;" type="submit" id="btnConfirmar" disabled>Confirmar Pedido</button>
                 </form>
                 
                 <script>
                     document.getElementById('aceptar').addEventListener('change', function() {
                         document.getElementById('btnConfirmar').disabled = !this.checked;
+                        document.getElementById('btnConfirmar').style.backgroundColor = !this.checked ? '#ccc' : '#6D4C41';
+                        document.getElementById('btnConfirmar').style.cursor = !this.checked ? 'not-allowed' : 'pointer';
                     });
                 </script>
 
@@ -120,6 +129,6 @@ while ($producto = $result->fetch_assoc()) {
             <?php include '../includes/footer.php'; ?>
         </div>
     </div>
-    <script src="js/script-alert.js"></script>
+    <script src="/assets/js/script-alert.js"></script>
 </body>
 </html>

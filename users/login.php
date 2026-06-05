@@ -59,6 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['mfa_usuario_id'] = $usuario['usuario_id'];
         $_SESSION['correo_mfa'] = $usuario['correo'];
         $_SESSION['mensaje'] = "Se envió un código a tu correo para iniciar sesión.";
+        $_SESSION['permitir_verificacion'] = true;
         header("Location: /DulceAlHornoWebPedidos/v4 (mejorada)/mfa/verificar_login.php");
         exit();
     } else {

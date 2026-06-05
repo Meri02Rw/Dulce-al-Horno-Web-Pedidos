@@ -1,14 +1,16 @@
 <?php
-include '../config/config.php';
-include '../config/db.php';
+include __DIR__ . '/../includes/alert.php'; // Incluir alertas
+include __DIR__ .  '/../config/config.php'; // Incluye configuración y asegura que la sesión esté iniciada 
+include __DIR__ .  '/../config/db.php'; // Incluye la conexión a la base de datos
+include __DIR__ . '/../includes/cliente_helper.php'; 
 
 if (!isset($_SESSION['usuario_id'])) {
     $_SESSION['mensaje'] = "Debes iniciar sesión para hacer un pedido";
-    header("Location: ../cuenta.php");
+    header("Location: ../pages/cuenta.php");
     exit();
 }
 
-$usuario_id = $_SESSION['usuario_id'];
+$cliente_id = obtenerClienteId($conn, $_SESSION['usuario_id']);
 $mensajeWhatsApp = "";
 $total = 0;
 
@@ -19,7 +21,7 @@ $sql = "SELECT c.carrito_id, cp.producto_id, cp.cantidad_producto, cp.precio, p.
         JOIN productos p ON p.producto_id = cp.producto_id
         WHERE c.cliente_id = ?";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $usuario_id);
+$stmt->bind_param("i", $cliente_id);
 $stmt->execute();
 $result = $stmt->get_result();
 
@@ -36,7 +38,7 @@ while ($row = $result->fetch_assoc()) {
 
 // Insertar en pedidos
 $stmt = $conn->prepare("INSERT INTO pedidos (cliente_id, fecha, total, estado) VALUES (?, NOW(), ?, 'en espera')");
-$stmt->bind_param("id", $usuario_id, $total);
+$stmt->bind_param("id", $cliente_id, $total);
 $stmt->execute();
 $pedido_id = $stmt->insert_id;
 

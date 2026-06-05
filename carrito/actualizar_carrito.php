@@ -1,40 +1,75 @@
 <?php
-include '../config/config.php'; // Incluye configuración y asegura que la sesión esté iniciada
-include '../config/db.php'; // Conexión a la base de datos
+include '../config/config.php';
+include '../config/db.php';
 
 if (!isset($_SESSION['usuario_id'])) {
-    header("Location: ../cuenta.php");
+    header("Location: ../pages/cuenta.php");
     exit();
 }
 
 $usuario_id = $_SESSION['usuario_id'];
 
-// Obtener el carrito_id del usuario
-$stmt = $conn->prepare("SELECT carrito_id FROM carrito WHERE cliente_id = ?");
-$stmt->bind_param("i", $usuario_id);
-$stmt->execute();
-$result = $stmt->get_result();
-$row = $result->fetch_assoc();
+// Obtener cliente_id
+$stmtCliente = $conn->prepare("
+    SELECT cliente_id 
+    FROM clientes 
+    WHERE usuario_id = ?
+");
 
-if (!$row) {
-    echo "Error: No se encontró el carrito del usuario.";
+$stmtCliente->bind_param("i", $usuario_id);
+$stmtCliente->execute();
+
+$cliente = $stmtCliente->get_result()->fetch_assoc();
+
+if (!$cliente) {
+    $_SESSION['mensaje'] = "Cliente no encontrado.";
+    header("Location: ../pages/carrito.php");
     exit();
 }
 
-$carrito_id = $row['carrito_id'];
+$cliente_id = $cliente['cliente_id'];
 
-// Verificar si se enviaron cantidades
-if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['cantidad'])) {
-    foreach ($_POST['cantidad'] as $producto_id => $cantidad) {
-        if ($cantidad > 0) {
-            $stmt = $conn->prepare("UPDATE carrito_productos SET cantidad_producto = ? WHERE carrito_id = ? AND producto_id = ?");
-            $stmt->bind_param("iii", $cantidad, $carrito_id, $producto_id);
-            $stmt->execute();
-        }
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+    $producto_id = $_POST['producto_id'];
+    $cantidad = $_POST['cantidad'];
+
+    // Obtener carrito del cliente
+    $stmt = $conn->prepare("
+        SELECT carrito_id
+        FROM carrito
+        WHERE cliente_id = ?
+    ");
+
+    $stmt->bind_param("i", $cliente_id);
+    $stmt->execute();
+
+    $carrito = $stmt->get_result()->fetch_assoc();
+
+    if ($carrito) {
+
+        $carrito_id = $carrito['carrito_id'];
+
+        $stmt = $conn->prepare("
+            UPDATE carrito_productos
+            SET cantidad_producto = ?
+            WHERE carrito_id = ?
+            AND producto_id = ?
+        ");
+
+        $stmt->bind_param(
+            "iii",
+            $cantidad,
+            $carrito_id,
+            $producto_id
+        );
+
+        $stmt->execute();
+
+        $_SESSION['mensaje'] = "Cantidad actualizada.";
     }
-    $_SESSION['mensaje'] = "Cantidad del producto actualizada correctamente.";
 }
 
-header("Location: ../carrito.php");
+header("Location: ../pages/carrito.php");
 exit();
 ?>

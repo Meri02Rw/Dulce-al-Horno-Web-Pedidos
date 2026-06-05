@@ -2,22 +2,29 @@
 include __DIR__ . '/../includes/alert.php'; // Incluir alertas
 include __DIR__ .  '/../config/config.php'; // Incluye configuración y asegura que la sesión esté iniciada 
 include __DIR__ .  '/../config/db.php'; // Incluye la conexión a la base de datos
+include __DIR__ . '/../includes/cliente_helper.php';
 
 // Verificamos si el usuario está logueado
 if (!isset($_SESSION['usuario_id'])) {
     $_SESSION['mensaje'] = "Debes iniciar sesión para ver tus pedidos";
-    header("Location: ../cuenta.php");
+    header("Location: ../pages/cuenta.php");
     exit();
 }
 
-$usuario_id = $_SESSION['usuario_id'];
+$cliente_id = obtenerClienteId($conn, $_SESSION['usuario_id']);
+
+if (!$cliente_id) {
+    $_SESSION['mensaje'] = "Cliente no encontrado.";
+    header("Location: ../pages/carrito.php");
+    exit();
+}
 
 // Obtener pedidos del usuario
 $sql = "SELECT p.pedido_id, p.fecha, p.total, p.estado
         FROM pedidos p
         WHERE p.cliente_id = ? ORDER BY p.fecha DESC";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $usuario_id);
+$stmt->bind_param("i", $cliente_id);
 $stmt->execute();
 $result = $stmt->get_result();
 

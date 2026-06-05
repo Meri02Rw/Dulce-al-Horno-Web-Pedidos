@@ -72,6 +72,7 @@ try {
     unset($_SESSION['registro_temp']);
     $_SESSION['mensaje'] =
     "Error: " . $e->getMessage();
+    $_SESSION['permitir_verificacion'] = true;
     header(
         "Location: ../pages/cuenta.php"
     );

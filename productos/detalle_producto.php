@@ -15,7 +15,6 @@ $sql = "SELECT *
         FROM productos 
         WHERE producto_id = ? 
         AND estado = 'disponible'";
-
 $stmt = $conn->prepare($sql);
 $stmt->bind_param("i", $producto_id);
 $stmt->execute();
@@ -25,12 +24,6 @@ $producto = $resultado->fetch_assoc();
 
 if (!$producto) {
     $_SESSION['mensaje'] = "El producto que buscas no existe o ya no está disponible.";
-    header("Location: ../index.php");
-    exit();
-}
-
-if (!$producto) {
-    $_SESSION['mensaje'] = "Producto no encontrado.";
     header("Location: ../index.php");
     exit();
 }

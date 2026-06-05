@@ -3,13 +3,27 @@ include __DIR__ . '/../includes/alert.php'; // Incluir alertas
 include __DIR__ .  '/../config/config.php'; // Incluye configuración y asegura que la sesión esté iniciada 
 include __DIR__ .  '/../config/db.php'; // Incluye la conexión a la base de datos
 
-session_start();
-
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['producto_id']) && isset($_POST['cantidad']) && isset($_SESSION['usuario_id'])) {
         $producto_id = $_POST['producto_id'];
         $cantidad = $_POST['cantidad'];
-        $usuario_id = $_SESSION['usuario_id']; // El usuario debe estar logueado
+        $usuario_id = $_SESSION['usuario_id'];
+
+        // Obtener cliente_id usando usuario_id
+        $stmt = $conn->prepare("SELECT cliente_id FROM clientes WHERE usuario_id = ?");
+        $stmt->bind_param("i", $usuario_id);
+        $stmt->execute();
+
+        $result = $stmt->get_result();
+        $cliente = $result->fetch_assoc();
+
+        if (!$cliente) {
+            $_SESSION['mensaje'] = "Cliente no encontrado.";
+            header("Location: ../pages/cuenta.php");
+            exit();
+        }
+
+        $cliente_id = $cliente['cliente_id'];
 
         // Consultamos el precio del producto
         $stmt = $conn->prepare("SELECT precio FROM productos WHERE producto_id = ?");
@@ -21,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($producto) {
             // Verificar si el usuario ya tiene un carrito
             $stmt = $conn->prepare("SELECT carrito_id FROM carrito WHERE cliente_id = ?");
-            $stmt->bind_param("i", $usuario_id);
+            $stmt->bind_param("i", $cliente_id);
             $stmt->execute();
             $result = $stmt->get_result();
 
@@ -29,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if ($result->num_rows == 0) {
                 // Crear un carrito para el usuario
                 $stmt = $conn->prepare("INSERT INTO carrito (cliente_id) VALUES (?)");
-                $stmt->bind_param("i", $usuario_id);
+                $stmt->bind_param("i", $cliente_id);
                 $stmt->execute();
                 $carrito_id = $stmt->insert_id; // Obtenemos el ID del nuevo carrito
             } else {

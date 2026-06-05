@@ -42,6 +42,6 @@
             </div>
         </ul>
     </div>
-    <script src="/DulceAlHornoWebPedidos/v4 (mejorada)/js/script-banner.js"></script>
+    <script src="/DulceAlHornoWebPedidos/v4 (mejorada)/assets/js/script-banner.js"></script>
 </body>
 </html>

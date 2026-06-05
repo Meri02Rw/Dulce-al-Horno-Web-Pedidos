@@ -15,7 +15,12 @@ $mensajeWhatsApp = "";
 $total = 0;
 
 // Obtener carrito y productos
-$sql = "SELECT c.carrito_id, cp.producto_id, cp.cantidad_producto, cp.precio, p.nombre
+$sql = "SELECT c.carrito_id, 
+               cp.producto_id, 
+               cp.cantidad_producto, 
+               cp.precio, 
+               p.nombre,
+               p.stock
         FROM carrito c
         JOIN carrito_productos cp ON cp.carrito_id = c.carrito_id
         JOIN productos p ON p.producto_id = cp.producto_id
@@ -35,6 +40,24 @@ while ($row = $result->fetch_assoc()) {
     $productos[] = $row;
     $total += $row['precio'] * $row['cantidad_producto'];
 }
+if (empty($productos)) {
+    $_SESSION['mensaje'] = "Tu carrito está vacío.";
+    header("Location: ../pages/carrito.php");
+    exit();
+}
+
+foreach ($productos as $p) {
+
+    if ($p['cantidad_producto'] > $p['stock']) {
+
+        $_SESSION['mensaje'] =
+            "No hay suficiente stock para: " .
+            $p['nombre'];
+
+        header("Location: ../pages/carrito.php");
+        exit();
+    }
+}
 
 // Insertar en pedidos
 $stmt = $conn->prepare("INSERT INTO pedidos (cliente_id, fecha, total, estado) VALUES (?, NOW(), ?, 'en espera')");
@@ -46,9 +69,38 @@ $pedido_id = $stmt->insert_id;
 $stmt = $conn->prepare("INSERT INTO detallepedido (pedido_id, producto_id, cantidad_producto, precio) VALUES (?, ?, ?, ?)");
 
 foreach ($productos as $p) {
-    $stmt->bind_param("iiid", $pedido_id, $p['producto_id'], $p['cantidad_producto'], $p['precio']);
+
+    $stmt->bind_param(
+        "iiid",
+        $pedido_id,
+        $p['producto_id'],
+        $p['cantidad_producto'],
+        $p['precio']
+    );
+
     $stmt->execute();
-    $mensajeWhatsApp .= "- " . $p['nombre'] . " x" . $p['cantidad_producto'] . "\n";
+
+    // Descontar stock
+    $stmtStock = $conn->prepare("
+        UPDATE productos
+        SET stock = stock - ?
+        WHERE producto_id = ?
+    ");
+
+    $stmtStock->bind_param(
+        "ii",
+        $p['cantidad_producto'],
+        $p['producto_id']
+    );
+
+    $stmtStock->execute();
+
+    $mensajeWhatsApp .=
+        "- " .
+        $p['nombre'] .
+        " x" .
+        $p['cantidad_producto'] .
+        "\n";
 }
 
 // Limpiar el carrito

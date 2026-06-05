@@ -57,8 +57,8 @@ while ($row = $result->fetch_assoc()) {
             <h2 class="title">Mis Pedidos</h2>
 
             <?php if (count($pedidos) > 0): ?>
-                <table class="tabla-pedidos">
-                    <tr>
+                <table class="tabla-pedidos" style="width: 100%; font-family: Arial, sans-serif; font-size: 16px; color: #333; box-shadow: 0 2px 5px rgba(0,0,0,0.1); background-color: #fff; border-radius: 5px; overflow: hidden; border: 1px solid #ddd; margin-top: 20px;">
+                    <tr style="background-color: #f2f2f2; font-weight: bold;">
                         <th>Pedido ID</th>
                         <th>Fecha</th>
                         <th>Total</th>
@@ -66,7 +66,7 @@ while ($row = $result->fetch_assoc()) {
                         <th>Ver Detalles</th>
                     </tr>
                     <?php foreach ($pedidos as $pedido): ?>
-                        <tr>
+                        <tr style="border-bottom: 1px solid #ddd;" onmouseover="this.style.backgroundColor='#f9f9f9';" onmouseout="this.style.backgroundColor='white';">
                             <td><?= $pedido['pedido_id'] ?></td>
                             <td><?= date("d/m/Y", strtotime($pedido['fecha'])) ?></td>
                             <td>$<?= number_format($pedido['total'], 2) ?></td>

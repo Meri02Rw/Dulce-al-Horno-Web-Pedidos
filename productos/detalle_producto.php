@@ -58,20 +58,23 @@ $usuario_logueado = isset($_SESSION["usuario_id"]);
                     <i class="bi bi-image" style="font-size: 40px; color: gray;"></i>
                 <?php endif; ?>
             </div>
-            <p>Precio: $<?= number_format($producto['precio'], 2) ?></p>
+            <p style="color: #b47945; font-weight: bold;">Precio: $<?= number_format($producto['precio'], 2) ?></p>
             <p><?= nl2br(htmlspecialchars($producto['descripcion'])) ?></p>
-
-            <?php if ($usuario_logueado) { ?>
-                <form action="../carrito/agregar_carrito.php" method="POST">
-                    <input type="hidden" name="producto_id" value="<?= $producto_id ?>">
-                    <label for="cantidad">Cantidad:</label>
-                    <input type="number" id="cantidad" name="cantidad" value="1" min="1" required>
-                    <button type="submit">Agregar al carrito</button>
-                </form>
+            <p style="color: #666; font-weight: bold;">Stock: <?php echo (int)$producto['stock']; ?></p>
+            <?php if ($producto['stock'] <= 0) { ?>
+                <p style="color: red; font-weight: bold;">Producto agotado</p>
             <?php } else { ?>
-                <p>Debes <a href="../pages/cuenta.php" onclick="abrirModal()">iniciar sesión</a> para comprar.</p>
+                <?php if ($usuario_logueado) { ?>
+                    <form action="../carrito/agregar_carrito.php" method="POST">
+                        <input type="hidden" name="producto_id" value="<?= $producto_id ?>">
+                        <label for="cantidad">Cantidad:</label>
+                        <input type="number" id="cantidad" name="cantidad" value="1" min="1" max="<?= $producto['stock'] ?>" required style="width: 60px; margin-left: 10px;">
+                        <button type="submit">Agregar al carrito</button>
+                    </form>
+                <?php } else { ?>
+                    <p>Debes <a href="../pages/cuenta.php" onclick="abrirModal()" style="color: #b47945; text-decoration: underline;">iniciar sesión</a> para comprar.</p>
+                <?php } ?>
             <?php } ?>
-
         </div>
         <!-- Incluir el footer con PHP -->
         <div id="footer-container">

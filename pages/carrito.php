@@ -50,7 +50,8 @@ include '../includes/alert.php';
                             p.nombre,
                             cp.cantidad_producto,
                             p.precio,
-                            p.img_url
+                            p.img_url,
+                            p.stock
                         FROM carrito_productos cp
                         JOIN productos p 
                             ON p.producto_id = cp.producto_id
@@ -97,6 +98,7 @@ include '../includes/alert.php';
                                     name="cantidad"
                                     value="' . $producto['cantidad_producto'] . '"
                                     min="1"
+                                    max="' . $producto['stock'] . '"
                                     required>
                             </td>';
                             echo '<td>$' . number_format($producto['precio'], 2) . '</td>';

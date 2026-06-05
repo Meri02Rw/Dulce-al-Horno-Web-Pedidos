@@ -59,10 +59,13 @@ if (!$producto) {
                 <input type="text" name="nombre"value="<?= htmlspecialchars($producto['nombre']) ?>"required>
 
                 <label>Precio:</label>
-                <input type="number" name="precio" step="0.01" value="<?= $producto['precio'] ?>" required>
+                <input type="number" name="precio" min="0.01" step="0.01" value="<?= $producto['precio'] ?>" required>
+                
+                <label>Stock:</label>
+                <input type="number" name="stock" min="0" value="<?= $producto['stock'] ?>" required><br>
 
                 <label>Descripción:</label>
-                <textarea name="descripcion"><?= htmlspecialchars($producto['descripcion']) ?></textarea>
+                <textarea name="descripcion" style="width: 100%; height: 100px;"><?= htmlspecialchars($producto['descripcion']) ?></textarea>
 
                 <label>Estado:</label>
                 <select name="estado">

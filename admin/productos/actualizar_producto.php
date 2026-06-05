@@ -9,6 +9,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $producto_id = $_POST['producto_id'];
     $nombre = $_POST['nombre'];
     $precio = $_POST['precio'];
+    $stock = $_POST['stock'];
     $descripcion = $_POST['descripcion'] ?? '';
     $estado = $_POST['estado'];
 
@@ -72,6 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         UPDATE productos
         SET nombre = ?,
             precio = ?,
+            stock = ?,
             descripcion = ?,
             estado = ?,
             img_url = ?
@@ -79,9 +81,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     ");
 
     $stmtUpdate->bind_param(
-        "sdsssi",
+        "sdisssi",
         $nombre,
         $precio,
+        $stock,
         $descripcion,
         $estado,
         $img_url,

@@ -90,23 +90,69 @@ if (
             $pedido['estado']
             ===
             'cancelado'
+            ||
+            $pedido['estado']
+            ===
+            'entregado'
         ) {
             $_SESSION['mensaje'] =
-            "El pedido ya estaba cancelado.";
+            "No se puede cancelar este pedido. El pedido ya estaba cancelado o entregado.";
         } else {
-            $update =
+        // Restaurar stock de productos del pedido
+        $stmtDetalle = $conn->prepare(
+            "SELECT producto_id, cantidad_producto
+            FROM detallepedido
+            WHERE pedido_id = ?"
+        );
+
+        $stmtDetalle->bind_param(
+            "i",
+            $pedido_id
+        );
+
+        $stmtDetalle->execute();
+
+        $detalles =
+        $stmtDetalle->get_result();
+
+        while (
+            $detalle =
+            $detalles->fetch_assoc()
+        ) {
+
+            $stmtStock =
             $conn->prepare(
-                "UPDATE pedidos
-                 SET estado = 'cancelado'
-                 WHERE pedido_id = ?"
+                "UPDATE productos
+                SET stock = stock + ?
+                WHERE producto_id = ?"
             );
-            $update->bind_param(
-                "i",
-                $pedido_id
+
+            $stmtStock->bind_param(
+                "ii",
+                $detalle['cantidad_producto'],
+                $detalle['producto_id']
             );
-            $update->execute();
-            $_SESSION['mensaje'] =
-            "Pedido cancelado correctamente.";
+
+            $stmtStock->execute();
+        }
+
+        // Cambiar estado a cancelado
+        $update =
+        $conn->prepare(
+            "UPDATE pedidos
+            SET estado = 'cancelado'
+            WHERE pedido_id = ?"
+        );
+
+        $update->bind_param(
+            "i",
+            $pedido_id
+        );
+
+        $update->execute();
+
+        $_SESSION['mensaje'] =
+        "Pedido cancelado correctamente y stock restaurado.";
         }
     } else {
         $_SESSION['mensaje'] =

@@ -38,6 +38,9 @@ while ($producto = $resultado->fetch_assoc()) { ?>
         ?>
 
         <a href="<?= $rutaDetalle ?>" style="text-decoration: none; color: inherit;">
+            <h3 style="font-size: 1.25rem; font-weight: bold; margin-bottom: 0.5rem; color: #b47945;">
+                <?php echo $producto['nombre']; ?>
+            </h3>
             <div class="producto-img">
                 <?php
                 $rutaImg = basename($_SERVER['PHP_SELF']) === 'catalogo.php'
@@ -52,10 +55,11 @@ while ($producto = $resultado->fetch_assoc()) { ?>
                     <i class="bi bi-image" style="font-size: 40px; color: gray;"></i>
                 <?php endif; ?>
             </div>
-            <h3 style="font-size: 1.25rem; font-weight: bold; margin-bottom: 0.5rem;">
-                <?php echo $producto['nombre']; ?>
-            </h3>
-            <p>$<?php echo number_format($producto['precio'], 2); ?></p>
+            <p style="color: #b47945; font-weight: bold;">Precio: $<?php echo number_format($producto['precio'], 2); ?></p>
+            <p style="color: #666; font-weight: bold;">Stock: <?php echo (int)$producto['stock']; ?></p>
+            <?php if ($producto['stock'] <= 0) {
+                echo '<p style="color: red; font-weight: bold;">Agotado</p>';
+            } ?>
         </a>
     </div>
 <?php }

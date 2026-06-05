@@ -22,17 +22,20 @@ include __DIR__ . '/../../includes/auth_admin.php';
         <div id="banner-container">
             <?php include __DIR__ . '/../../includes/banner.php'; ?>
         </div>
-        </div class="main-container">
+        <div class="main-container">
             <h1 class="title">Agregar Producto</h1>
-            <form action="guardar_producto.php" method="POST" enctype="multipart/form-data" style="display: flex; flex-direction: column; max-width: 400px; margin-left: 20px;">
+            <form action="guardar_producto.php" method="POST" enctype="multipart/form-data" style="margin-top: 30px; display: flex; flex-direction: column; gap: 15px; max-width: 400px;">
                 <label>Nombre:</label>
                 <input type="text" name="nombre" required size="30"><br>
 
                 <label>Precio:</label>
-                <input type="number" name="precio" step="0.01" required><br>
+                <input type="number" name="precio" min="0.01" step="0.01" required><br>
+
+                <label>Stock:</label>
+                <input type="number" name="stock" min="0" required><br>
 
                 <label>Descripción:</label>
-                <textarea name="descripcion"></textarea><br>
+                <textarea name="descripcion" style="width: 100%; height: 100px;"></textarea><br>
 
                 <label>Estado:</label>
                 <select name="estado">
@@ -45,10 +48,10 @@ include __DIR__ . '/../../includes/auth_admin.php';
 
                 <button style="margin-bottom: 20px;" type="submit">Agregar Producto</button>
             </form>
-            <!-- Incluir el footer con PHP -->
-            <div id="footer-container">
-                <?php include __DIR__ . '/../../includes/footer.php'; ?>
-            </div>
+        </div>
+        <!-- Incluir el footer con PHP -->
+        <div id="footer-container">
+            <?php include __DIR__ . '/../../includes/footer.php'; ?>
         </div>
 </body>
 </html>

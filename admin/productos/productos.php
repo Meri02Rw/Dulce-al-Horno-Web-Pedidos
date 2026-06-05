@@ -73,6 +73,20 @@ while ($row = $result->fetch_assoc()) {
                                 text-align: center;
                             ">
                                 <strong><?= htmlspecialchars($producto['nombre']) ?></strong>
+
+                                <p style="
+                                    margin-top:10px;
+                                    font-size:15px;
+                                    color:#666;
+                                ">
+                                    Stock: <?= (int)$producto['stock'] ?>
+                                </p>
+
+                                <?php if ((int)$producto['stock'] <= 0): ?>
+                                    <p style="color:red; font-size:14px;">
+                                        Agotado
+                                    </p>
+                                <?php endif; ?>
                             </div>
 
                             <div class="producto-img" 
@@ -85,7 +99,6 @@ while ($row = $result->fetch_assoc()) {
                                 align-items: center;
                                 overflow: hidden;
                             ">
-
                                 <?php if (!empty($producto['img_url'])): ?>
                                     <img 
                                     src="/DulceAlHornoWebPedidos/v4 (mejorada)/<?= htmlspecialchars($producto['img_url']) ?>" 
@@ -98,7 +111,16 @@ while ($row = $result->fetch_assoc()) {
                                 <?php else: ?>
                                     <i class="bi bi-image" style="font-size: 40px; color: gray;"></i>
                                 <?php endif; ?>
+                            </div>
 
+                            <div class="producto-precio" 
+                            style="
+                                font-size: 20px;
+                                font-weight: bold;
+                                color: #b47945;
+                                margin-bottom: 10px;
+                            ">
+                                Precio: $<?= number_format($producto['precio'], 2) ?>
                             </div>
 
                             <div class="producto-opciones" 

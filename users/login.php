@@ -32,6 +32,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($correo === 'dulcealhorno@gmail.com') {
             $_SESSION['mfa_usuario_id'] = $usuario['usuario_id'];
             $_SESSION['correo_mfa'] = $usuario['correo'];
+            $_SESSION['permitir_verificacion'] = true;
             $_SESSION['mensaje'] = "Usuario ADMIN. Escriba cualquier numero y presione el botón verificar.";
             header("Location: /DulceAlHornoWebPedidos/v4 (mejorada)/mfa/verificar_login.php");
             exit();

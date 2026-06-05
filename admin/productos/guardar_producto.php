@@ -5,6 +5,7 @@ include '../../config/db.php';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $nombre = $_POST['nombre'];
     $precio = $_POST['precio'];
+    $stock = $_POST['stock'];
     $descripcion = $_POST['descripcion'] ?? '';
     $estado = $_POST['estado'];
 
@@ -25,8 +26,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 
     // Insertar en la base de datos
-    $stmt = $conn->prepare("INSERT INTO productos (nombre, precio, descripcion, estado, img_url) VALUES (?, ?, ?, ?, ?)");
-    $stmt->bind_param("sdsss", $nombre, $precio, $descripcion, $estado, $img_url);
+    $stmt = $conn->prepare("INSERT INTO productos (nombre, precio, stock, descripcion, estado, img_url) VALUES (?, ?, ?, ?, ?, ?)");
+    $stmt->bind_param("sdssss", $nombre, $precio, $stock, $descripcion, $estado, $img_url);
 
     if ($stmt->execute()) {
         $_SESSION['mensaje'] = "Producto agregado correctamente.";

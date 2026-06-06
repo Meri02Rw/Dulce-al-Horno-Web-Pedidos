@@ -8,7 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['mensaje'] =
         "Sesión expirada.";
         header(
-            "Location: " . __DIR__ . "/pages/cuenta.php"
+            "Location: /pages/cuenta.php"
         );
         exit();
     }
@@ -97,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['mensaje'] =
             "Correo verificado correctamente. Ya puedes acceder.";
             header(
-            "Location: " . __DIR__ . "/pages/cuenta.php"
+            "Location: /pages/cuenta.php"
             );
             exit();
         } catch (Exception $e) {
@@ -105,7 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['mensaje'] =
             "Error al crear cuenta.";
             header(
-            "Location: " . __DIR__ . "/pages/cuenta.php"
+            "Location: /pages/cuenta.php"
             );
             exit();
         }
@@ -114,7 +114,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         "Código inválido o expirado.";
         $_SESSION['permitir_verificacion'] = true;
         header(
-        "Location: " . __DIR__ . "/mfa/verificar_registro.php"
+        "Location: /mfa/verificar_registro.php"
         );
         exit();
     }

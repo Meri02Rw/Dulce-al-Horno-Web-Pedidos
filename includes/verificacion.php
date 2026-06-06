@@ -31,7 +31,7 @@ unset($_SESSION['permitir_verificacion']);
         <div class="container-primary">
             <!-- Incluir el banner con PHP -->
             <div id="banner-container">
-                <?php include __DIR__ . '/includes/banner.php'; ?>
+                <?php include __DIR__ . '/banner.php'; ?>
             </div>
             <div class="main-container">
                 <!-- Formulario de verificación -->
@@ -42,7 +42,7 @@ unset($_SESSION['permitir_verificacion']);
                 </form>
             </div>
             <div id="footer-container">
-                <?php include __DIR__ . '/includes/footer.php'; ?>
+                <?php include __DIR__ . '/footer.php'; ?>
             </div>
         </div>
         <script src="/assets/js/script-alert.js"></script>

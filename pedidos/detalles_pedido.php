@@ -94,7 +94,7 @@ $pedido_id = $_GET['pedido_id'];
                     <?php foreach ($productos as $p): ?>
                         <tr style="border-bottom: 1px solid #ddd;" onmouseover="this.style.backgroundColor='#f9f9f9';" onmouseout="this.style.backgroundColor='white';">
                             <td>
-                                <img src="<?= $p['img_url'] ?>" alt="<?= $p['nombre'] ?>" width="50">
+                                <img src="/<?= $p['img_url'] ?>" alt="<?= $p['nombre'] ?>" width="50">
                                 <?= $p['nombre'] ?>
                             </td>
                             <td><?= $p['cantidad_producto'] ?></td>

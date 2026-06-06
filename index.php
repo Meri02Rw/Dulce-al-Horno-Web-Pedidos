@@ -82,7 +82,7 @@ include __DIR__ . '/includes/alert.php'; // Incluir alertas
         <div class="container-primary">
             <!-- Incluir el banner con PHP -->
             <div id="banner-container">
-                <?php include 'includes/banner.php'; ?>
+                <?php include __DIR__ . '/includes/banner.php'; ?>
             </div>
             <!-- Imágenes principales -->
             <a href="/pages/catalogo.php" class="a-img">
@@ -102,12 +102,12 @@ include __DIR__ . '/includes/alert.php'; // Incluir alertas
             <div class="main-container">
                 <h1 class="title">Algunos de nuestros productos</h1>
                 <div class="productos">
-                    <?php include 'productos/productos.php'; ?>
+                    <?php include __DIR__ . '/productos/productos.php'; ?>
                 </div>
             </div>
             <!-- Incluir el footer con PHP -->
             <div id="footer-container">
-                <?php include 'includes/footer.php'; ?>
+                <?php include __DIR__ . '/includes/footer.php'; ?>
             </div>
         </div>
         <script src="/assets/js/script.js"></script>

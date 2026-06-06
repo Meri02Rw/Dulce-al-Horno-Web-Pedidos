@@ -112,6 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } else {
         $_SESSION['mensaje'] =
         "Código inválido o expirado.";
+        $_SESSION['permitir_verificacion'] = true;
         header(
         "Location: " . __DIR__ . "/mfa/verificar_registro.php"
         );

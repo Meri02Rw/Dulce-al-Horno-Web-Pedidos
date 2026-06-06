@@ -25,10 +25,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit();
     } else {
         $_SESSION['mensaje'] = "Código inválido o expirado.";
+        $_SESSION['permitir_verificacion'] = true;
         header("Location: /mfa/verificar_login.php");
         exit();
     }
 }
-
 include __DIR__ . '/../includes/verificacion.php';
 ?>

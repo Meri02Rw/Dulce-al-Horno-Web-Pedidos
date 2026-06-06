@@ -1,8 +1,8 @@
 <?php
-include '../config/config.php';
-include '../config/db.php';
-include '../includes/alert.php';
-include '../includes/mail_helper.php';
+include __DIR__ . '/../config/config.php';
+include __DIR__ . '/../config/db.php';
+include __DIR__ . '/../includes/alert.php';
+include __DIR__ . '/../includes/mail_helper.php';
 
 $nombre = trim($_POST['nombre']);
 $apellidos = !empty($_POST['apellidos']) ? trim($_POST['apellidos']) : NULL;
@@ -25,7 +25,7 @@ if ($resultado->num_rows > 0) {
 
     $_SESSION['mensaje'] =
     "El correo ya está registrado.";
-    header("Location: ../pages/cuenta.php");
+    header("Location: /pages/cuenta.php");
     exit();
 }
 
@@ -65,7 +65,7 @@ try {
     $_SESSION['mensaje'] =
     "Código enviado al correo.";
     header(
-        "Location: ../mfa/verificar_registro.php"
+        "Location: /mfa/verificar_registro.php"
     );
     exit();
 } catch (Exception $e) {
@@ -74,7 +74,7 @@ try {
     "Error: " . $e->getMessage();
     $_SESSION['permitir_verificacion'] = true;
     header(
-        "Location: ../pages/cuenta.php"
+        "Location: /pages/cuenta.php"
     );
     exit();
 }

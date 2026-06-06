@@ -1,7 +1,7 @@
 <?php
 if (!isset($_SESSION['usuario_id'])) {
     $_SESSION['mensaje'] = "Debes iniciar sesión.";
-    header("Location: ../../pages/cuenta.php");
+    header("Location: /pages/cuenta.php");
     exit();
 }
 
@@ -26,7 +26,7 @@ if ($usuario = $resultCheck->fetch_assoc()) {
 // Si NO es admin, bloquear acceso
 if (!$isAdmin) {
     $_SESSION['mensaje'] = "Acceso denegado.";
-    header("Location: ../../pages/cuenta.php");
+    header("Location: /pages/cuenta.php");
     exit();
 }
 ?>

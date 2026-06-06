@@ -1,8 +1,8 @@
 <?php
-include '../config/config.php';
-include '../config/db.php';
-include '../users/login_registro.php';
-include '../includes/alert.php';
+include __DIR__ . '/../config/config.php';
+include __DIR__ . '/../config/db.php';
+include __DIR__ . '/../users/login_registro.php';
+include __DIR__ . '/../includes/alert.php';
 ?>
 
 <!DOCTYPE html>
@@ -11,10 +11,10 @@ include '../includes/alert.php';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Carrito</title>
-    <link rel="icon" type="image/x-icon" href="/DulceAlHornoWebPedidos/v4 (mejorada)/resources/icon/Icon_DulceAlHorno_2.jpg"> 
-    <link rel="stylesheet" href="/DulceAlHornoWebPedidos/v4 (mejorada)/assets/css/styles.css">
-    <link rel="stylesheet" href="/DulceAlHornoWebPedidos/v4 (mejorada)/assets/css/styles-banner-footer.css">
-    <link rel="stylesheet" href="/DulceAlHornoWebPedidos/v4 (mejorada)/assets/css/styles-carrito.css">
+    <link rel="icon" type="image/x-icon" href="/resources/icon/Icon_DulceAlHorno_2.jpg"> 
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="/assets/css/styles-banner-footer.css">
+    <link rel="stylesheet" href="/assets/css/styles-carrito.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 
@@ -66,7 +66,7 @@ include '../includes/alert.php';
                     $result = $stmt->get_result();
 
                     if ($result->num_rows > 0) {
-                        echo '<form action="../carrito/actualizar_carrito.php" method="POST">';
+                        echo '<form action="/carrito/actualizar_carrito.php" method="POST">';
                         echo '<table>';
                         echo '
                         <thead>
@@ -83,12 +83,12 @@ include '../includes/alert.php';
                             $total = $producto['precio'] * $producto['cantidad_producto'];
                             echo '<tr>';
                             echo '<td>
-                                <img src="../' . $producto['img_url'] . '" width="50">
+                                <img src="/' . $producto['img_url'] . '" width="50">
                                 <br>
                                 ' . htmlspecialchars($producto['nombre']) . '
                             </td>';
                             echo '<td>
-                                <form action="../carrito/actualizar_carrito.php" method="POST">
+                                <form action="/carrito/actualizar_carrito.php" method="POST">
                                     <input 
                                     type="hidden"
                                     name="producto_id"
@@ -111,7 +111,7 @@ include '../includes/alert.php';
                                     </button>
                                 </form>
                                 <form 
-                                action="../carrito/eliminar_carrito.php" 
+                                action="/carrito/eliminar_carrito.php" 
                                 method="GET"
                                 onsubmit="return confirm(\'¿Eliminar este producto?\')">
                                     <input
@@ -131,7 +131,7 @@ include '../includes/alert.php';
                         echo '</table>';
                         echo '</form>';
                         echo '
-                        <form action="/DulceAlHornoWebPedidos/v4 (mejorada)/pedidos/confirmar_pedido.php" method="GET">
+                        <form action="/pedidos/confirmar_pedido.php" method="GET">
                             <button type="submit">
                                 Confirmar compra
                             </button>
@@ -150,8 +150,8 @@ include '../includes/alert.php';
         </div>
     </div>
 
-    <script src="/DulceAlHornoWebPedidos/v4 (mejorada)/assets/js/script-login-registro.js"></script>
-    <script src="/DulceAlHornoWebPedidos/v4 (mejorada)/assets/js/script-alert.js"></script>
+    <script src="/assets/js/script-login-registro.js"></script>
+    <script src="/assets/js/script-alert.js"></script>
 
 </body>
 </html>

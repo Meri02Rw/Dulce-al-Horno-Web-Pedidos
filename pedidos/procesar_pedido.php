@@ -6,7 +6,7 @@ include __DIR__ . '/../includes/cliente_helper.php';
 
 if (!isset($_SESSION['usuario_id'])) {
     $_SESSION['mensaje'] = "Debes iniciar sesión para hacer un pedido";
-    header("Location: ../pages/cuenta.php");
+    header("Location: /pages/cuenta.php");
     exit();
 }
 
@@ -42,7 +42,7 @@ while ($row = $result->fetch_assoc()) {
 }
 if (empty($productos)) {
     $_SESSION['mensaje'] = "Tu carrito está vacío.";
-    header("Location: ../pages/carrito.php");
+    header("Location: /pages/carrito.php");
     exit();
 }
 
@@ -54,7 +54,7 @@ foreach ($productos as $p) {
             "No hay suficiente stock para: " .
             $p['nombre'];
 
-        header("Location: ../pages/carrito.php");
+        header("Location: /pages/carrito.php");
         exit();
     }
 }
@@ -115,6 +115,6 @@ $link = "https://wa.me/$telefono?text=$mensaje";
 $_SESSION['mensaje'] = "Tu pedido fue realizado con éxito! Se abrirá WhatsApp automáticamente para que lo envíes.";
 $_SESSION['pedido_exitoso'] = true;
 $_SESSION['whatsapp_link'] = $link;
-header("Location: ../index.php");
+header("Location: /index.php");
 exit();
 ?>

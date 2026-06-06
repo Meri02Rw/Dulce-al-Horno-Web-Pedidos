@@ -1,5 +1,5 @@
 <?php 
-include __DIR__ . '/./includes/alert.php'; // Incluir alertas
+include __DIR__ . '/includes/alert.php'; // Incluir alertas
 ?>
 <!DOCTYPE html>
 <html lang="es-MX">
@@ -8,9 +8,9 @@ include __DIR__ . '/./includes/alert.php'; // Incluir alertas
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Dulce al Horno</title>
         <link rel="icon" type="image/x-icon" href="resources/icon/Icon_DulceAlHorno_2.jpg">  
-        <link rel="stylesheet" href="/DulceAlHornoWebPedidos/v4 (mejorada)/assets/css/styles.css">
-        <link rel="stylesheet" href="/DulceAlHornoWebPedidos/v4 (mejorada)/assets/css/styles-banner-footer.css">
-        <link rel="stylesheet" href="/DulceAlHornoWebPedidos/v4 (mejorada)/assets/css/styles-productos.css">
+        <link rel="stylesheet" href="/assets/css/styles.css">
+        <link rel="stylesheet" href="/assets/css/styles-banner-footer.css">
+        <link rel="stylesheet" href="/assets/css/styles-productos.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
         <style>
             .main-img {
@@ -85,7 +85,7 @@ include __DIR__ . '/./includes/alert.php'; // Incluir alertas
                 <?php include 'includes/banner.php'; ?>
             </div>
             <!-- Imágenes principales -->
-            <a href="/DulceAlHornoWebPedidos/v4 (mejorada)/pages/catalogo.php" class="a-img">
+            <a href="/pages/catalogo.php" class="a-img">
                 <div class="main-container-img">
                     <div class="main-img">
                         <img src="resources/img/galletas_corazon_2.jpg" class="img-item" style="--rotate-angle: 30deg;" alt="galletas corazon">

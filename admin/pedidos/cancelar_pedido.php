@@ -7,7 +7,7 @@ if (!isset($_SESSION['usuario_id'])) {
     $_SESSION['mensaje'] =
     "Debes iniciar sesión.";
     header(
-        "Location: ../../pages/cuenta.php"
+        "Location: /pages/cuenta.php"
     );
     exit();
 }
@@ -48,7 +48,7 @@ if (!$isAdmin) {
     $_SESSION['mensaje'] =
     "Acceso denegado.";
     header(
-        "Location: ../../pages/cuenta.php"
+        "Location: /pages/cuenta.php"
     );
     exit();
 }
@@ -159,7 +159,7 @@ if (
         "Pedido no encontrado.";
     }
     header(
-    "Location: /DulceAlHornoWebPedidos/v4 (mejorada)/admin/pedidos/pedidos_recibidos.php"
+    "Location: /admin/pedidos/pedidos_recibidos.php"
     );
     exit();
 }

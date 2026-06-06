@@ -1,6 +1,6 @@
 <?php
-include '../../config/config.php';
-include '../../config/db.php';
+include __DIR__ . '/../../config/config.php';
+include __DIR__ . '/../../config/db.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Ruta física de la imagen
         if (!empty($producto['img_url'])) {
 
-            $rutaImagen = "../../" . $producto['img_url'];
+            $rutaImagen = __DIR__ . "/../../" . $producto['img_url'];
 
             if (file_exists($rutaImagen)) {
                 unlink($rutaImagen);

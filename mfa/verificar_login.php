@@ -1,7 +1,7 @@
 <?php
-include '../config/config.php'; // Incluye configuración y asegura que la sesión esté iniciada
-include '../config/db.php'; // Incluye la conexión a la base de datos
-include '../includes/alert.php'; // Incluir alertas
+include __DIR__ . '/../config/config.php'; // Incluye configuración y asegura que la sesión esté iniciada
+include __DIR__ . '/../config/db.php'; // Incluye la conexión a la base de datos
+include __DIR__ . '/../includes/alert.php'; // Incluir alertas
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $codigo = $_POST['codigo'];
@@ -21,14 +21,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $conn->query("UPDATE usuarios SET mfa_codigo = NULL, mfa_expira = NULL WHERE usuario_id = $usuario_id");
 
         $_SESSION['mensaje'] = "Sesión iniciada correctamente";
-        header("Location: /DulceAlHornoWebPedidos/v4 (mejorada)/index.php");
+        header("Location: /index.php");
         exit();
     } else {
         $_SESSION['mensaje'] = "Código inválido o expirado.";
-        header("Location: /DulceAlHornoWebPedidos/v4 (mejorada)/mfa/verificar_login.php");
+        header("Location: /mfa/verificar_login.php");
         exit();
     }
 }
 
-include '../includes/verificacion.php';
+include __DIR__ . '/../includes/verificacion.php';
 ?>

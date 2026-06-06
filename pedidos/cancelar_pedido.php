@@ -10,7 +10,7 @@ if (!isset($_SESSION['usuario_id'])) {
     "Debes iniciar sesión.";
 
     header(
-        "Location: ../pages/cuenta.php"
+        "Location: /pages/cuenta.php"
     );
 
     exit();
@@ -61,7 +61,7 @@ if (
         "No se pudo cancelar el pedido.";
 
         header(
-            "Location: ../pedidos/pedidos.php"
+            "Location: /pedidos/pedidos.php"
         );
 
         exit();
@@ -81,7 +81,7 @@ if (
         "Este pedido ya estaba cancelado.";
 
         header(
-            "Location: ../pedidos/pedidos.php"
+            "Location: /pedidos/pedidos.php"
         );
 
         exit();
@@ -97,7 +97,7 @@ if (
         "No puedes cancelar un pedido entregado.";
 
         header(
-            "Location: ../pedidos/pedidos.php"
+            "Location: /pedidos/pedidos.php"
         );
 
         exit();
@@ -113,7 +113,7 @@ if (
         "El pedido ya está cerrado.";
 
         header(
-            "Location: ../pedidos/pedidos.php"
+            "Location: /pedidos/pedidos.php"
         );
 
         exit();
@@ -183,7 +183,7 @@ if (
         "El pedido ya fue cancelado o cambió de estado.";
 
         header(
-            "Location: ../pedidos/pedidos.php"
+            "Location: /pedidos/pedidos.php"
         );
 
         exit();
@@ -193,7 +193,7 @@ if (
     "Pedido cancelado correctamente.";
 
     header(
-        "Location: ../pedidos/pedidos.php"
+        "Location: /pedidos/pedidos.php"
     );
 
     exit();

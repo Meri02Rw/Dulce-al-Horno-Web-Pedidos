@@ -1,9 +1,9 @@
 <?php
-include '../config/config.php';
-include '../config/db.php';
+include __DIR__ . '/../config/config.php';
+include __DIR__ . '/../config/db.php';
 
 if (!isset($_SESSION['usuario_id'])) {
-    header("Location: ../pages/cuenta.php");
+    header("Location: /pages/cuenta.php");
     exit();
 }
 
@@ -23,7 +23,7 @@ $cliente = $stmtCliente->get_result()->fetch_assoc();
 
 if (!$cliente) {
     $_SESSION['mensaje'] = "Cliente no encontrado.";
-    header("Location: ../pages/carrito.php");
+    header("Location: /pages/carrito.php");
     exit();
 }
 
@@ -67,6 +67,6 @@ if (isset($_GET['producto_id'])) {
     }
 }
 
-header("Location: ../pages/carrito.php");
+header("Location: /pages/carrito.php");
 exit();
 ?>

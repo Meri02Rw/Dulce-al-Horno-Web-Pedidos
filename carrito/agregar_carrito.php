@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if ($cantidad <= 0) {
             $_SESSION['mensaje'] = "Cantidad inválida.";
-            header("Location: ../index.php");
+            header("Location: /index.php");
             exit();
         }
 
@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             $_SESSION['mensaje'] = "Cliente no encontrado.";
 
-            header("Location: ../pages/cuenta.php");
+            header("Location: /pages/cuenta.php");
             exit();
         }
 
@@ -61,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             $_SESSION['mensaje'] = "Producto no encontrado.";
 
-            header("Location: ../index.php");
+            header("Location: /index.php");
             exit();
         }
 
@@ -70,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['mensaje'] =
                 "Producto no disponible.";
 
-            header("Location: ../productos/detalle_producto.php?id=" . $producto_id);
+            header("Location: /productos/detalle_producto.php?id=" . $producto_id);
             exit();
         }
 
@@ -79,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['mensaje'] =
                 "Producto agotado.";
 
-            header("Location: ../productos/detalle_producto.php?id=" . $producto_id);
+            header("Location: /productos/detalle_producto.php?id=" . $producto_id);
             exit();
         }
 
@@ -88,7 +88,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['mensaje'] =
                 "Cantidad mayor al stock disponible.";
 
-            header("Location: ../productos/detalle_producto.php?id=" . $producto_id);
+            header("Location: /productos/detalle_producto.php?id=" . $producto_id);
             exit();
         }
 
@@ -156,7 +156,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     "No hay suficiente stock disponible.";
 
                 header(
-                    "Location: ../productos/detalle_producto.php?id=" .
+                    "Location: /productos/detalle_producto.php?id=" .
                     $producto_id
                 );
 
@@ -216,7 +216,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             "Producto agregado al carrito.";
 
         header(
-            "Location: ../productos/detalle_producto.php?id=" .
+            "Location: /productos/detalle_producto.php?id=" .
             $producto_id
         );
 

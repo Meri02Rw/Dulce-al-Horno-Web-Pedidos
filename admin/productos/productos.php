@@ -20,10 +20,10 @@ while ($row = $result->fetch_assoc()) {
 <head>
     <meta charset="UTF-8">
     <title>Gestión de Productos</title>
-    <link rel="icon" type="image/x-icon" href="/DulceAlHornoWebPedidos/v4 (mejorada)/resources/icon/Icon_DulceAlHorno_2.jpg">  
-    <link rel="stylesheet" href="/DulceAlHornoWebPedidos/v4 (mejorada)/assets/css/styles.css">
-    <link rel="stylesheet" href="/DulceAlHornoWebPedidos/v4 (mejorada)/assets/css/styles-banner-footer.css">
-    <link rel="stylesheet" href="/DulceAlHornoWebPedidos/v4 (mejorada)/assets/css/styles-alert.css">
+    <link rel="icon" type="image/x-icon" href="/resources/icon/Icon_DulceAlHorno_2.jpg">  
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="/assets/css/styles-banner-footer.css">
+    <link rel="stylesheet" href="/assets/css/styles-alert.css">
 </head>
 <body>
     <div>
@@ -34,7 +34,7 @@ while ($row = $result->fetch_assoc()) {
         <div class="main-container" >
             <h2 class="title">Productos</h2>
     
-            <form action="/DulceAlHornoWebPedidos/v4 (mejorada)/admin/productos/agregar_producto.php" method="get" style="margin-left: 20px;">
+            <form action="/admin/productos/agregar_producto.php" method="get" style="margin-left: 20px;">
                 <button type="submit" class="btn-agregar-producto" class="btn btn-primary">
                     <i class="bi bi-plus" style="margin-right: 5px; font-size: 22px; "></i> Agregar Producto
                 </button>
@@ -101,7 +101,7 @@ while ($row = $result->fetch_assoc()) {
                             ">
                                 <?php if (!empty($producto['img_url'])): ?>
                                     <img 
-                                    src="/DulceAlHornoWebPedidos/v4 (mejorada)/<?= htmlspecialchars($producto['img_url']) ?>" 
+                                    src="/<?= htmlspecialchars($producto['img_url']) ?>" 
                                     alt="<?= htmlspecialchars($producto['nombre']) ?>"
                                     style="
                                         max-width: 100%;
@@ -131,7 +131,7 @@ while ($row = $result->fetch_assoc()) {
                                 justify-content: center;
                             ">
 
-                                <form method="POST" action="/DulceAlHornoWebPedidos/v4 (mejorada)/admin/productos/cambiar_estado_producto.php">
+                                <form method="POST" action="/admin/productos/cambiar_estado_producto.php">
                                     <input type="hidden" name="producto_id" value="<?= $producto['producto_id'] ?>">
 
                                     <select name="nuevo_estado" onchange="this.form.submit()" class="selector-estado">
@@ -145,7 +145,7 @@ while ($row = $result->fetch_assoc()) {
                                     </select>
                                 </form>
 
-                                <form action="/DulceAlHornoWebPedidos/v4 (mejorada)/admin/productos/editar_producto.php" method="GET">
+                                <form action="/admin/productos/editar_producto.php" method="GET">
                                     <input type="hidden" name="id" value="<?= $producto['producto_id'] ?>">
 
                                     <button type="submit" class="btn-editar">
@@ -153,7 +153,7 @@ while ($row = $result->fetch_assoc()) {
                                     </button>
                                 </form>
 
-                                <form method="POST" action="/DulceAlHornoWebPedidos/v4 (mejorada)/admin/productos/eliminar_producto.php" onsubmit="return confirm('¿Seguro que deseas eliminar este producto?')">
+                                <form method="POST" action="/admin/productos/eliminar_producto.php" onsubmit="return confirm('¿Seguro que deseas eliminar este producto?')">
                                     <input type="hidden" name="producto_id" value="<?= $producto['producto_id'] ?>">
 
                                     <button type="submit" class="btn-eliminar">

@@ -1,8 +1,8 @@
 <?php
-include '../config/config.php'; 
-include '../config/db.php'; 
-include '../includes/alert.php'; 
-include '../includes/mail_helper.php';
+include __DIR__ . '/../config/config.php'; 
+include __DIR__ . '/../config/db.php'; 
+include __DIR__ . '/../includes/alert.php'; 
+include __DIR__ . '/../includes/mail_helper.php';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $correo = $_POST['correo'];
@@ -18,13 +18,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if ($usuario['verificado'] != 1) {
             $_SESSION['mensaje'] = "Correo no verificado. Verifícalo para poder iniciar sesión.";
-            header("Location: /DulceAlHornoWebPedidos/v4 (mejorada)/pages/cuenta.php");
+            header("Location: /pages/cuenta.php");
             exit();
         }
 
         if (!password_verify($password, $usuario['contraseña'])) {
             $_SESSION['mensaje'] = "Correo o contraseña incorrectos.";
-            header("Location: /DulceAlHornoWebPedidos/v4 (mejorada)/pages/cuenta.php");
+            header("Location: /pages/cuenta.php");
             exit();
         }
 
@@ -34,7 +34,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['correo_mfa'] = $usuario['correo'];
             $_SESSION['permitir_verificacion'] = true;
             $_SESSION['mensaje'] = "Usuario ADMIN. Escriba cualquier numero y presione el botón verificar.";
-            header("Location: /DulceAlHornoWebPedidos/v4 (mejorada)/mfa/verificar_login.php");
+            header("Location: /mfa/verificar_login.php");
             exit();
         }
 
@@ -53,7 +53,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         );
         if (!$enviado) {
             $_SESSION['mensaje'] = "No se pudo enviar el correo de verificación.";
-            header("Location: /DulceAlHornoWebPedidos/v4 (mejorada)/pages/cuenta.php");
+            header("Location: /pages/cuenta.php");
             exit();
         }
 
@@ -61,12 +61,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $_SESSION['correo_mfa'] = $usuario['correo'];
         $_SESSION['mensaje'] = "Se envió un código a tu correo para iniciar sesión.";
         $_SESSION['permitir_verificacion'] = true;
-        header("Location: /DulceAlHornoWebPedidos/v4 (mejorada)/mfa/verificar_login.php");
+        header("Location: /mfa/verificar_login.php");
         exit();
     } else {
         $_SESSION['mensaje'] = "Usuario no registrado. Regístrate para poder iniciar sesión.";
-        header("Location: /DulceAlHornoWebPedidos/v4 (mejorada)/pages/cuenta.php");
+        header("Location: /pages/cuenta.php");
         exit();
     }
 }
-?>

@@ -1,8 +1,8 @@
 <link rel="icon" type="image/x-icon" href="resources/icon/Icon_DulceAlHorno_2.jpg"> 
-<link rel="stylesheet" href="/DulceAlHornoWebPedidos/v4 (mejorada)/assets/css/styles-alert.css">
+<link rel="stylesheet" href="/assets/css/styles-alert.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 <?php
-include __DIR__ .  '/../config/config.php'; // Incluye configuración y asegura que la sesión esté iniciada 
+include __DIR__ .  '/config/config.php'; // Incluye configuración y asegura que la sesión esté iniciada 
 
 // Mostrar alerta
 if (isset($_SESSION['mensaje'])):
@@ -27,4 +27,4 @@ if (isset($_SESSION['mensaje'])):
     unset($_SESSION['whatsapp_link']);
 endif;
 ?>
-<script src="/DulceAlHornoWebPedidos/v4 (mejorada)/assets/js/script-alert.js"></script>
+<script src="/assets/js/script-alert.js"></script>

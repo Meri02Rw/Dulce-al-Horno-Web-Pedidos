@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             basename($_FILES['imagen']['name']);
 
         $rutaDestino =
-            '../../resources/img/' .
+            __DIR__ . '/../../resources/img/' .
             $nombreImagen;
 
         $rutaGuardar =
@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if (!empty($img_url)) {
 
                 $rutaVieja =
-                    "../../" . $img_url;
+                    __DIR__ . '/../../resources/img/' . basename($img_url);
 
                 if (file_exists($rutaVieja)) {
                     unlink($rutaVieja);

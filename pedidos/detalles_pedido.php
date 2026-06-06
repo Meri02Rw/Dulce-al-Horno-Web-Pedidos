@@ -1,14 +1,14 @@
 <?php
 include __DIR__ . '/../includes/alert.php'; // Incluir alertas
-include __DIR__ .  '/../config/config.php'; // Incluye configuración y asegura que la sesión esté iniciada 
-include __DIR__ .  '/../config/db.php'; // Incluye la conexión a la base de datos
+include __DIR__ . '/../config/config.php'; // Incluye configuración y asegura que la sesión esté iniciada 
+include __DIR__ . '/../config/db.php'; // Incluye la conexión a la base de datos
 include __DIR__ . '/../includes/cliente_helper.php'; 
 
 
 // Verificamos si el usuario está logueado
 if (!isset($_SESSION['usuario_id'])) {
     $_SESSION['mensaje'] = "Debes iniciar sesión para ver los detalles de tu pedido";
-    header("Location: ../pages/cuenta.php");
+    header("Location: /pages/cuenta.php");
     exit();
 }
 
@@ -59,7 +59,7 @@ $pedido_id = $_GET['pedido_id'];
         }
     } else {
         $_SESSION['mensaje'] = "Este pedido no te pertenece.";
-        header("Location: ../pedidos/pedidos.php");
+        header("Location: /pedidos/pedidos.php");
         exit();
     }
 ?>
@@ -70,15 +70,15 @@ $pedido_id = $_GET['pedido_id'];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detalles del Pedido</title>
-    <link rel="icon" type="image/x-icon" href="/DulceAlHornoWebPedidos/resources/icon/Icon_DulceAlHorno_2.jpg">  
-    <link rel="stylesheet" href="../assets/css/styles.css">
-    <link rel="stylesheet" href="../assets/css/styles-banner-footer.css">
+    <link rel="icon" type="image/x-icon" href="/resources/icon/Icon_DulceAlHorno_2.jpg">  
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="/assets/css/styles-banner-footer.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body>
     <div>
         <div id="banner-container">
-            <?php include '../includes/banner.php'; ?>
+            <?php include __DIR__ . '/../includes/banner.php'; ?>
         </div>
         <div class="main-container">
             <h2 class="title">Detalles de Pedido #<?= $pedido_id ?></h2>
@@ -94,7 +94,7 @@ $pedido_id = $_GET['pedido_id'];
                     <?php foreach ($productos as $p): ?>
                         <tr style="border-bottom: 1px solid #ddd;" onmouseover="this.style.backgroundColor='#f9f9f9';" onmouseout="this.style.backgroundColor='white';">
                             <td>
-                                <img src="../<?= $p['img_url'] ?>" alt="<?= $p['nombre'] ?>" width="50">
+                                <img src="<?= $p['img_url'] ?>" alt="<?= $p['nombre'] ?>" width="50">
                                 <?= $p['nombre'] ?>
                             </td>
                             <td><?= $p['cantidad_producto'] ?></td>
@@ -109,7 +109,7 @@ $pedido_id = $_GET['pedido_id'];
             <?php endif; ?>
         </div>
         <div id="footer-container">
-            <?php include '../includes/footer.php'; ?>
+            <?php include __DIR__ . '/../includes/footer.php'; ?>
         </div>
     </div>
     <script src="/assets/js/script.js"></script>

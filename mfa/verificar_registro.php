@@ -1,14 +1,14 @@
 <?php
-include '../config/config.php';
-include '../config/db.php';
-include '../includes/alert.php';
+include __DIR__ . '/../config/config.php';
+include __DIR__ . '/../config/db.php';
+include __DIR__ . '/../includes/alert.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (!isset($_SESSION['registro_temp'])) {
         $_SESSION['mensaje'] =
         "Sesión expirada.";
         header(
-            "Location: ../pages/cuenta.php"
+            "Location: " . __DIR__ . "/pages/cuenta.php"
         );
         exit();
     }
@@ -97,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['mensaje'] =
             "Correo verificado correctamente. Ya puedes acceder.";
             header(
-            "Location: /DulceAlHornoWebPedidos/v4 (mejorada)/pages/cuenta.php"
+            "Location: " . __DIR__ . "/pages/cuenta.php"
             );
             exit();
         } catch (Exception $e) {
@@ -105,7 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $_SESSION['mensaje'] =
             "Error al crear cuenta.";
             header(
-            "Location: ../pages/cuenta.php"
+            "Location: " . __DIR__ . "/pages/cuenta.php"
             );
             exit();
         }
@@ -113,10 +113,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $_SESSION['mensaje'] =
         "Código inválido o expirado.";
         header(
-        "Location: /DulceAlHornoWebPedidos/v4 (mejorada)/mfa/verificar_registro.php"
+        "Location: " . __DIR__ . "/mfa/verificar_registro.php"
         );
         exit();
     }
 }
-include '../includes/verificacion.php';
+include __DIR__ . '/../includes/verificacion.php';
 ?>

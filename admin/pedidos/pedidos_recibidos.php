@@ -6,7 +6,7 @@ include __DIR__ . '/../../config/db.php';
 // Verificar sesión
 if (!isset($_SESSION['usuario_id'])) {
     $_SESSION['mensaje'] = "Debes iniciar sesión para ver los pedidos";
-    header("Location: ../../pages/cuenta.php");
+    header("Location: /pages/cuenta.php");
     exit();
 }
 
@@ -33,7 +33,7 @@ if ($isAdmin) {
     $stmt = $conn->prepare($sql);
 } else {
     $_SESSION['mensaje'] = "Acceso denegado.";
-    header("Location: ../../pages/cuenta.php");
+    header("Location: /pages/cuenta.php");
     exit();
 }
 
@@ -52,16 +52,16 @@ while ($row = $result->fetch_assoc()) {
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Pedidos Recibidos</title>
-        <link rel="icon" type="image/x-icon" href="/DulceAlHornoWebPedidos/v4 (mejorada)/resources/icon/Icon_DulceAlHorno_2.jpg">  
-        <link rel="stylesheet" href="/DulceAlHornoWebPedidos/v4 (mejorada)/assets/css/styles.css">
-        <link rel="stylesheet" href="/DulceAlHornoWebPedidos/v4 (mejorada)/assets/css/styles-pedidos.css">
-        <link rel="stylesheet" href="/DulceAlHornoWebPedidos/v4 (mejorada)/assets/css/styles-banner-footer.css">
+        <link rel="icon" type="image/x-icon" href="/resources/icon/Icon_DulceAlHorno_2.jpg">  
+        <link rel="stylesheet" href="/assets/css/styles.css">
+        <link rel="stylesheet" href="/assets/css/styles-pedidos.css">
+        <link rel="stylesheet" href="/assets/css/styles-banner-footer.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     </head>
     <body>
         <div>
             <div id="banner-container">
-                <?php include '../../includes/banner.php'; ?>
+                <?php include __DIR__ . '/../../includes/banner.php'; ?>
             </div>
             <div class="main-container">
                 <h2 class="title">Pedidos Recibidos</h2>
@@ -92,14 +92,14 @@ while ($row = $result->fetch_assoc()) {
 
                                     <!-- Cancelar pedido -->
                                     <?php if ($pedido['estado'] == 'en espera'): ?>
-                                        <form method="POST" action="/DulceAlHornoWebPedidos/v4 (mejorada)/admin/pedidos/cancelar_pedido.php" onsubmit="return confirmarCancelacion();">
+                                        <form method="POST" action="/admin/pedidos/cancelar_pedido.php" onsubmit="return confirmarCancelacion();">
                                             <input type="hidden" name="pedido_id" value="<?= $pedido['pedido_id'] ?>">
                                             <button type="submit" class="cancelar">Cancelar</button>
                                         </form>
                                     <?php endif; ?>
 
                                     <!-- Ver detalles -->
-                                    <a href="/DulceAlHornoWebPedidos/v4 (mejorada)/pedidos/detalles_pedido.php?pedido_id=<?= $pedido['pedido_id'] ?>">Ver Detalles</a>
+                                    <a href="/pedidos/detalles_pedido.php?pedido_id=<?= $pedido['pedido_id'] ?>">Ver Detalles</a>
                                 </div>
                             </div>
                         <?php endforeach; ?>
@@ -110,7 +110,7 @@ while ($row = $result->fetch_assoc()) {
 
             </div>
             <div id="footer-container">
-                <?php include '../../includes/footer.php'; ?>
+                <?php include __DIR__ . '/../../includes/footer.php'; ?>
             </div>
 
         </div>

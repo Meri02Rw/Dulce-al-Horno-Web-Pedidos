@@ -1,8 +1,8 @@
 <?php 
-include '../config/config.php'; // Incluye configuración y asegura que la sesión esté iniciada
-include '../config/db.php'; // Incluye la conexión a la base de datos
-include '../users/login_registro.php'; // Incluir el modal login-registro
-include '../includes/alert.php'; // Incluir alertas
+include __DIR__ . '/../config/config.php'; // Incluye configuración y asegura que la sesión esté iniciada
+include __DIR__ . '/../config/db.php'; // Incluye la conexión a la base de datos
+include __DIR__ . '/../users/login_registro.php'; // Incluir el modal login-registro
+include __DIR__ . '/../includes/alert.php'; // Incluir alertas
 ?>
 
 <!DOCTYPE html>
@@ -11,9 +11,9 @@ include '../includes/alert.php'; // Incluir alertas
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cuenta</title>
-    <link rel="icon" type="image/x-icon" href="/DulceAlHornoWebPedidos/v4 (mejorada)/resources/icon/Icon_DulceAlHorno_2.jpg">  
-    <link rel="stylesheet" href="/DulceAlHornoWebPedidos/v4 (mejorada)/assets/css/styles.css">
-    <link rel="stylesheet" href="/DulceAlHornoWebPedidos/v4 (mejorada)/assets/css/styles-banner-footer.css">
+    <link rel="icon" type="image/x-icon" href="/resources/icon/Icon_DulceAlHorno_2.jpg">  
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="/assets/css/styles-banner-footer.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body>
@@ -48,20 +48,20 @@ include '../includes/alert.php'; // Incluir alertas
                 // Botón para ver los pedidos
                 // Verificar si el usuario es admin
                 if ($correo === 'dulcealhorno@gmail.com') {
-                    echo '<form action="/DulceAlHornoWebPedidos/v4 (mejorada)/admin/pedidos/pedidos_recibidos.php" method="get">
+                    echo '<form action="/admin/pedidos/pedidos_recibidos.php" method="get">
                             <button type="submit" class="view-orders-button">Ver pedidos recibidos</button>
                         </form>
-                        <form action="/DulceAlHornoWebPedidos/v4 (mejorada)/admin/productos/productos.php" method="get">
+                        <form action="/admin/productos/productos.php" method="get">
                             <button type="submit" class="view-orders-button">Gestionar productos</button>
                         </form>';
                 } else {
-                    echo '<form action="/DulceAlHornoWebPedidos/v4 (mejorada)/pedidos/pedidos.php" method="get">
+                    echo '<form action="/pedidos/pedidos.php" method="get">
                             <button type="submit" class="view-orders-button">Ver mis pedidos</button>
                         </form>';
                 }
 
                 // Botón para cerrar sesión
-                echo '<form action="/DulceAlHornoWebPedidos/v4 (mejorada)/users/logout.php" method="get">
+                echo '<form action="/users/logout.php" method="get">
                         <button type="submit" class="logout-button">Cerrar Sesión</button>
                     </form>';
             } else {
@@ -75,7 +75,7 @@ include '../includes/alert.php'; // Incluir alertas
             <?php include __DIR__ . '/../includes/footer.php'; ?>
         </div>
     </div>
-    <script src="/DulceAlHornoWebPedidos/v4 (mejorada)/assets/js/script-login-registro.js"></script>
-    <script src="/DulceAlHornoWebPedidos/v4 (mejorada)/assets/js/script-alert.js"></script>
+    <script src="/assets/js/script-login-registro.js"></script>
+    <script src="/assets/js/script-alert.js"></script>
 </body>
 </html>

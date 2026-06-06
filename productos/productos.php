@@ -22,7 +22,7 @@ if (isset($_GET['q']) && !empty(trim($_GET['q']))) {
 
 if ($resultado->num_rows === 0) {
     $_SESSION['mensaje'] = "No se encontraron productos.";
-    header("Location: ../../index.php");
+    header("Location: /index.php");
     exit();
     
 }
@@ -33,8 +33,8 @@ while ($producto = $resultado->fetch_assoc()) { ?>
     <div class="producto-card">
         <?php
         $rutaDetalle = basename($_SERVER['PHP_SELF']) === 'catalogo.php'
-            ? '../productos/detalle_producto.php?id=' . $producto['producto_id']
-            : 'productos/detalle_producto.php?id=' . $producto['producto_id'];
+            ? '/productos/detalle_producto.php?id=' . $producto['producto_id']
+            : '/productos/detalle_producto.php?id=' . $producto['producto_id'];
         ?>
 
         <a href="<?= $rutaDetalle ?>" style="text-decoration: none; color: inherit;">
@@ -44,8 +44,8 @@ while ($producto = $resultado->fetch_assoc()) { ?>
             <div class="producto-img">
                 <?php
                 $rutaImg = basename($_SERVER['PHP_SELF']) === 'catalogo.php'
-                    ? '../' . $producto['img_url']
-                    : $producto['img_url'];
+                    ? '/' . $producto['img_url']
+                    : '/'. $producto['img_url'];
                 ?>
 
                 <?php if (!empty($producto['img_url'])): ?>

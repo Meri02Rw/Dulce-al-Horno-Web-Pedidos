@@ -1,11 +1,11 @@
 <?php
 include __DIR__ . '/../includes/alert.php'; // Incluir alertas
-include __DIR__ .  '/../config/config.php'; // Incluye configuración y asegura que la sesión esté iniciada 
-include __DIR__ .  '/../config/db.php'; // Incluye la conexión a la base de datos
+include __DIR__ . '/../config/config.php'; // Incluye configuración y asegura que la sesión esté iniciada 
+include __DIR__ . '/../config/db.php'; // Incluye la conexión a la base de datos
 
 if (!isset($_GET["id"])) {
     $_SESSION['mensaje'] = "Producto no encontrado.";
-    header("Location: ../index.php");
+    header("Location: /index.php");
     exit();
 }
 
@@ -24,7 +24,7 @@ $producto = $resultado->fetch_assoc();
 
 if (!$producto) {
     $_SESSION['mensaje'] = "El producto que buscas no existe o ya no está disponible.";
-    header("Location: ../index.php");
+    header("Location: /index.php");
     exit();
 }
 
@@ -37,23 +37,23 @@ $usuario_logueado = isset($_SESSION["usuario_id"]);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $producto["nombre"]; ?></title>
-    <link rel="icon" type="image/x-icon" href="/DulceAlHornoWebPedidos/v4 (mejorada)/resources/icon/Icon_DulceAlHorno_2.jpg">  
-    <link rel="stylesheet" href="/DulceAlHornoWebPedidos/v4 (mejorada)/assets/css/styles.css">
-    <link rel="stylesheet" href="/DulceAlHornoWebPedidos/v4 (mejorada)/assets/css/styles-banner-footer.css">
+    <link rel="icon" type="image/x-icon" href="/resources/icon/Icon_DulceAlHorno_2.jpg">  
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="/assets/css/styles-banner-footer.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body>
     <div>
         <!-- Incluir el banner con PHP -->
         <div id="banner-container">
-            <?php include '../includes/banner.php'; ?>
+            <?php include __DIR__ . '/../includes/banner.php'; ?>
         </div>
         
         <div class="main-container">
             <h2 class="title"><?= htmlspecialchars($producto['nombre']) ?></h2>
             <div class="producto-img">
                 <?php if (!empty($producto['img_url'])): ?>
-                    <img src="../<?= htmlspecialchars($producto['img_url']) ?>" alt="<?= htmlspecialchars($producto['nombre']) ?>">
+                    <img src="/<?= htmlspecialchars($producto['img_url']) ?>" alt="<?= htmlspecialchars($producto['nombre']) ?>">
                 <?php else: ?>
                     <i class="bi bi-image" style="font-size: 40px; color: gray;"></i>
                 <?php endif; ?>
@@ -65,20 +65,20 @@ $usuario_logueado = isset($_SESSION["usuario_id"]);
                 <p style="color: red; font-weight: bold;">Producto agotado</p>
             <?php } else { ?>
                 <?php if ($usuario_logueado) { ?>
-                    <form action="../carrito/agregar_carrito.php" method="POST">
+                    <form action="/carrito/agregar_carrito.php" method="POST">
                         <input type="hidden" name="producto_id" value="<?= $producto_id ?>">
                         <label for="cantidad">Cantidad:</label>
                         <input type="number" id="cantidad" name="cantidad" value="1" min="1" max="<?= $producto['stock'] ?>" required style="width: 60px; margin-left: 10px;">
                         <button type="submit">Agregar al carrito</button>
                     </form>
                 <?php } else { ?>
-                    <p>Debes <a href="../pages/cuenta.php" onclick="abrirModal()" style="color: #b47945; text-decoration: underline;">iniciar sesión</a> para comprar.</p>
+                    <p>Debes <a href="/pages/cuenta.php" onclick="abrirModal()" style="color: #b47945; text-decoration: underline;">iniciar sesión</a> para comprar.</p>
                 <?php } ?>
             <?php } ?>
         </div>
         <!-- Incluir el footer con PHP -->
         <div id="footer-container">
-            <?php include '../includes/footer.php'; ?>
+            <?php include __DIR__ . '/../includes/footer.php'; ?>
         </div>
     </div>
     <script src="assets/js/script-login-registro.js"></script>

@@ -1,6 +1,6 @@
 <?php
-include '../../config/config.php';
-include '../../config/db.php';
+include __DIR__ . '/../../config/config.php';
+include __DIR__ . '/../../config/db.php';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $nombre = $_POST['nombre'];
@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Manejo de la imagen
     if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] == 0) {
         $nombreImagen = basename($_FILES['imagen']['name']);
-        $rutaDestino = '../../resources/img/' . $nombreImagen;
+        $rutaDestino = __DIR__ . "/../../resources/img/" . $nombreImagen;
         $ruta = 'resources/img/' . $nombreImagen;
 
         // Mover la imagen al directorio deseado

@@ -7,7 +7,7 @@ if (!isset($_SESSION['usuario_id'])) {
     $_SESSION['mensaje'] =
     "Debes iniciar sesión para realizar esta acción.";
 
-    header("Location: ../../pages/cuenta.php");
+    header("Location: /pages/cuenta.php");
     exit();
 }
 
@@ -47,7 +47,7 @@ if (
     $_SESSION['mensaje'] =
     "No tienes permiso.";
 
-    header("Location: ../../pages/cuenta.php");
+    header("Location: /pages/cuenta.php");
     exit();
 }
 
@@ -87,7 +87,7 @@ if (
         "Estado inválido.";
 
         header(
-            "Location: pedidos_recibidos.php"
+            "Location: /admin/pedidos/pedidos_recibidos.php"
         );
 
         exit();
@@ -120,7 +120,7 @@ if (
         "Pedido no encontrado.";
 
         header(
-            "Location: pedidos_recibidos.php"
+            "Location: /admin/pedidos/pedidos_recibidos.php"
         );
 
         exit();
@@ -146,7 +146,7 @@ if (
         "No puedes modificar un pedido entregado.";
 
         header(
-            "Location: pedidos_recibidos.php"
+            "Location: /admin/pedidos/pedidos_recibidos.php"
         );
 
         exit();
@@ -170,7 +170,7 @@ if (
         "No puedes reabrir un pedido cerrado.";
 
         header(
-            "Location: pedidos_recibidos.php"
+            "Location: /admin/pedidos/pedidos_recibidos.php"
         );
 
         exit();
@@ -255,7 +255,7 @@ if (
     }
 
     header(
-        "Location: pedidos_recibidos.php"
+        "Location: /admin/pedidos/pedidos_recibidos.php"
     );
 
     exit();
@@ -266,7 +266,7 @@ if (
     "Datos incompletos.";
 
     header(
-        "Location: pedidos_recibidos.php"
+        "Location: /admin/pedidos/pedidos_recibidos.php"
     );
 
     exit();

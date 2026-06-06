@@ -4,10 +4,10 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Contacto</title>
-        <link rel="icon" type="image/x-icon" href="/DulceAlHornoWebPedidos/v4 (mejorada)/resources/icon/Icon_DulceAlHorno_2.jpg">  
-        <link rel="stylesheet" href="/DulceAlHornoWebPedidos/v4 (mejorada)/assets/css/styles.css">
-        <link rel="stylesheet" href="/DulceAlHornoWebPedidos/v4 (mejorada)/assets/css/styles-banner-footer.css">
-        <link rel="stylesheet" href="/DulceAlHornoWebPedidos/v4 (mejorada)/assets/css/styles-contacto.css">
+        <link rel="icon" type="image/x-icon" href="/resources/icon/Icon_DulceAlHorno_2.jpg">  
+        <link rel="stylesheet" href="/assets/css/styles.css">
+        <link rel="stylesheet" href="/assets/css/styles-banner-footer.css">
+        <link rel="stylesheet" href="/assets/css/styles-contacto.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     </head>
     <body>
@@ -15,7 +15,7 @@
         <div class="container-primary">
             <!-- Incluir el banner con PHP -->
             <div id="banner-container">
-                <?php include '../includes/banner.php'; ?>
+                <?php include __DIR__ . '/../includes/banner.php'; ?>
             </div>
 
             <div class="main-container">
@@ -49,7 +49,7 @@
 
             <!-- Incluir el footer con PHP -->
             <div id="footer-container">
-                <?php include '../includes/footer.php'; ?>
+                <?php include __DIR__ . '/../includes/footer.php'; ?>
             </div>
         </div>
     </body>

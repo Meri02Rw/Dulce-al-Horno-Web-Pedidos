@@ -64,6 +64,7 @@ try {
     }
     $_SESSION['mensaje'] =
     "Código enviado al correo.";
+    $_SESSION['permitir_verificacion'] = true;
     header(
         "Location: /mfa/verificar_registro.php"
     );
@@ -72,7 +73,6 @@ try {
     unset($_SESSION['registro_temp']);
     $_SESSION['mensaje'] =
     "Error: " . $e->getMessage();
-    $_SESSION['permitir_verificacion'] = true;
     header(
         "Location: /pages/cuenta.php"
     );
